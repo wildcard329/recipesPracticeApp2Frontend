@@ -1,16 +1,12 @@
 import React from 'react';
+import ViewUserDetails from './ViewUserDetails.jsx';
 
 function UserCard({users}) {
-
     return(
         <div>
             {users && users.map(user => {
                 return(
-                    <div key={user.id}>
-                        <span>Username: {user.username} </span>
-                        <span>Password: {user.password} </span>
-                        <span>Email: {user.email}</span>
-                    </div>
+                    <ViewUserDetails user={user} />
                 )
             })}
         </div>
