@@ -9,7 +9,11 @@ class UserService {
     };
     async getUserData(id) {
         const response = await axios.get(`${UserURL}/${id}`);
+        console.log('Data: ',response.data)
         return response.data;
+    };
+    async addNewUser(user) {
+        await axios.post(`${UserURL}/create`, user)
     };
 };
 

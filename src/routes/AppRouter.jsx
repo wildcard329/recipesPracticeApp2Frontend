@@ -12,7 +12,7 @@ function AppRouter() {
             <Switch>
                 <Route path='/users/all' component={UserList} />
                 <Route path='/users/info' component={UserInfo} />
-                <Route path='/users/edit' component={CreateUser} />
+                <Route path='/users/add' component={CreateUser} />
                 <Route path='/users/edit' component={EditUser} />
             </Switch>
         </div>

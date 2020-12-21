@@ -13,6 +13,7 @@ function ViewUserDetails({user}) {
 
     return(
         <div key={user.id} onClick={getUserData}>
+            <span>ID: {user.id} </span>
             <span>Username: {user.username} </span>
             <span>Password: {user.password} </span>
             <span>Email: {user.email}</span>

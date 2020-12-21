@@ -8,11 +8,10 @@ function UserInfo() {
     const user = useSelector(selectUserData)
     const history = useHistory();
 
-    console.log(user)
     const toUsers = e => {
         e.preventDefault();
         history.push('/users/all')
-    }
+    };
     return(
         <div>
             <h2>{user.username}</h2>

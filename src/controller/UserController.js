@@ -11,6 +11,9 @@ class UserController{
         const userData = await UserService.getUserData(id);
         store.dispatch(Action.getUserData(userData));
     };
+    async addNewUser(user){
+        await UserService.addNewUser(user);
+    };
 };
 
 export default new UserController();
