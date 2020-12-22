@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { selectUserData } from '../../model/state/UserSelector.js';
+import { selectUserData } from '../../model/state/user/UserSelector.js';
 
 function UserInfo() {
     const user = useSelector(selectUserData)
