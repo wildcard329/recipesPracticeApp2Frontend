@@ -1,7 +1,12 @@
 import store from '../store.js';
 import * as Action from '../model/state/recipe/RecipeAction.js';
-import UserService from '../model/services/RecipeServices.js';
+import RecipeServices from '../model/services/RecipeServices.js';
 
 class RecipeController {
-
+    async getRecipeList() {
+        const recipeList = await RecipeServices.getRecipeList();
+        store.dispatch(Action.getRecipeList(recipeList));
+    }
 }
+
+export default new RecipeController();

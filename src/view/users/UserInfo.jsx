@@ -10,7 +10,7 @@ function UserInfo() {
 
     const toUsers = e => {
         e.preventDefault();
-        history.push('/users/all')
+        history.push('/users/all');
     };
     return(
         <div>

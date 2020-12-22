@@ -7,8 +7,8 @@ function ViewUserDetails({user}) {
 
     const getUserData = (e) => {
         e.preventDefault();
-        UserController.getUserData(user.id)
-        history.push('/users/info')
+        UserController.getUserData(user.id);
+        history.push('/users/info');
     }
 
     return(

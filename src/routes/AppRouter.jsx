@@ -6,6 +6,11 @@ import UserInfo from '../view/users/UserInfo.jsx';
 import EditUser from '../view/users/EditUser.jsx';
 import CreateUser from '../view/users/CreateUser.jsx';
 
+import RecipeList from '../view/recipes/RecipeList.jsx';
+import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
+import EditRecipe from '../view/recipes/EditRecipe.jsx';
+import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
+
 function AppRouter() {
     return(
         <div>
@@ -14,6 +19,11 @@ function AppRouter() {
                 <Route path='/users/info' component={UserInfo} />
                 <Route path='/users/add' component={CreateUser} />
                 <Route path='/users/edit' component={EditUser} />
+
+                <Route path='/recipes/all' component={RecipeList} />
+                <Route path='/recipe/info' component={RecipeInfo} />
+                <Route path='/recipes/add' component={CreateRecipe} />
+                <Route path='/recipe/edit' component={EditRecipe} />
             </Switch>
         </div>
     )

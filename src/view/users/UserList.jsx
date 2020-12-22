@@ -7,7 +7,7 @@ import { selectUserList } from '../../model/state/user/UserSelector.js';
 import UserCard from './UserCard.jsx';
 
 function UserList() {
-    const users = useSelector(selectUserList)
+    const users = useSelector(selectUserList);
     const history = useHistory();
 
     useEffect(() => {

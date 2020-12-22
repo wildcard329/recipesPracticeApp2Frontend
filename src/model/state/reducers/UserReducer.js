@@ -1,4 +1,4 @@
-import * as Actions from './UserAction.js';
+import * as Actions from '../user/UserAction.js';
 
 const initialState = {
     userList: [],

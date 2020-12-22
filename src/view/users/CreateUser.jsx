@@ -7,7 +7,7 @@ function CreateUser() {
         username: '',
         password: '',
         email: ''
-    })
+    });
     const history = useHistory();
 
     const enterUser = e => {
@@ -22,9 +22,9 @@ function CreateUser() {
 
     const addUser = e => {
         e.preventDefault();
-        UserController.addNewUser(user)
+        UserController.addNewUser(user);
         history.push('/users/all');
-    }
+    };
 
     return(
         <div>
