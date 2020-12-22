@@ -1,11 +1,11 @@
-import * as Actions from '../user/UserAction.js';
+import * as Actions from './Action.js';
 
 const initialState = {
     userList: [],
     userData: {}
 };
 
-export const userReducer = (state=initialState, action) => {
+export const reducer = (state=initialState, action) => {
     switch (action.type) {
         case Actions.GET_USER_LIST:
             return {
@@ -17,6 +17,16 @@ export const userReducer = (state=initialState, action) => {
                 ...state,
                 userData: {...action.userData}
             };
+        case Actions.GET_RECIPE_LIST:
+            return {
+                ...state,
+                recipeList: [...action.recipeList]
+            }
+            case Actions.GET_RECIPE_DATA:
+            return {
+                ...state,
+                recipeData: [...action.recipeData]
+            }
         default:
             return state;
     };

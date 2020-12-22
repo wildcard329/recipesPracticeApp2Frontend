@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import UserController from '../../controller/UserController.js';
-import { selectUserList } from '../../model/state/user/UserSelector.js';
+import { selectUserList } from '../../model/state/Selector.js';
 import UserCard from './UserCard.jsx';
 
 function UserList() {

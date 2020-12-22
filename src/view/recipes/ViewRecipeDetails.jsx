@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { selectRecipeData } from '../../model/state/recipe/RecipeSelector';
+import { selectRecipeData } from '../../model/state/Selector.js';
 
 function ViewRecipeDetails() {
     const recipe = useSelector(selectRecipeData);

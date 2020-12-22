@@ -1,5 +1,5 @@
 import store from '../store.js';
-import * as Action from '../model/state/user/UserAction.js';
+import * as Action from '../model/state/Action.js';
 import UserService from '../model/services/UserServices.js';
 
 class UserController{

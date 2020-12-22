@@ -1,5 +1,5 @@
 import store from '../store.js';
-import * as Action from '../model/state/recipe/RecipeAction.js';
+import * as Action from '../model/state/Action.js';
 import RecipeServices from '../model/services/RecipeServices.js';
 
 class RecipeController {

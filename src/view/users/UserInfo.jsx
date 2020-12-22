@@ -2,11 +2,12 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { selectUserData } from '../../model/state/user/UserSelector.js';
+import { selectUserData } from '../../model/state/Selector.js';
 
 function UserInfo() {
     const user = useSelector(selectUserData)
     const history = useHistory();
+    console.log('info: ',user)
 
     const toUsers = e => {
         e.preventDefault();
