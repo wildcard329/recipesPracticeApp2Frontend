@@ -2,12 +2,15 @@ import * as Actions from './Action.js';
 
 const initialState = {
     userList: [],
-    userData: {}
+    userData: {},
+    recipeList: [],
+    recipeData: {}
 };
 
 export const reducer = (state=initialState, action) => {
     switch (action.type) {
         case Actions.GET_USER_LIST:
+            console.log('state: ',state)
             return {
                 ...state,
                 userList: [...action.userList]

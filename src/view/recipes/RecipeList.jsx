@@ -10,7 +10,7 @@ function RecipeList() {
 
     useEffect(() => {
         RecipeController.getRecipeList();
-    }, [recipes]);
+    }, []);
     
     return(
         <div>

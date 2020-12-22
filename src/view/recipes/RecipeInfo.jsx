@@ -6,6 +6,7 @@ import RecipeController from '../../controller/RecipeController';
 function RecipeInfo({recipe}) {
     const history = useHistory();
 
+    console.log('info', recipe)
     const getRecipeData = e => {
         e.preventDefault();
         RecipeController.getRecipeData(recipe.id);
