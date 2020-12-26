@@ -1,23 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import RecipeController from '../../controller/RecipeController';
+import { selectRecipeData } from '../../model/state/Selector.js';
 
-function RecipeInfo({recipe}) {
+function RecipeInfo() {
+    const recipe = useSelector(selectRecipeData);
     const history = useHistory();
+    console.log('component data: ', recipe)
 
-    console.log('info', recipe)
-    const getRecipeData = e => {
+    const toRecipes = e => {
         e.preventDefault();
-        RecipeController.getRecipeData(recipe.id);
-        history.push('/recipe/info');
+        history.push('/recipes/all');
     };
 
     return(
-        <div onClick={getRecipeData}>
+        <div>
             <h2>{recipe.name}</h2>
             <p>{recipe.description}</p>
             <p>Posted by {recipe.author}</p>
+            <button onClick={toRecipes}>Recipes</button>
         </div>
     )
 }

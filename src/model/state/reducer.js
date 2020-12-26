@@ -4,7 +4,8 @@ const initialState = {
     userList: [],
     userData: {},
     recipeList: [],
-    recipeData: {}
+    recipeData: {},
+    newRecipeStatus: false
 };
 
 export const reducer = (state=initialState, action) => {
@@ -26,9 +27,10 @@ export const reducer = (state=initialState, action) => {
                 recipeList: [...action.recipeList]
             }
             case Actions.GET_RECIPE_DATA:
+                console.log('State: ',state)
             return {
                 ...state,
-                recipeData: [...action.recipeData]
+                recipeData: {...action.recipeData}
             }
         default:
             return state;

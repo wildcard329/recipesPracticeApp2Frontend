@@ -11,6 +11,8 @@ import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
 import EditRecipe from '../view/recipes/EditRecipe.jsx';
 import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
 
+import Testimageupload from '../view/testimageupload.jsx';
+
 function AppRouter() {
     return(
         <div>
@@ -24,6 +26,8 @@ function AppRouter() {
                 <Route path='/recipe/info' component={RecipeInfo} />
                 <Route path='/recipes/add' component={CreateRecipe} />
                 <Route path='/recipe/edit' component={EditRecipe} />
+            
+                <Route path='/image_upload' component={Testimageupload} />
             </Switch>
         </div>
     )

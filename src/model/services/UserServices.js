@@ -5,6 +5,7 @@ const UserURL = new URL('http://localhost:5000/api/users')
 class UserService {
     async getUserList() {
         const response = await axios.get(`${UserURL}/all`);
+        console.log('u service: ', response.data)
         return response.data;
     };
     async getUserData(id) {
