@@ -12,9 +12,7 @@ class RecipeServices {
         return response.data;
     };
     async addRecipeData(recipe) {
-        const response = await axios.post(`${RecipesURL}/create`, recipe);
-        console.log('response: ',response)
-        return response.status;
+        await axios.post(`${RecipesURL}/create`, recipe, { headers: { 'Content-Type': 'multipart/form-data'}});
     };
 };
 

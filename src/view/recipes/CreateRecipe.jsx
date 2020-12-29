@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
+import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
     const [recipe, setRecipe] = useState({
@@ -11,28 +12,53 @@ function CreateRecipe() {
     })
     const history = useHistory();
 
-    const [image, setImage] = useState('')
-    const [imagename, setImagename] = useState('Select image')
+    const [file, setFile] = useState('')
+    const [filename, setFilename] = useState('Select image')
+    const [image, setImage] = useState(null)
+    const [imgData, setImgData] = useState(null)
 
     const handleRecipe = e => {
         setRecipe({...recipe, [e.target.name]: e.target.value});
     }
 
-    const handleFile = e => {
-        setImage(e.target.files[0]);
-        setImagename(e.target.files[0].name);
-        recipe.image = image
-        recipe.imagename = imagename
+    const onChangeImage = e => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                setImgData(reader.result);
+            });
+            reader.readAsDataURL(e.target.files[0])
+        }
     }
 
+    const handleFile = e => {
+        e.preventDefault();
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            setFile(reader.result);
+        });
+        reader.readAsDataURL(e.target.files[0]);
+        console.log('file: ',file);
+    }
+    
     const cancel = e => {
         e.preventDefault();
         history.push('/recipes/all');
     }
-
+    
     const submitRecipe = e => {
+        const data = new FormData();
+        data.append('name', recipe.name);
+        data.append('description', recipe.description);
+        data.append('author', recipe.author)
+        data.append('filename', filename);
+        data.append('file', file);
         e.preventDefault();
-        RecipeController.addRecipeData(recipe)
+        console.log('Sending :',data)
+        RecipeController.addRecipeData(data)
     }
     return(
         <div>
@@ -54,6 +80,8 @@ function CreateRecipe() {
                     <button onClick={submitRecipe}>Submit</button>
                 </div>
             </form>
+            <image src ={file} />
+            <RecipePreview recipe={recipe} file={file} filename={filename} />
         </div>
     )
 }
