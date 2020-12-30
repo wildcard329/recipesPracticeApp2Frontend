@@ -1,6 +1,8 @@
 import axios from 'axios';
+import axiosWithAuth from '../../helpers/utils/axiosWithAuth.js';
 
 const UserURL = new URL('http://localhost:5000/api/users')
+const AuthURL = new URL('http://localhost:5000/api/auth')
 
 class UserService {
     async getUserList() {
@@ -14,6 +16,12 @@ class UserService {
     };
     async addNewUser(user) {
         await axios.post(`${UserURL}/create`, user)
+    };
+    async registerNewUser(user) {
+        await axios.post(`${AuthURL}/register`, user);
+    };
+    async loginUser(user) {
+        await axios.post(`${AuthURL}/login`, user)
     };
 };
 

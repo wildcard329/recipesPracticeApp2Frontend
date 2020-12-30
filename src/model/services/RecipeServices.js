@@ -1,18 +1,19 @@
 import axios from 'axios';
+import axiosWithAuth from '../../helpers/utils/axiosWithAuth.js';
 
 const RecipesURL = new URL('http://localhost:5000/api/recipes')
 
 class RecipeServices {
     async getRecipeList() {
-        const response = await axios.get(`${RecipesURL}/all`);
+        const response = await axiosWithAuth.get(`${RecipesURL}/all`);
         return response.data;
     };
     async getRecipeData(id) {
-        const response = await axios.get(`${RecipesURL}/${id}`);
+        const response = await axiosWithAuth.get(`${RecipesURL}/${id}`);
         return response.data;
     };
     async addRecipeData(recipe) {
-        await axios.post(`${RecipesURL}/create`, recipe, { headers: { 'Content-Type': 'multipart/form-data'}});
+        await axiosWithAuth.post(`${RecipesURL}/create`, recipe, { headers: { 'Content-Type': 'multipart/form-data'}});
     };
 };
 

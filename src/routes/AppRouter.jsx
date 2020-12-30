@@ -10,22 +10,27 @@ import RecipeList from '../view/recipes/RecipeList.jsx';
 import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
 import EditRecipe from '../view/recipes/EditRecipe.jsx';
 import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
 
 import Testimageupload from '../view/testimageupload.jsx';
+import UserLogin from '../view/auth/UserLogin.jsx';
+import UserRegister from '../view/auth/UserRegister.jsx';
 
 function AppRouter() {
     return(
         <div>
             <Switch>
-                <Route path='/users/all' component={UserList} />
-                <Route path='/users/info' component={UserInfo} />
-                <Route path='/users/add' component={CreateUser} />
-                <Route path='/users/edit' component={EditUser} />
+                <Route path='/auth/login' component={UserLogin} />
+                <Route path='/auth/register' component={UserRegister} />
+                <PrivateRoute path='/users/all' component={UserList} />
+                <PrivateRoute path='/users/info' component={UserInfo} />
+                <PrivateRoute path='/users/add' component={CreateUser} />
+                <PrivateRoute path='/users/edit' component={EditUser} />
 
-                <Route path='/recipes/all' component={RecipeList} />
-                <Route path='/recipe/info' component={RecipeInfo} />
-                <Route path='/recipes/add' component={CreateRecipe} />
-                <Route path='/recipe/edit' component={EditRecipe} />
+                <PrivateRoute path='/recipes/all' component={RecipeList} />
+                <PrivateRoute path='/recipe/info' component={RecipeInfo} />
+                <PrivateRoute path='/recipes/add' component={CreateRecipe} />
+                <PrivateRoute path='/recipe/edit' component={EditRecipe} />
             
                 <Route path='/image_upload' component={Testimageupload} />
             </Switch>

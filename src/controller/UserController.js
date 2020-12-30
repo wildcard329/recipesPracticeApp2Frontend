@@ -14,6 +14,12 @@ class UserController{
     async addNewUser(user){
         await UserService.addNewUser(user);
     };
+    async registerNewUser(user) {
+        await UserService.registerNewUser(user);
+    };
+    async loginUser(user) {
+        await UserService.loginUser(user);
+    };
 };
 
 export default new UserController();
