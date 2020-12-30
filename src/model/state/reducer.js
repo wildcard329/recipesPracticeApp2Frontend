@@ -1,7 +1,7 @@
 import * as Actions from './Action.js';
 
 const initialState = {
-    token: '',
+    user: {},
     userList: [],
     userData: {},
     recipeList: [],
@@ -11,12 +11,10 @@ const initialState = {
 
 export const reducer = (state=initialState, action) => {
     switch (action.type) {
-        case Actions.LOGIN_USER:
-            console.log(`reducer token: ${action.token}`)
-            localStorage.setItem('token', action.token)
+        case Actions.SET_USER:
             return {
                 ...state,
-                token: {...action.token}
+                token: {...action.user}
             };
         case Actions.GET_USER_LIST:
             console.log('state: ',state)
