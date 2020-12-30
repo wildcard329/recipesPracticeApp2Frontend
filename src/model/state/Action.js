@@ -1,6 +1,7 @@
 // User
 export const GET_USER_LIST = 'GET_USER_LIST';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const LOGIN_USER = 'LOGIN_USER';
 
 export const getUserList = userList => {
     return { type: GET_USER_LIST, userList };
@@ -8,6 +9,10 @@ export const getUserList = userList => {
 
 export const getUserData = userData => {
     return { type: GET_USER_DATA, userData };
+};
+
+export const authenticateUser = token => {
+    return { type: LOGIN_USER, token };
 };
 
 // Recipe

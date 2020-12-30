@@ -18,7 +18,9 @@ class UserController{
         await UserService.registerNewUser(user);
     };
     async loginUser(user) {
-        await UserService.loginUser(user);
+        const token = await UserService.loginUser(user);
+        console.log('token: ',token)
+        store.dispatch(Action.authenticateUser(token))
     };
 };
 

@@ -21,7 +21,10 @@ class UserService {
         await axios.post(`${AuthURL}/register`, user);
     };
     async loginUser(user) {
-        await axios.post(`${AuthURL}/login`, user)
+        const response = await axios.post(`${AuthURL}/login`, user)
+        localStorage.setItem('token', response.data.token)
+        console.log(response)
+        return response.data.token;
     };
 };
 
