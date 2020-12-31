@@ -8,7 +8,6 @@ import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
     const user = useSelector(selectUser)
-    console.log(user.username)
     const [recipe, setRecipe] = useState({
         name: '',
         description: '',
@@ -16,23 +15,8 @@ function CreateRecipe() {
     })
     const history = useHistory();
 
-    const [file, setFile] = useState('')
-    const [filename, setFilename] = useState('Select image')
-
     const handleRecipe = e => {
         setRecipe({...recipe, [e.target.name]: e.target.value});
-    }
-
-    const handleFile = e => {
-        e.preventDefault();
-        setFile(e.target.files[0]);
-        setFilename(e.target.files[0].name);
-        const reader = new FileReader();
-        reader.addEventListener("load", () => {
-            setFile(reader.result);
-        });
-        reader.readAsDataURL(e.target.files[0]);
-        console.log('file: ',file);
     }
     
     const cancel = e => {
@@ -57,16 +41,11 @@ function CreateRecipe() {
                     <input id='description' type='text' name='description' onChange={handleRecipe} />
                 </div>
                 <div>
-                    <label htmlFor='image'>Picture</label>
-                    <input id='image' type='file' name='image' onChange={handleFile} />
-                </div>
-                <div>
                     <button onClick={cancel}>Cancel</button>
                     <button onClick={submitRecipe}>Submit</button>
                 </div>
             </form>
-            <image src ={file} />
-            <RecipePreview recipe={recipe} file={file} filename={filename} />
+            <RecipePreview recipe={recipe} />
         </div>
     )
 }

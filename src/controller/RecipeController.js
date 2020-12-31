@@ -7,6 +7,10 @@ class RecipeController {
         const recipeList = await RecipeServices.getRecipeList();
         store.dispatch(Action.getRecipeList(recipeList));
     };
+    async getUserRecipeList(id) {
+        const userRecipeList = await RecipeServices.getUserRecipeList(id);
+        store.dispatch(Action.getUserRecipeList(userRecipeList));
+    };
     async getRecipeData(id) {
         const recipeData = await RecipeServices.getRecipeData(id);
         store.dispatch(Action.getRecipeData(recipeData));

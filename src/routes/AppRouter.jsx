@@ -20,6 +20,7 @@ function AppRouter() {
     return(
         <div>
             <Switch>
+                <Route exact path='/' component={UserLogin} />
                 <Route path='/auth/login' component={UserLogin} />
                 <Route path='/auth/register' component={UserRegister} />
                 <PrivateRoute path='/users/all' component={UserList} />

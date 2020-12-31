@@ -35,6 +35,11 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 recipeList: [...action.recipeList]
             };
+        case Actions.GET_USER_RECIPE_LIST:
+            return {
+                ...state,
+                userRecipeList: [...action.userRecipeList]
+            };
         case Actions.GET_RECIPE_DATA:
             return {
                 ...state,

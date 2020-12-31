@@ -6,7 +6,8 @@ import UserController from '../../controller/UserController';
 function UserLogin() {
     const [user, setUser] = useState({
         username: '',
-        password: ''
+        password: '',
+        lastLogin: Date.now()
     })
     const history = useHistory();
 
