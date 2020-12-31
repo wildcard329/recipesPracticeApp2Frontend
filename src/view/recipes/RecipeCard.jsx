@@ -3,7 +3,7 @@ import ViewRecipeDetails from './ViewRecipeDetails.jsx';
 
 function RecipeCard({recipes}) {
     return(
-        <div>
+        <div className='all-recipes'>
             {recipes && recipes.map(recipe => {
                 return(
                     <ViewRecipeDetails recipe={recipe} />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import UserController from '../../controller/UserController';
-import { useHistory, link } from 'react-router-dom';
 
 function UserLogin() {
     const [user, setUser] = useState({
@@ -16,21 +17,22 @@ function UserLogin() {
     const submitLogin = e => {
         e.preventDefault();
         UserController.loginUser(user);
-        history.push('/recipes/all');
-    }
+            history.push('/recipes/all');
+    };
 
-    const goToRegister = () => {
+    const goToRegister = e => {
+        e.preventDefault();
         history.push('/auth/register')
-    }
+    };
     return(
-        <div>
+        <div className='auth-form'>
             <form onSubmit={submitLogin}>
                 <div>
-                    <label htmlFor='username'>Enter username</label>
+                    <label htmlFor='username'>Username</label>
                     <input id='username' type='text' name='username' onChange={onChangeCredentials} />
                 </div>
                 <div>
-                    <label htmlFor='password'>Enter password</label>
+                    <label htmlFor='password'>Password</label>
                     <input id='password' type='text' name='password' onChange={onChangeCredentials} />
                 </div>
                 <div>

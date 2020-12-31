@@ -9,10 +9,11 @@ import RecipeCard from './RecipeCard.jsx';
 function RecipeList() {
     const recipes = useSelector(selectRecipeList);
     const history = useHistory();
+    console.log('recipes: ',recipes)
 
     useEffect(() => {
         RecipeController.getRecipeList();
-    }, [recipes]);
+    }, []);
 
     const toAddRecipe = e => {
         e.preventDefault();
@@ -21,6 +22,7 @@ function RecipeList() {
 
     return(
         <div>
+            <h2>Browse all recipes</h2>
             <RecipeCard recipes={recipes} />
             <button onClick={toAddRecipe}>Add Recipe</button>
         </div>

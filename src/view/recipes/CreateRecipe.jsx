@@ -1,35 +1,26 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
+import { selectUser } from '../../model/state/Selector.js';
 import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
+    const user = useSelector(selectUser)
+    console.log(user.username)
     const [recipe, setRecipe] = useState({
         name: '',
         description: '',
-        author: 'test user1',
+        author: user.id,
     })
     const history = useHistory();
 
     const [file, setFile] = useState('')
     const [filename, setFilename] = useState('Select image')
-    const [image, setImage] = useState(null)
-    const [imgData, setImgData] = useState(null)
 
     const handleRecipe = e => {
         setRecipe({...recipe, [e.target.name]: e.target.value});
-    }
-
-    const onChangeImage = e => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
-            const reader = new FileReader();
-            reader.addEventListener("load", () => {
-                setImgData(reader.result);
-            });
-            reader.readAsDataURL(e.target.files[0])
-        }
     }
 
     const handleFile = e => {
@@ -50,15 +41,9 @@ function CreateRecipe() {
     }
     
     const submitRecipe = e => {
-        const data = new FormData();
-        data.append('name', recipe.name);
-        data.append('description', recipe.description);
-        data.append('author', recipe.author)
-        data.append('filename', filename);
-        data.append('file', file);
         e.preventDefault();
-        console.log('Sending :',data)
-        RecipeController.addRecipeData(data)
+        RecipeController.addRecipeData(recipe);
+        RecipeController.getRecipeList();
     }
     return(
         <div>

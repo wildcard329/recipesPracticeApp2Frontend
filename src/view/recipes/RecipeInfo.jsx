@@ -15,7 +15,7 @@ function RecipeInfo() {
     };
 
     return(
-        <div>
+        <div className='recipe-card'>
             <h2>{recipe.name}</h2>
             <p>{recipe.description}</p>
             <p>Posted by {recipe.author}</p>

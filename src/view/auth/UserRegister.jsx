@@ -11,7 +11,6 @@ function UserRegister() {
     const history = useHistory();
 
     const enterUser = e => {
-        e.preventDefault();
         setUser({...user, [e.target.name]: e.target.value});
     };
 
@@ -21,12 +20,13 @@ function UserRegister() {
         history.push('/auth/login');
     };
 
-    const cancelRegistration = () => {
+    const cancelRegistration = e => {
+        e.preventDefault();
         history.push('/auth/login');
     }
 
     return(
-        <div>
+        <div className='auth-form'>
             <form onSubmit={submitRegistration}>
                 <div>
                     <label htmlFor='username'>Choose a username</label>

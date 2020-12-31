@@ -13,7 +13,7 @@ class RecipeServices {
         return response.data;
     };
     async addRecipeData(recipe) {
-        await axiosWithAuth().post(`${RecipesURL}/create`, recipe, { headers: { 'Content-Type': 'multipart/form-data'}});
+        await axiosWithAuth().post(`${RecipesURL}/create`, recipe);
     };
 };
 
