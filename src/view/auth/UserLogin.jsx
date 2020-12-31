@@ -17,7 +17,7 @@ function UserLogin() {
     const submitLogin = e => {
         e.preventDefault();
         UserController.loginUser(user);
-            history.push('/recipes/all');
+        history.push('/recipes/all');
     };
 
     const goToRegister = e => {

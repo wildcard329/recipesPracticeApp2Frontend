@@ -2,6 +2,7 @@
 export const GET_USER_LIST = 'GET_USER_LIST';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SET_USER = 'SET_USER';
+export const REMOVE_USER = 'REMOVE_USER';
 
 export const getUserList = userList => {
     return { type: GET_USER_LIST, userList };
@@ -13,6 +14,10 @@ export const getUserData = userData => {
 
 export const setUser = user => {
     return { type: SET_USER, user };
+};
+
+export const removeUser = user => {
+    return { type: REMOVE_USER, user };
 };
 
 // Recipe

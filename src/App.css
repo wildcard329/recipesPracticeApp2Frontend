@@ -7,6 +7,12 @@
   height: 50;
 }
 
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+}
+
 .user-dashboard {
   text-align: right;
 }
@@ -40,4 +46,9 @@
 
 .recipe-card:hover {
   border: 4px solid yellow;
+}
+
+.public-header {
+  text-align: center;
+  margin: 0 auto;
 }

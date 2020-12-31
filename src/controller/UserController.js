@@ -21,6 +21,10 @@ class UserController{
         const userObject = await UserService.loginUser(user);
         store.dispatch(Action.setUser(userObject))
     };
+    async logoutUser(user) {
+        await UserService.logoutUser();
+        store.dispatch(Action.removeUser(user));
+    };
 };
 
 export default new UserController();

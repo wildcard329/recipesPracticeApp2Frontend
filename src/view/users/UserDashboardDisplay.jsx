@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import UserController from '../../controller/UserController';
 
 function UserDashboardDisplay({user}) {
     const history = useHistory();
@@ -9,10 +10,10 @@ function UserDashboardDisplay({user}) {
         if (user) {
             setDisplay(true);
         }
-    }, [user])
+    }, [user]);
 
     const logout = () => {
-        localStorage.removeItem('token');
+        UserController.logoutUser(user);
         history.push('/auth/login');
         setDisplay(false);
     };
