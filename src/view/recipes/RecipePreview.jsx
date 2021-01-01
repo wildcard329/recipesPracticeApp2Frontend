@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function  RecipePreview(props) {
-    console.log('props: ', props)
 
     return(
         <div>

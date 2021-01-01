@@ -7,7 +7,6 @@ function Testimageupload() {
     const onChangeForm = e => {
         setFile(e.target.files[0]);
         setFilename(e.target.files[0].name);
-        console.log(filename)
     }
 
     const onSubmitForm = e => {

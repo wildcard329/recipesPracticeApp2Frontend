@@ -15,9 +15,9 @@ function UserLogin() {
         setUser({...user, [e.target.name]: e.target.value});
     }
 
-    const submitLogin = e => {
+    const submitLogin = async e => {
         e.preventDefault();
-        UserController.loginUser(user);
+        await UserController.loginUser(user);
         history.push('/recipes/all');
     };
 

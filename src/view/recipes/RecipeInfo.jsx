@@ -7,7 +7,6 @@ import { selectRecipeData } from '../../model/state/Selector.js';
 function RecipeInfo() {
     const recipe = useSelector(selectRecipeData);
     const history = useHistory();
-    console.log('component data: ', recipe)
 
     const toRecipes = e => {
         e.preventDefault();

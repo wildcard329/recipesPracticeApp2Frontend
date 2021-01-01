@@ -8,7 +8,6 @@ function ViewRecipeDetails({recipe}) {
 
     const getRecipeData = e => {
         e.preventDefault();
-        console.log('recipe id: ',recipe.id)
         RecipeController.getRecipeData(recipe.id);
         history.push('/recipe/info');
     };

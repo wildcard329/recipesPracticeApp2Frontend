@@ -7,13 +7,13 @@ import { selectUser } from '../../model/state/Selector.js';
 import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
+    const history = useHistory();
     const user = useSelector(selectUser)
     const [recipe, setRecipe] = useState({
         name: '',
         description: '',
         author: user.id,
     })
-    const history = useHistory();
 
     const handleRecipe = e => {
         setRecipe({...recipe, [e.target.name]: e.target.value});
@@ -24,11 +24,13 @@ function CreateRecipe() {
         history.push('/recipes/all');
     }
     
-    const submitRecipe = e => {
+    const submitRecipe = async e => {
         e.preventDefault();
         RecipeController.addRecipeData(recipe);
         RecipeController.getRecipeList();
-    }
+        await RecipeController.getUserRecipeList(user.id);
+        history.push('/recipes/all');
+    };
     return(
         <div>
             <form onSubmit={submitRecipe}>

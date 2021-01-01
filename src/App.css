@@ -30,11 +30,12 @@
   background-color: rgb(119, 68, 68);
 }
 
-.all-recipes {
+.recipe-list {
   width: 90%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  background-color: #dcdcdc;
 }
 
 .recipe-card {
@@ -42,6 +43,7 @@
   border: 3px solid gray;
   border-radius: 5%;
   padding: 3%;
+  background-color: white;
 }
 
 .recipe-card:hover {

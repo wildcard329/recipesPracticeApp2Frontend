@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserDashboardDisplayOptions() {
+function UserDashboardLogoutDisplay() {
     return(
         <div className='public-header'>
             <h1>Welcome to Cookbook!</h1>
@@ -8,4 +8,4 @@ function UserDashboardDisplayOptions() {
     )
 }
 
-export default UserDashboardDisplayOptions;
+export default UserDashboardLogoutDisplay;

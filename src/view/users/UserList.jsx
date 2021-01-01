@@ -13,7 +13,6 @@ function UserList() {
     useEffect(() => {
         UserController.getUserList();
     }, []);
-    console.log('users: ',users)
 
     const toAddUser = (e) => {
         e.preventDefault();

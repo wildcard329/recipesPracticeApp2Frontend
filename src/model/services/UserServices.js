@@ -22,11 +22,15 @@ class UserService {
     async loginUser(user) {
         const response = await axios.post(`${AuthURL}/login`, user);
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userid', response.data.user.id);
+        localStorage.setItem('username', response.data.user.username);
         return response.data.user;
     };
     async logoutUser() {
         localStorage.removeItem('token');
-    }
+        localStorage.removeItem('userid');
+        localStorage.removeItem('username');
+    };
 };
 
 export default new UserService();

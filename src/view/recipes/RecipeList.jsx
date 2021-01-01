@@ -5,14 +5,15 @@ import { useHistory } from 'react-router-dom';
 import RecipeController from '../../controller/RecipeController.js';
 import { selectRecipeList, selectUser, selectUserRecipeList } from '../../model/state/Selector.js';
 import RecipeCard from './RecipeCard.jsx';
+import UserHelper from '../../helpers/functions/validateUserId.js';
 
 function RecipeList() {
-    const user = useSelector(selectUser);
+    // const user = useSelector(selectUser);
     const recipes = useSelector(selectRecipeList);
     const userRecipes = useSelector(selectUserRecipeList);
     const history = useHistory();
-    console.log('recipes: ',userRecipes)
-
+    const user = UserHelper.validateId(useSelector(selectUser));
+    
     useEffect(() => {
         RecipeController.getRecipeList();
         RecipeController.getUserRecipeList(user.id);

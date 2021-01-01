@@ -7,6 +7,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
+// store.subscribe(() => {
+//     console.log('Store updated!\n\n',store.getState());
+// })
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
