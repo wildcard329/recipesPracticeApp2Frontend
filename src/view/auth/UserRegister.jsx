@@ -6,7 +6,8 @@ function UserRegister() {
     const [user, setUser] = useState({
         username: '',
         password: '',
-        email: null
+        email: null,
+        created_on: new Date()
     });
     const history = useHistory();
 

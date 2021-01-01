@@ -13,8 +13,9 @@
   padding: 2%;
 }
 
-.user-dashboard {
+.user-dashboard-right {
   text-align: right;
+  margin-right: 5%;
 }
 
 .none {
@@ -36,6 +37,10 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #dcdcdc;
+}
+
+.list-header {
+  margin-left: 5%;
 }
 
 .recipe-card {

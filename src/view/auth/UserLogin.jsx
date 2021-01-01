@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import UserController from '../../controller/UserController';
+import UserController from '../../controller/UserController.js';
 
 function UserLogin() {
     const [user, setUser] = useState({
         username: '',
         password: '',
-        lastLogin: Date.now()
+        last_login: new Date()
     })
     const history = useHistory();
 

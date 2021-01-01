@@ -19,10 +19,15 @@ class UserController{
     };
     async loginUser(user) {
         const userObject = await UserService.loginUser(user);
-        store.dispatch(Action.setUser(userObject))
+        store.dispatch(Action.setToken(userObject.token));
+        store.dispatch(Action.setUser(userObject.user));
+        store.dispatch(Action.setLoggedIn());
+    };
+    async getLoggedInUser(id) {
+        const user = await UserService.getLoggedInUser(id);
+        store.dispatch(Action.setUser(user));
     };
     async logoutUser(user) {
-        await UserService.logoutUser();
         store.dispatch(Action.removeUser(user));
     };
 };

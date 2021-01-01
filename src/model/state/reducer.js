@@ -1,11 +1,13 @@
 import * as Actions from './Action.js';
 
 const initialState = {
+    token: null,
     user: {},
     userList: [],
     userData: {},
     recipeList: [],
-    recipeData: {}
+    recipeData: {},
+    loggedIn: false
 };
 
 export const reducer = (state=initialState, action) => {
@@ -14,6 +16,16 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 user: {...action.user}
+            };
+        case Actions.SET_TOKEN:
+            return {
+                ...state,
+                token: {...action.token}
+            };
+        case Actions.SET_LOGGED_IN:
+            return {
+                ...state,
+                loggedIn: true
             };
         case Actions.REMOVE_USER:
             return {
@@ -36,6 +48,7 @@ export const reducer = (state=initialState, action) => {
                 recipeList: [...action.recipeList]
             };
         case Actions.GET_USER_RECIPE_LIST:
+            console.log('state: ',state)
             return {
                 ...state,
                 userRecipeList: [...action.userRecipeList]

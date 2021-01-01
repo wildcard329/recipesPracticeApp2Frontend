@@ -2,6 +2,8 @@
 export const GET_USER_LIST = 'GET_USER_LIST';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SET_USER = 'SET_USER';
+export const SET_LOGGED_IN = 'SET_LOGGED_IN';
+export const SET_TOKEN = 'SET_TOKEN';
 export const REMOVE_USER = 'REMOVE_USER';
 
 export const getUserList = userList => {
@@ -14,6 +16,14 @@ export const getUserData = userData => {
 
 export const setUser = user => {
     return { type: SET_USER, user };
+};
+
+export const setLoggedIn = () => {
+    return { type: SET_LOGGED_IN }
+}
+
+export const setToken = token => {
+    return { type: SET_TOKEN, token };
 };
 
 export const removeUser = user => {
