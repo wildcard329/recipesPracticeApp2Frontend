@@ -5,7 +5,6 @@ import UserDashboard from './view/users/UserDashboard';
 function App() {
   return (
     <div>
-      <UserDashboard />
       <AppRouter />
     </div>
   );

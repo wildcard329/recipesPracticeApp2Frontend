@@ -26,6 +26,7 @@ class UserController{
     async getLoggedInUser(id) {
         const user = await UserService.getLoggedInUser(id);
         store.dispatch(Action.setUser(user));
+        store.dispatch(Action.setLoggedIn());
     };
     async logoutUser(user) {
         store.dispatch(Action.removeUser(user));

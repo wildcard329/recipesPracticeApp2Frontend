@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import UserController from '../../controller/UserController';
-import UserHelper from '../../helpers/functions/storageHandler.js';
+import React from 'react';
 
-function UserDashboardDisplay({user}) {
-    const history = useHistory();
+import UserDashboardMenu from './UserDashboardMenu.jsx';
+import UserDashboardUser from './UserDashboardUser.jsx';
 
-    const logout = () => {
-        UserController.logoutUser(user);
-        UserHelper.removeTokenSession();
-        history.push('/auth/login');
-    };
+function UserDashboardDisplay() {
     return(
-        <div className='user-dashboard-right'>
-            <h2>{user && `Welcome, ${user.username}`}</h2>
-            <button onClick={logout}>Logout</button>
+        <div>
+            <UserDashboardMenu />
+            <UserDashboardUser />
         </div>
     )
 }

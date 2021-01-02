@@ -10,12 +10,16 @@
 .dashboard-container {
   display: flex;
   justify-content: space-between;
-  padding: 2%;
 }
 
 .user-dashboard-right {
   text-align: right;
   margin-right: 5%;
+}
+
+.user-dashboard-left {
+  text-align: left;
+  margin-left: 5%;
 }
 
 .none {
