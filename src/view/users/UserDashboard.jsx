@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { selectUser, selectToken } from '../../model/state/Selector.js';
 import UserDashboardDisplayUser from './UserDashboardDisplay.jsx';
@@ -12,13 +12,20 @@ function UserDashboard() {
     const user = UserHelper.validateId(useSelector(selectUser));
     const token = useSelector(selectToken);
     UserHelper.setToken(token, user);
-    const history = useHistory();
+    const path = useLocation().pathname;
 
     useEffect(() => {
-        history.location.pathname === '/auth/login' || '/auth/register' ? setDisplay(false) : setDisplay(true);
-    }, [history.location.pathname]);
+        // path !== '/auth/login' || '/auth/register' ? setDisplay(true) : setDisplay(false)
+        // console.log('display state: ',display)
+        if (path === '/auth/login') {
+            setDisplay(false)
+        } else if (path === '/auth/register') {
+            setDisplay(false)
+        } else {
+            setDisplay(true)
+        }
+    }, [path]);
 
-    console.log(history.location.pathname === '/auth/login')
     return(
         <div>
             <div className={display ? 'none' : ''}>
