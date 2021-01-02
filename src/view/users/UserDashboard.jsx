@@ -6,6 +6,7 @@ import { selectUser, selectToken } from '../../model/state/Selector.js';
 import UserDashboardDisplayUser from './UserDashboardDisplay.jsx';
 import UserDashboardLogoutDsiplay from './UserDashboardLogoutDsiplay.jsx';
 import UserHelper from '../../helpers/functions/storageHandler.js';
+import UserController from '../../controller/UserController.js';
 
 function UserDashboard() {
     const [display, setDisplay] = useState(false);
@@ -15,15 +16,17 @@ function UserDashboard() {
     const path = useLocation().pathname;
 
     useEffect(() => {
-        // path !== '/auth/login' || '/auth/register' ? setDisplay(true) : setDisplay(false)
-        // console.log('display state: ',display)
-        if (path === '/auth/login') {
-            setDisplay(false)
-        } else if (path === '/auth/register') {
-            setDisplay(false)
-        } else {
-            setDisplay(true)
-        }
+        UserController.getLoggedInUser(user.id);
+        switch (path) {
+            case '/auth/login':
+                return setDisplay(false);
+            case '/auth/register':
+                return setDisplay(false);
+            case '/':
+                return setDisplay(false);
+            default:
+                return setDisplay(true);
+        };
     }, [path]);
 
     return(

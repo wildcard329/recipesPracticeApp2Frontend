@@ -26,6 +26,10 @@
   display: none;
 }
 
+ul .menu-list {
+  list-style-type: none;
+}
+
 .auth-form {
   text-align: center;
   border: 1px solid black;

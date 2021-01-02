@@ -16,6 +16,7 @@ import Testimageupload from '../view/testimageupload.jsx';
 import UserLogin from '../view/auth/UserLogin.jsx';
 import UserRegister from '../view/auth/UserRegister.jsx';
 import UserDashboard from '../view/users/UserDashboard.jsx';
+import UserProfile from '../view/users/UserProfile.jsx';
 
 function AppRouter() {
     return(
@@ -25,6 +26,9 @@ function AppRouter() {
                 <Route exact path='/' component={UserLogin} />
                 <Route path='/auth/login' component={UserLogin} />
                 <Route path='/auth/register' component={UserRegister} />
+                
+                <PrivateRoute path='/user/profile' component={UserProfile} />
+                
                 <PrivateRoute path='/users/all' component={UserList} />
                 <PrivateRoute path='/users/info' component={UserInfo} />
                 <PrivateRoute path='/users/add' component={CreateUser} />
