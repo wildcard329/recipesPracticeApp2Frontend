@@ -27,7 +27,7 @@ function UserDashboard() {
             default:
                 return setDisplay(true);
         };
-    }, [path]);
+    }, [path, user.id]);
 
     return(
         <div>

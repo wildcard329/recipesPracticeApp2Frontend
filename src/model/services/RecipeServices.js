@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosWithAuth } from '../../helpers/utils/axiosWithAuth.js';
 
 const RecipesURL = new URL('http://localhost:5000/api/recipes')

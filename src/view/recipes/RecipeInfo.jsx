@@ -10,7 +10,7 @@ function RecipeInfo() {
 
     const toRecipes = e => {
         e.preventDefault();
-        history.push('/recipes/all');
+        history.push('/recipes/browse');
     };
 
     return(

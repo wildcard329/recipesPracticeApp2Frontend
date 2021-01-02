@@ -5,7 +5,7 @@ import UserDashboardUser from './UserDashboardUser.jsx';
 
 function UserDashboardDisplay() {
     return(
-        <div>
+        <div className='dashboard-container'>
             <UserDashboardMenu />
             <UserDashboardUser />
         </div>

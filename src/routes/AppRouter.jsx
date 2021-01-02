@@ -6,7 +6,8 @@ import UserInfo from '../view/users/UserInfo.jsx';
 import EditUser from '../view/users/EditUser.jsx';
 import CreateUser from '../view/users/CreateUser.jsx';
 
-import RecipeList from '../view/recipes/RecipeList.jsx';
+import SingleRecipeList from '../view/recipes/SingleRecipeList.jsx';
+import MultiRecipeList from '../view/recipes/MultiRecipeList.jsx';
 import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
 import EditRecipe from '../view/recipes/EditRecipe.jsx';
 import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
@@ -34,7 +35,9 @@ function AppRouter() {
                 <PrivateRoute path='/users/add' component={CreateUser} />
                 <PrivateRoute path='/users/edit' component={EditUser} />
 
-                <PrivateRoute path='/recipes/all' component={RecipeList} />
+                <PrivateRoute path='/recipes/browse' component={MultiRecipeList} />
+                <PrivateRoute path='/recipes/all' component={SingleRecipeList} />
+                <PrivateRoute path='/recipes/user' component={SingleRecipeList} />
                 <PrivateRoute path='/recipe/info' component={RecipeInfo} />
                 <PrivateRoute path='/recipes/add' component={CreateRecipe} />
                 <PrivateRoute path='/recipe/edit' component={EditRecipe} />

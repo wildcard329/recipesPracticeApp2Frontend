@@ -21,7 +21,7 @@ function CreateRecipe() {
     
     const cancel = e => {
         e.preventDefault();
-        history.push('/recipes/all');
+        history.push('/recipes/browse');
     }
     
     const submitRecipe = async e => {
@@ -29,7 +29,7 @@ function CreateRecipe() {
         RecipeController.addRecipeData(recipe);
         RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);
-        history.push('/recipes/all');
+        history.push('/recipes/browse');
     };
     return(
         <div>

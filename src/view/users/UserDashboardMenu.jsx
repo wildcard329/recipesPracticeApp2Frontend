@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
+import RecipeController from '../../controller/RecipeController';
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
 import { selectUser } from '../../model/state/Selector.js';
@@ -10,49 +11,62 @@ function UserDashboardMenu() {
     const user = useSelector(selectUser);
     const [open, setOpen] = useState(false);
     const history = useHistory();
+
     const openMenu = e => {
         e.preventDefault();
         setOpen(true);
     };
+    
+    const closeMenu = () => {
+        setOpen(false)
+    }
 
     const viewProfile = () => {
-        UserController.getUserData(user.id);
         history.push('/user/profile');
-        setOpen(false);
+        closeMenu();
     }
 
     const browseRecipes = () => {
-        history.push('/recipes/all');
-        setOpen(false);
+        history.push('/recipes/browse');
+        closeMenu();
     }
 
     const browseUserRecipes = () => {
-        // todo: make component which only contains a single list of recipes
-        // recipes list component currently contains multiple lists
-        setOpen(false);
+        UserController.getUserData(user.id);
+        history.push('/recipes/user');
+        closeMenu();
     }
+
+    const toAddRecipe = e => {
+        e.preventDefault();
+        history.push('/recipes/add');
+        closeMenu();
+    };
 
     const logout = () => {
         UserController.logoutUser(user);
         UserHelper.removeTokenSession();
         history.push('/auth/login');
-        setOpen(false);
+        closeMenu();
     };
 
     return(
         <div className='user-dashboard-left'>
-            <h2 onClick={openMenu} className={!open ? 'menu' : 'none'}>Menu</h2>
-            <ul className={open ? 'menu-list' : 'none'}>
-                <li>
+            <h2 onMouseEnter={openMenu} className={!open ? 'menu' : 'none'}>Menu</h2>
+            <ul className={open ? 'menu-list' : 'none'} onMouseLeave={closeMenu}>
+                <li className='menu-item'>
                     <button onClick={viewProfile}>Profile</button>
                 </li>
-                <li>
-                    <button onClick={browseRecipes}>All Recipes</button>
+                <li className='menu-item'>
+                    <button onClick={browseRecipes}>Browse Recipes</button>
                 </li>
-                <li>
+                <li className='menu-item'>
                     <button onClick={browseUserRecipes}>My Recipes</button>
                 </li>
-                <li>
+                <li className='menu-item'>
+                    <button onClick={toAddRecipe}>Add Recipe</button>
+                </li>
+                <li className='menu-item'>
                     <button onClick={logout}>Logout</button>
                 </li>
             </ul>

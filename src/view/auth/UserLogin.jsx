@@ -18,7 +18,7 @@ function UserLogin() {
     const submitLogin = async e => {
         e.preventDefault();
         await UserController.loginUser(user);
-        history.push('/recipes/all');
+        history.push('/recipes/browse');
     };
 
     const goToRegister = e => {

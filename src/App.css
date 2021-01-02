@@ -12,6 +12,11 @@
   justify-content: space-between;
 }
 
+.recipe-lists {
+  height: 40vh;
+  overflow: hidden;
+}
+
 .user-dashboard-right {
   text-align: right;
   margin-right: 5%;
@@ -26,8 +31,26 @@
   display: none;
 }
 
-ul .menu-list {
-  list-style-type: none;
+.menu-list {
+  list-style: none;
+  margin-left: -2.55%;
+  margin-top: 2%;
+  position: absolute;
+  z-index: 1;
+}
+
+.menu-item button {
+  width: 100%;
+  font-size: large;
+}
+
+.menu-item button:hover {
+  background-color: #dcdcdc;
+  border:2px solid yellow;
+}
+
+.menu-item button:active {
+  color: yellow;
 }
 
 .auth-form {
@@ -36,7 +59,7 @@ ul .menu-list {
   width: 50%;
   margin: 0 auto;
   padding: 10%;
-  background-color: rgb(119, 68, 68);
+  background-color: #cd853f;
 }
 
 .recipe-list {
@@ -49,6 +72,13 @@ ul .menu-list {
 
 .list-header {
   margin-left: 5%;
+  text-decoration: none;
+  color: black;
+  width:fit-content;
+}
+
+.list-header:hover {
+  color:yellow;
 }
 
 .recipe-card {
