@@ -14,10 +14,8 @@ function ViewRecipeDetails({recipe}) {
 
     return(
         <div key={recipe.id} onClick={getRecipeData} className='recipe-card'>
-            <image src={notAvailable} alt='image not available' style={{width: 50, height: 50}} />
+            <img src={notAvailable} alt='image not available' />
             <h2>{recipe.name}</h2>
-            <p>{recipe.description}</p>
-            <p>Posted by {recipe.author}</p>
         </div>
     )
 }

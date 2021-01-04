@@ -13,7 +13,7 @@
 }
 
 .recipe-lists {
-  height: 40vh;
+  height: 60vh;
   overflow: hidden;
 }
 
@@ -46,11 +46,11 @@
 
 .menu-item button:hover {
   background-color: #dcdcdc;
-  border:2px solid yellow;
+  border:2px solid lightblue;
 }
 
 .menu-item button:active {
-  color: yellow;
+  color: lightblue;
 }
 
 .auth-form {
@@ -78,7 +78,7 @@
 }
 
 .list-header:hover {
-  color:yellow;
+  color:lightblue;
 }
 
 .recipe-card {
@@ -90,10 +90,18 @@
 }
 
 .recipe-card:hover {
-  border: 4px solid yellow;
+  border: 4px solid lightblue;
+  cursor: pointer;
+}
+
+img .recipe-card {
+  width: 10%;
+  position: absolute;
+  z-index: -1;
 }
 
 .public-header {
   text-align: center;
   margin: 0 auto;
 }
+

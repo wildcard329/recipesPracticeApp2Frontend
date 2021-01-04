@@ -29,7 +29,6 @@ export const reducer = (state=initialState, action) => {
             };
         case Actions.REMOVE_USER:
             return {
-                ...state,
                 state: initialState
             }
         case Actions.GET_USER_LIST:

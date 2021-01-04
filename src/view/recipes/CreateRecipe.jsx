@@ -26,8 +26,8 @@ function CreateRecipe() {
     
     const submitRecipe = async e => {
         e.preventDefault();
-        RecipeController.addRecipeData(recipe);
-        RecipeController.getRecipeList();
+        await RecipeController.addRecipeData(recipe);
+        await RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);
         history.push('/recipes/browse');
     };

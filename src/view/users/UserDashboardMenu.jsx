@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useHistory } from 'react-router-dom';
-import RecipeController from '../../controller/RecipeController';
+
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
 import { selectUser } from '../../model/state/Selector.js';
@@ -43,9 +42,9 @@ function UserDashboardMenu() {
         closeMenu();
     };
 
-    const logout = () => {
-        UserController.logoutUser(user);
-        UserHelper.removeTokenSession();
+    const logout = async () => {
+        await UserController.logoutUser(user);
+        await UserHelper.removeTokenSession();
         history.push('/auth/login');
         closeMenu();
     };
