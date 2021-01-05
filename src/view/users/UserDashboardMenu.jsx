@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
@@ -9,7 +8,6 @@ import { selectUser } from '../../model/state/Selector.js';
 function UserDashboardMenu() {
     const user = useSelector(selectUser);
     const [open, setOpen] = useState(false);
-    const history = useHistory();
 
     const openMenu = e => {
         e.preventDefault();
@@ -21,31 +19,30 @@ function UserDashboardMenu() {
     }
 
     const viewProfile = () => {
-        history.push('/user/profile');
+        UserController.routeToDestination('profile');
         closeMenu();
     }
 
     const browseRecipes = () => {
-        history.push('/recipes/browse');
+        UserController.routeToDestination('browse');
         closeMenu();
     }
 
     const browseUserRecipes = () => {
         UserController.getUserData(user.id);
-        history.push('/recipes/user');
+        UserController.routeToDestination('user recipes');
         closeMenu();
     }
 
-    const toAddRecipe = e => {
-        e.preventDefault();
-        history.push('/recipes/add');
+    const toAddRecipe = () => {
+        UserController.routeToDestination('add recipe');
         closeMenu();
     };
 
     const logout = async () => {
         await UserController.logoutUser(user);
         await UserHelper.removeTokenSession();
-        history.push('/auth/login');
+        UserController.routeToDestination('login');
         closeMenu();
     };
 

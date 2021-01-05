@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
+import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import { selectUser } from '../../model/state/Selector.js';
 import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
-    const history = useHistory();
     const user = useSelector(selectUser)
     const [recipe, setRecipe] = useState({
         name: '',
@@ -21,7 +20,7 @@ function CreateRecipe() {
     
     const cancel = e => {
         e.preventDefault();
-        history.push('/recipes/browse');
+        UserController.routeToDestination('browse');
     }
     
     const submitRecipe = async e => {
@@ -29,7 +28,7 @@ function CreateRecipe() {
         await RecipeController.addRecipeData(recipe);
         await RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);
-        history.push('/recipes/browse');
+        UserController.routeToDestination('browse');
     };
     return(
         <div>

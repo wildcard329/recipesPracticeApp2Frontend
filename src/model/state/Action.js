@@ -51,3 +51,11 @@ export const getRecipeData = recipeData => {
 export const setNewRecipeStatus = newRecipeStatus => {
     return { type: SET_NEW_RECIPE_STATUS, newRecipeStatus };
 };
+
+// History
+
+export const SET_DESTINATION = 'SET_DESTINATION';
+
+export const setDestination = destination => {
+    return { type: SET_DESTINATION, destination };
+};

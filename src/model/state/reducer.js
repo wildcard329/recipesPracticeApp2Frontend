@@ -7,7 +7,8 @@ const initialState = {
     userData: {},
     recipeList: [],
     recipeData: {},
-    loggedIn: false
+    loggedIn: false,
+    destination: null
 };
 
 export const reducer = (state=initialState, action) => {
@@ -56,6 +57,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 recipeData: {...action.recipeData}
+            };
+        case Actions.SET_DESTINATION:
+            return {
+                ...state,
+                destination: action.destination
             };
         default:
             return state;

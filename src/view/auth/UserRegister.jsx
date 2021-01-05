@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import UserController from '../../controller/UserController.js';
-import { useHistory } from 'react-router-dom';
 
 function UserRegister() {
     const [user, setUser] = useState({
@@ -9,7 +8,6 @@ function UserRegister() {
         email: null,
         created_on: new Date()
     });
-    const history = useHistory();
 
     const enterUser = e => {
         setUser({...user, [e.target.name]: e.target.value});
@@ -18,12 +16,11 @@ function UserRegister() {
     const submitRegistration = e => {
         e.preventDefault();
         UserController.registerNewUser(user);
-        history.push('/auth/login');
+        UserController.routeToDestination('login');
     };
 
-    const cancelRegistration = e => {
-        e.preventDefault();
-        history.push('/auth/login');
+    const cancelRegistration = () => {
+        UserController.routeToDestination('login');
     }
 
     return(

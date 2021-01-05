@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import UserController from '../../controller/UserController.js';
 
@@ -9,7 +8,6 @@ function UserLogin() {
         password: '',
         last_login: new Date()
     })
-    const history = useHistory();
 
     const onChangeCredentials = e => {
         setUser({...user, [e.target.name]: e.target.value});
@@ -18,12 +16,12 @@ function UserLogin() {
     const submitLogin = async e => {
         e.preventDefault();
         await UserController.loginUser(user);
-        history.push('/recipes/browse');
+        UserController.routeToDestination('browse');
     };
 
     const goToRegister = e => {
         e.preventDefault();
-        history.push('/auth/register')
+        UserController.routeToDestination('register');
     };
     return(
         <div className='auth-form'>

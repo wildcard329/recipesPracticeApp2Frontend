@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import UserController from '../../controller/UserController.js';
 import { selectUserList } from '../../model/state/Selector.js';
@@ -8,7 +7,6 @@ import UserCard from './UserCard.jsx';
 
 function UserList() {
     const users = useSelector(selectUserList);
-    const history = useHistory();
 
     useEffect(() => {
         UserController.getUserList();
@@ -16,8 +14,8 @@ function UserList() {
 
     const toAddUser = (e) => {
         e.preventDefault();
-        history.push('/users/add')
-    }
+        UserController.routeToDestination('add user');
+    };
 
     return(
         <div>

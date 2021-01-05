@@ -15,15 +15,13 @@ function CreateUser() {
         setUser({...user, [e.target.name]: e.target.value});
     };
 
-    const cancel = e => {
-        e.preventDefault();
-        history.push('/users/all');
+    const cancel = () => {
+        UserController.routeToDestination('all users');
     };
 
-    const addUser = e => {
-        e.preventDefault();
-        UserController.addNewUser(user);
-        history.push('/users/all');
+    const addUser = async () => {
+        await UserController.addNewUser(user);
+        UserController.routeToDestination('all users');
     };
 
     return(

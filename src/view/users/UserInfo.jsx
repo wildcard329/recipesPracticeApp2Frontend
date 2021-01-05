@@ -1,16 +1,15 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { selectUserData } from '../../model/state/Selector.js';
+import UserController from '../../controller/UserController.js';
 
 function UserInfo() {
     const user = useSelector(selectUserData)
-    const history = useHistory();
 
     const toUsers = e => {
         e.preventDefault();
-        history.push('/users/all');
+        UserController.routeToDestination('all users');
     };
     return(
         <div>

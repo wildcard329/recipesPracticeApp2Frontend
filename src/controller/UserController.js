@@ -3,6 +3,9 @@ import * as Action from '../model/state/Action.js';
 import UserService from '../model/services/UserServices.js';
 
 class UserController{
+    async routeToDestination(destination) {
+        store.dispatch(Action.setDestination(destination));
+    };
     async getUserList(){
         const userList = await UserService.getUserList();
         store.dispatch(Action.getUserList(userList));

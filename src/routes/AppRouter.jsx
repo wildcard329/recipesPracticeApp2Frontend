@@ -19,10 +19,13 @@ import UserRegister from '../view/auth/UserRegister.jsx';
 import UserDashboard from '../view/users/UserDashboard.jsx';
 import UserProfile from '../view/users/UserProfile.jsx';
 
+import { AppLocation } from './AppLocation.jsx';
+
 function AppRouter() {
     return(
         <div>
             <UserDashboard />
+            <AppLocation />
             <Switch>
                 <Route exact path='/' component={UserLogin} />
                 <Route path='/auth/login' component={UserLogin} />

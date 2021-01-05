@@ -1,15 +1,15 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+
+import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import notAvailable from '../images_static/na.jpeg';
 
 function ViewRecipeDetails({recipe}) {
-    const history = useHistory();
 
     const getRecipeData = e => {
         e.preventDefault();
         RecipeController.getRecipeData(recipe.id);
-        history.push('/recipe/info');
+        UserController.routeToDestination('recipe info');
     };
 
     return(

@@ -1,17 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { selectRecipeData } from '../../model/state/Selector.js';
 import notAvailable from '../images_static/na.jpeg';
+import UserController from '../../controller/UserController.js';
 
 function RecipeInfo() {
     const recipe = useSelector(selectRecipeData);
-    const history = useHistory();
 
     const toRecipes = e => {
         e.preventDefault();
-        history.push('/recipes/browse');
+        UserController.routeToDestination('browse');
     };
 
     return(
