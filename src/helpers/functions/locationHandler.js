@@ -1,4 +1,16 @@
-class UserLocation {
+class UserNavigation {
+    static setDashboard(path) {
+        switch (path) {
+            case '/auth/login':
+                return false;
+            case '/auth/register':
+                return false;
+            case '/':
+                return false;
+            default:
+                return true;
+        };
+    };
     static setRouteDestination(destination) {
         switch (destination) {
             case 'login':
@@ -29,4 +41,4 @@ class UserLocation {
     };
 };
 
-export default UserLocation;
+export default UserNavigation;

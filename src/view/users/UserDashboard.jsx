@@ -6,6 +6,7 @@ import { selectUser, selectToken } from '../../model/state/Selector.js';
 import UserDashboardDisplayUser from './UserDashboardDisplay.jsx';
 import UserDashboardLogoutDsiplay from './UserDashboardLogoutDsiplay.jsx';
 import UserHelper from '../../helpers/functions/storageHandler.js';
+import NavHelper from '../../helpers/functions/locationHandler.js';
 import UserController from '../../controller/UserController.js';
 
 function UserDashboard() {
@@ -17,16 +18,7 @@ function UserDashboard() {
 
     useEffect(() => {
         UserController.getLoggedInUser(user.id);
-        switch (path) {
-            case '/auth/login':
-                return setDisplay(false);
-            case '/auth/register':
-                return setDisplay(false);
-            case '/':
-                return setDisplay(false);
-            default:
-                return setDisplay(true);
-        };
+        setDisplay(NavHelper.setDashboard(path));
     }, [path, user.id]);
 
     return(
