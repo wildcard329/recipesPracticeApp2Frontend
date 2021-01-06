@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController.js';
 
@@ -15,6 +16,7 @@ function UserLogin() {
 
     const submitLogin = async e => {
         e.preventDefault();
+        console.log('user: ',user)
         await UserController.loginUser(user);
         UserController.routeToDestination('browse');
     };
@@ -43,6 +45,24 @@ function UserLogin() {
                 <button onClick={goToRegister}>Register</button>
             </div>
         </div>
+        // <form onSubmit={submitLogin}>
+        //     <Form>
+        //         <Form.Group controlId='formUsername'>
+        //             <Form.Label>Username</Form.Label>
+        //             <Form.Control type='text' id='username' value='username' onChange={onChangeCredentials} placeholder='username' />
+        //             <Form.Text className='text-muted'>Enter your username</Form.Text>
+        //         </Form.Group>
+        //         <Form.Group controlId='formPassword'>
+        //             <Form.Label>Password</Form.Label>
+        //             <Form.Control type='password' id='password' value='password' onChange={onChangeCredentials} placeholder='password' />
+        //             <Form.Text className='text-muted'>Enter your password</Form.Text>
+        //         </Form.Group>
+        //         <Form.Group>
+        //             <Button onClick={submitLogin} type="button" class="btn btn-primary">Login</Button>
+        //             <Button onClick={goToRegister} type='button' class='btn btn-link'>Register</Button>
+        //         </Form.Group>
+        //     </Form>
+        // </form>
     )
 }
 

@@ -8,6 +8,6 @@ import LocationHelper from '../helpers/functions/locationHandler.js';
 export const AppNavigator = () => {
     const history = useHistory();
     const destination = LocationHelper.setRouteDestination(useSelector(selectDestination));
-    history.push(destination)
+    history.push(destination);
     return(<></>)
 };

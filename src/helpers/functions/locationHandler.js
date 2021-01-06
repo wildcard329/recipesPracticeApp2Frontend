@@ -36,7 +36,7 @@ class UserNavigation {
             case 'recipe info':
                 return '/recipe/info';
             default:
-                return '/';
+                return;
         };
     };
 };

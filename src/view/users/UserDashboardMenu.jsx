@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
@@ -39,33 +40,48 @@ function UserDashboardMenu() {
         closeMenu();
     };
 
-    const logout = async () => {
-        await UserController.logoutUser(user);
-        await UserHelper.removeTokenSession();
+    const logout = () => {
+        UserHelper.removeTokenSession();
+        UserController.logoutUser(user);
         UserController.routeToDestination('login');
         closeMenu();
     };
 
     return(
-        <div className='user-dashboard-left'>
-            <h2 onMouseEnter={openMenu} className={!open ? 'menu' : 'none'}>Menu</h2>
-            <ul className={open ? 'menu-list' : 'none'} onMouseLeave={closeMenu}>
-                <li className='menu-item'>
-                    <button onClick={viewProfile}>Profile</button>
-                </li>
-                <li className='menu-item'>
-                    <button onClick={browseRecipes}>Browse Recipes</button>
-                </li>
-                <li className='menu-item'>
-                    <button onClick={browseUserRecipes}>My Recipes</button>
-                </li>
-                <li className='menu-item'>
-                    <button onClick={toAddRecipe}>Add Recipe</button>
-                </li>
-                <li className='menu-item'>
-                    <button onClick={logout}>Logout</button>
-                </li>
-            </ul>
+        // <div className='user-dashboard-left'>
+        //     <h2 onMouseEnter={openMenu} className={!open ? 'menu' : 'none'}>Menu</h2>
+        //     <ul className={open ? 'menu-list' : 'none'} onMouseLeave={closeMenu}>
+        //         <li className='menu-item'>
+        //             <button onClick={viewProfile}>Profile</button>
+        //         </li>
+        //         <li className='menu-item'>
+        //             <button onClick={browseRecipes}>Browse Recipes</button>
+        //         </li>
+        //         <li className='menu-item'>
+        //             <button onClick={browseUserRecipes}>My Recipes</button>
+        //         </li>
+        //         <li className='menu-item'>
+        //             <button onClick={toAddRecipe}>Add Recipe</button>
+        //         </li>
+        //         <li className='menu-item'>
+        //             <button onClick={logout}>Logout</button>
+        //         </li>
+        //     </ul>
+        // </div>
+        <div>
+<Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+    Menu
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item onClick={viewProfile}>Profile</Dropdown.Item>
+    <Dropdown.Item onClick={browseRecipes}>Browse</Dropdown.Item>
+    <Dropdown.Item onClick={browseUserRecipes}>Cookbook</Dropdown.Item>
+    <Dropdown.Item onClick={toAddRecipe}>New Recipe</Dropdown.Item>
+    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
         </div>
     )
 }
