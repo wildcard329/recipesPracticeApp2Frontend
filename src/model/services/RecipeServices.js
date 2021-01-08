@@ -18,6 +18,10 @@ class RecipeServices {
     async addRecipeData(recipe) {
         await axiosWithAuth().post(`${RecipesURL}/create`, recipe);
     };
+
+    async sendTestData(data) {
+        await axiosWithAuth().post(`${RecipesURL}/images`, data);
+    }
 };
 
 export default new RecipeServices();

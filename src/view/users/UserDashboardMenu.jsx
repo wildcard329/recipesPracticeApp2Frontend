@@ -69,19 +69,19 @@ function UserDashboardMenu() {
         //     </ul>
         // </div>
         <div>
-<Dropdown>
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
-    Menu
-  </Dropdown.Toggle>
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Menu
+            </Dropdown.Toggle>
 
-  <Dropdown.Menu>
-    <Dropdown.Item onClick={viewProfile}>Profile</Dropdown.Item>
-    <Dropdown.Item onClick={browseRecipes}>Browse</Dropdown.Item>
-    <Dropdown.Item onClick={browseUserRecipes}>Cookbook</Dropdown.Item>
-    <Dropdown.Item onClick={toAddRecipe}>New Recipe</Dropdown.Item>
-    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
+            <Dropdown.Menu>
+                <Dropdown.Item onClick={viewProfile}>Profile</Dropdown.Item>
+                <Dropdown.Item onClick={browseRecipes}>Browse</Dropdown.Item>
+                <Dropdown.Item onClick={browseUserRecipes}>Cookbook</Dropdown.Item>
+                <Dropdown.Item onClick={toAddRecipe}>New Recipe</Dropdown.Item>
+                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
         </div>
     )
 }

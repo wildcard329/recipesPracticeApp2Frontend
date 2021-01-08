@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
@@ -13,10 +14,10 @@ function ViewRecipeDetails({recipe}) {
     };
 
     return(
-        <div key={recipe.id} onClick={getRecipeData} className='recipe-card'>
-            <img src={notAvailable} alt='image not available' />
-            <h2>{recipe.name}</h2>
-        </div>
+        <Card key={recipe.id} onClick={getRecipeData} className='recipe-card'>
+            <Card.Img src={notAvailable} alt='image not available' />
+            <Card.Title>{recipe.name}</Card.Title>
+        </Card>
     )
 }
 
