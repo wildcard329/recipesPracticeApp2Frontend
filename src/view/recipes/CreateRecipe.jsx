@@ -4,18 +4,24 @@ import { useSelector } from 'react-redux';
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import { selectUser } from '../../model/state/Selector.js';
-import RecipePreview from './RecipePreview.jsx';
 
 function CreateRecipe() {
-    const user = useSelector(selectUser)
-    const [recipe, setRecipe] = useState({
+    const user = useSelector(selectUser);
+    const [file, setFile] = useState('');
+    const [filename, setFilename] = useState('');
+    const [data, setData] = useState({
         name: '',
         description: '',
-        author: user.id,
+        author: user.id
     })
 
+    const handleImage = e => {
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
+    }
+    
     const handleRecipe = e => {
-        setRecipe({...recipe, [e.target.name]: e.target.value});
+        setData({...data, [e.target.name]: e.target.value});
     }
     
     const cancel = e => {
@@ -25,6 +31,13 @@ function CreateRecipe() {
     
     const submitRecipe = async e => {
         e.preventDefault();
+        const recipe = new FormData();
+        recipe.append('file', file);
+        recipe.append('name', data.name);
+        recipe.append('description', data.description);
+        recipe.append('author',data.author);
+        recipe.append('filename', filename);
+        console.log(recipe)
         await RecipeController.addRecipeData(recipe);
         await RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);
@@ -42,11 +55,14 @@ function CreateRecipe() {
                     <input id='description' type='text' name='description' onChange={handleRecipe} />
                 </div>
                 <div>
+                    <label htmlFor='image'>Image</label>
+                    <input type='file' onChange={handleImage} />
+                </div>
+                <div>
                     <button onClick={cancel}>Cancel</button>
                     <button onClick={submitRecipe}>Submit</button>
                 </div>
             </form>
-            <RecipePreview recipe={recipe} />
         </div>
     )
 }

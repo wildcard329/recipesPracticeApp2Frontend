@@ -14,12 +14,13 @@ const initialState = {
 export const reducer = (state=initialState, action) => {
     switch (action.type) {
         case Actions.SET_USER:
+            console.log('state: ',state)
             return {
                 ...state,
                 user: {...action.user}
             };
-        case Actions.SET_TOKEN:
-            return {
+            case Actions.SET_TOKEN:
+                return {
                 ...state,
                 token: {...action.token}
             };
@@ -32,7 +33,7 @@ export const reducer = (state=initialState, action) => {
             return {
                 state: initialState
             }
-        case Actions.GET_USER_LIST:
+            case Actions.GET_USER_LIST:
             return {
                 ...state,
                 userList: [...action.userList]
@@ -48,7 +49,6 @@ export const reducer = (state=initialState, action) => {
                 recipeList: [...action.recipeList]
             };
         case Actions.GET_USER_RECIPE_LIST:
-            console.log('state: ',state)
             return {
                 ...state,
                 userRecipeList: [...action.userRecipeList]

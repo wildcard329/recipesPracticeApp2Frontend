@@ -16,6 +16,7 @@ class RecipeServices {
         return response.data;
     };
     async addRecipeData(recipe) {
+        console.log('service data: ',recipe)
         await axiosWithAuth().post(`${RecipesURL}/create`, recipe);
     };
 

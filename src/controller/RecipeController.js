@@ -16,13 +16,14 @@ class RecipeController {
         store.dispatch(Action.getRecipeData(recipeData));
     };
     async addRecipeData(recipe) {
+        console.log('controller data: ',recipe)
         const newRecipeStatus = await RecipeServices.addRecipeData(recipe);
         store.dispatch(Action.setNewRecipeStatus(newRecipeStatus));
     };
     // Testing function
     async sendTestData(data) {
         await RecipeServices.sendTestData(data);
-    }
+    };
 };
 
 export default new RecipeController();

@@ -5,6 +5,7 @@ export const SET_USER = 'SET_USER';
 export const SET_LOGGED_IN = 'SET_LOGGED_IN';
 export const SET_TOKEN = 'SET_TOKEN';
 export const REMOVE_USER = 'REMOVE_USER';
+export const SET_DESTINATION = 'SET_DESTINATION';
 
 export const getUserList = userList => {
     return { type: GET_USER_LIST, userList };
@@ -30,6 +31,10 @@ export const removeUser = user => {
     return { type: REMOVE_USER, user };
 };
 
+export const setDestination = destination => {
+    return { type: SET_DESTINATION, destination };
+};
+
 // Recipe
 export const GET_RECIPE_LIST = 'GET_RECIPE_LIST';
 export const GET_USER_RECIPE_LIST = 'GET_USER_RECIPE_LIST';
@@ -52,10 +57,3 @@ export const setNewRecipeStatus = newRecipeStatus => {
     return { type: SET_NEW_RECIPE_STATUS, newRecipeStatus };
 };
 
-// History
-
-export const SET_DESTINATION = 'SET_DESTINATION';
-
-export const setDestination = destination => {
-    return { type: SET_DESTINATION, destination };
-};

@@ -22,7 +22,7 @@ function SingleRecipeList() {
                 setList('user');
                 return RecipeController.getUserRecipeList(id);
             default:
-                return null;
+                return;
             }
     }, [id]);
     return(
