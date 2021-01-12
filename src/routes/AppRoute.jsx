@@ -13,7 +13,6 @@ import EditRecipe from '../view/recipes/EditRecipe.jsx';
 import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 
-import Testimageupload from '../view/testimageupload.jsx';
 import UserLogin from '../view/auth/UserLogin.jsx';
 import UserRegister from '../view/auth/UserRegister.jsx';
 import UserDashboard from '../view/users/UserDashboard.jsx';
@@ -44,8 +43,6 @@ function AppRouter() {
                 <PrivateRoute path='/recipe/info' component={RecipeInfo} />
                 <PrivateRoute path='/recipes/add' component={CreateRecipe} />
                 <PrivateRoute path='/recipe/edit' component={EditRecipe} />
-            
-                <Route path='/image_upload' component={Testimageupload} />
             </Switch>
         </div>
     )

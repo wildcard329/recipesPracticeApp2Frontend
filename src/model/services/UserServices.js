@@ -17,7 +17,8 @@ class UserService {
         await axiosWithAuth().post(`${UserURL}/create`, user)
     };
     async registerNewUser(user) {
-        await axios.post(`${AuthURL}/register`, user);
+        const response = await axios.post(`${AuthURL}/register`, user);
+        console.log('response: ',response)
     };
     async loginUser(user) {
         const response = await axios.post(`${AuthURL}/login`, user);
@@ -25,6 +26,7 @@ class UserService {
     };
     async getLoggedInUser(id) {
         const response = await axiosWithAuth().get(`${UserURL}/${id}`);
+        console.log('response: ',response)
         return response.data;
     }
 };

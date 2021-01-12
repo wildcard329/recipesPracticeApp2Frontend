@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Form, Button, CardImg, Card } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import { selectUser } from '../../model/state/Selector.js';
+import imageDefault from '../../images_static/plate-utensils.jpeg';
 
 function CreateRecipe() {
     const user = useSelector(selectUser);
@@ -32,10 +34,10 @@ function CreateRecipe() {
     const submitRecipe = async e => {
         e.preventDefault();
         const recipe = new FormData();
-        recipe.append('file', file);
         recipe.append('name', data.name);
         recipe.append('description', data.description);
         recipe.append('author',data.author);
+        recipe.append('file', file);
         recipe.append('filename', filename);
         console.log(recipe)
         await RecipeController.addRecipeData(recipe);
@@ -44,24 +46,25 @@ function CreateRecipe() {
         UserController.routeToDestination('browse');
     };
     return(
-        <div>
-            <form onSubmit={submitRecipe}>
-                <div>
-                    <label htmlFor='name'>Recipe</label>
-                    <input id='name' type='text' name='name' onChange={handleRecipe} />
-                </div>
-                <div>
-                    <label htmlFor='description'>Description</label>
-                    <input id='description' type='text' name='description' onChange={handleRecipe} />
-                </div>
-                <div>
-                    <label htmlFor='image'>Image</label>
-                    <input type='file' onChange={handleImage} />
-                </div>
-                <div>
-                    <button onClick={cancel}>Cancel</button>
-                    <button onClick={submitRecipe}>Submit</button>
-                </div>
+        <div className='create-recipe'>
+            <h2>Add New Recipe</h2>
+            <form className='recipe-form' onSubmit={submitRecipe}>
+                {file ? <Card.Img src={file} /> : <Card.Img src={imageDefault} />}
+                <Form>
+                    <Form.Group controlId='name'>
+                        <input id='name' placeholder='name' type='text' name='name' onChange={handleRecipe} />    
+                    </Form.Group>
+                    <Form.Group>
+                        <input id='description' placeholder='description' type='text' name='description' onChange={handleRecipe} />    
+                    </Form.Group>
+                    <Form.Group>
+                        <input type='file' src={imageDefault} onChange={handleImage} />    
+                    </Form.Group>
+                    <Form.Group className='recipe-btn-group'>
+                        <Button className='btn btn-primary' onClick={submitRecipe}>Submit</Button>
+                        <Button className='btn btn-secondary' onClick={cancel}>Cancel</Button>
+                    </Form.Group>
+                </Form>
             </form>
         </div>
     )
