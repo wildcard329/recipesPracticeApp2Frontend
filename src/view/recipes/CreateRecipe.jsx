@@ -11,6 +11,7 @@ function CreateRecipe() {
     const user = useSelector(selectUser);
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
+    const [imgPreview, setImgPreview] = useState('');
     const [data, setData] = useState({
         name: null,
         description: null,
@@ -20,6 +21,11 @@ function CreateRecipe() {
     const handleImage = e => {
         setFile(e.target.files[0]);
         setFilename(e.target.files[0].name);
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            setImgPreview(reader.result);
+        })
+        reader.readAsDataURL(e.target.files[0])
     }
     
     const handleRecipe = e => {
@@ -32,6 +38,7 @@ function CreateRecipe() {
     }
     
     const submitRecipe = async e => {
+        console.log('image: ',file)
         e.preventDefault();
         const recipe = new FormData();
         recipe.append('name', data.name);
@@ -50,9 +57,16 @@ function CreateRecipe() {
             <h2>Add New Recipe</h2>
             <form onSubmit={submitRecipe}>
                 <Form>
-                    <Row>
-                        {file ? 
-                            <Card.Img src={file} /> 
+                    <Row className='form-row'>
+                        {imgPreview ? 
+                            <Form.Group as={Col}>
+                                <Row>
+                                    <Card.Img src={imgPreview} /> 
+                                </Row>
+                                <Row>
+                                    <input type='file' onChange={handleImage} className='image-input' />
+                                </Row>
+                            </Form.Group>
                         : 
                         <Form.Group as={Col}>
                             <Row>
@@ -74,8 +88,8 @@ function CreateRecipe() {
                         </Form.Group>
                     </Row>
                     <Form.Group as={Row} className='recipe-btn-group'>
-                        <Button className='btn btn-primary' onClick={submitRecipe}>Submit</Button>
-                        <Button className='btn btn-secondary' onClick={cancel}>Cancel</Button>
+                        <Button xs={2} className='btn btn-primary' onClick={submitRecipe}>Submit</Button>
+                        <Button xs={2} className='btn btn-secondary' onClick={cancel}>Cancel</Button>
                     </Form.Group>
                 </Form>
             </form>
