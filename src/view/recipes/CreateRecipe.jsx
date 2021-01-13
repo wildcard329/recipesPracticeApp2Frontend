@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Form, Button, CardImg, Card } from 'react-bootstrap';
+import { Form, Button, Card, CardImg, Row, Col } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
@@ -12,8 +12,8 @@ function CreateRecipe() {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [data, setData] = useState({
-        name: '',
-        description: '',
+        name: null,
+        description: null,
         author: user.id
     })
 
@@ -48,19 +48,32 @@ function CreateRecipe() {
     return(
         <div className='create-recipe'>
             <h2>Add New Recipe</h2>
-            <form className='recipe-form' onSubmit={submitRecipe}>
-                {file ? <Card.Img src={file} /> : <Card.Img src={imageDefault} />}
+            <form onSubmit={submitRecipe}>
                 <Form>
-                    <Form.Group controlId='name'>
-                        <input id='name' placeholder='name' type='text' name='name' onChange={handleRecipe} />    
-                    </Form.Group>
-                    <Form.Group>
-                        <input id='description' placeholder='description' type='text' name='description' onChange={handleRecipe} />    
-                    </Form.Group>
-                    <Form.Group>
-                        <input type='file' src={imageDefault} onChange={handleImage} />    
-                    </Form.Group>
-                    <Form.Group className='recipe-btn-group'>
+                    <Row>
+                        {file ? 
+                            <Card.Img src={file} /> 
+                        : 
+                        <Form.Group as={Col}>
+                            <Row>
+                                <CardImg src={imageDefault} />
+                            </Row>
+                            <Row>
+                                <input type='file' onChange={handleImage} className='image-input' />
+                            </Row>
+                        </Form.Group>}
+                        <Form.Group controlId='name' as={Col}>
+                            <Row>
+                                {data.name ? <h3>{data.name}</h3> : null}
+                                <input id='name' placeholder='recipe name' type='text' name='name' onChange={handleRecipe} />
+                            </Row>
+                            <Row>
+                                {data.description ? <p>{data.description}</p> : null}
+                                <input id='description' placeholder='description' type='text' name='description' onChange={handleRecipe} />    
+                            </Row>
+                        </Form.Group>
+                    </Row>
+                    <Form.Group as={Row} className='recipe-btn-group'>
                         <Button className='btn btn-primary' onClick={submitRecipe}>Submit</Button>
                         <Button className='btn btn-secondary' onClick={cancel}>Cancel</Button>
                     </Form.Group>

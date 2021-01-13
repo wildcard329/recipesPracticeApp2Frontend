@@ -61,15 +61,12 @@
   margin-left: 12%;
 }
 
-.recipe-form .card-img {
-  width: 35%;
+.image-input {
+  margin-top: 10%;
 }
 
-.recipe-btn-group {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  width: 20%;
+.recipe-form h3 {
+  text-align: left;
 }
 
 .recipe-list {
