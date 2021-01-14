@@ -55,13 +55,24 @@
   margin-top: 10%;
 }
 
+.create-recipe .form-row h4 {
+  margin-top: 30%;
+  margin-left: 25%;
+  position: absolute;
+  z-index: 10;
+}
+
 .create-recipe .form-row {
   display: flex;
   justify-content: space-around;
 }
 
-.create-recipe button {
+.create-recipe .recipe-btn-group button {
   width: 10%;
+}
+
+.recipe-btn-add-fields {
+  width: 25%;
 }
 
 .recipe-btn-group {
