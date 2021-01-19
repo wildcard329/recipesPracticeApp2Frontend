@@ -26,6 +26,10 @@
   display: none;
 }
 
+.error-field {
+  color: red;
+}
+
 .auth-form {
   text-align: center;
   border: 1px solid black;
@@ -69,6 +73,14 @@
 
 .create-recipe .recipe-btn-group button {
   width: 10%;
+}
+
+.add-recipe-field:hover {
+  cursor: text;
+}
+
+.edit-create-recipe-list {
+  list-style: none;
 }
 
 .recipe-btn-add-fields {
