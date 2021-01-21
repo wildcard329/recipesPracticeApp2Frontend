@@ -71,6 +71,10 @@
   justify-content: space-around;
 }
 
+.create-recipe .input-field {
+  margin: 5%;
+}
+
 .create-recipe .recipe-btn-group button {
   width: 10%;
 }
@@ -79,8 +83,8 @@
   cursor: text;
 }
 
-.edit-create-recipe-list {
-  list-style: none;
+.create-recipe-item {
+  margin: 1%;
 }
 
 .recipe-btn-add-fields {
