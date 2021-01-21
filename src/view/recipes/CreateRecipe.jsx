@@ -4,16 +4,16 @@ import { Form, Button, Card, CardImg, Row, Col } from 'react-bootstrap';
 
 import AddRecipeName from '../formComponents/addRecipe/AddRecipeName.jsx';
 import AddRecipeDescription from '../formComponents/addRecipe/AddRecipeDescription.jsx';
-import CreateRecipeIngredients from './CreateRecipeIngredients.jsx';
-import CreateRecipeInstructions from './CreateRecipeInstructions.jsx';
+import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients.jsx';
+import AddRecipeInstructions from '../formComponents/addRecipe/AddRecipeInstructions.jsx';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import { selectUser } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import ArrayHelper from '../../helpers/functions/intToArrayHandler.js';
-import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients.jsx';
-import AddRecipeInstructions from '../formComponents/addRecipe/AddRecipeInstructions.jsx';
+import CreateRecipeIngredients from './CreateRecipeIngredients.jsx';
+import CreateRecipeInstructions from './CreateRecipeInstructions.jsx';
 
 function CreateRecipe() {
     const user = useSelector(selectUser);
@@ -24,7 +24,6 @@ function CreateRecipe() {
     const [descriptionIsEntered, setDescriptionIsEntered] = useState(false);
     const [numRecipeIngredients, setNumRecipeIngredients] = useState(5);
     const [numRecipeInstructions, setNumRecipeInstructions] = useState(3);
-    const [completed, setCompleted] = useState();
     const [data, setData] = useState({
         name: null,
         description: null,
@@ -33,16 +32,6 @@ function CreateRecipe() {
     const recipeIngredientsArr = ArrayHelper.convertIntToArr('ingredient',numRecipeIngredients);
     const recipeInstructionsArr = ArrayHelper.convertIntToArr('instruction',numRecipeInstructions);
 
-    useEffect(() => {
-        recipeIngredientsArr.map(ingredientId => {
-            setCompleted({...completed, [ingredientId]: false});
-        });
-        recipeInstructionsArr.map(instructionId => {
-            setCompleted({...completed, [instructionId]: false})
-        });
-        console.log(completed)
-    }, []);
-    
     const incrementRecipeIngredientsArr = () => {
         setNumRecipeIngredients(numRecipeIngredients+1);
     };
@@ -64,26 +53,16 @@ function CreateRecipe() {
         setData({...data, [e.target.name]: e.target.value});
     }
 
-    const signalListItemComplete = e => {
-        setCompleted({...completed, [e.target.name]: true});
-    };
-
-    const signalListItemEdit = e => {
-        setCompleted({...completed, [e.target.name]: false});
-    };
-
     const passNameProps = () => {
         setNameIsEntered(true);
     };
 
     const passDescriptionProps = () => {
         setDescriptionIsEntered(true);
-        console.log(completed);
     };
 
     const editNameField = () => {
         setNameIsEntered(false);
-        console.log(completed)
     };
 
     const editDescriptionField = () => {
@@ -146,9 +125,8 @@ function CreateRecipe() {
                                 <ul>
                                 {recipeIngredientsArr && recipeIngredientsArr.map(ingredientId => {
                                     return (
-                                        <li onClick={signalListItemEdit}>
-                                            <AddRecipeIngredients />
-                                            <input onChange={handleRecipe} name={ingredientId} type='text' placeholder='ingredient' onBlur={signalListItemComplete} className= 'create-recipe-item' />
+                                        <li>
+                                            <CreateRecipeIngredients id={ingredientId} />
                                         </li>)
                                 })}
                                 </ul>
@@ -158,15 +136,13 @@ function CreateRecipe() {
                                 <ul>
                                     {recipeInstructionsArr && recipeInstructionsArr.map(instructionId => {
                                         return(
-                                            <li onClick={signalListItemEdit}>
-                                                <AddRecipeInstructions />
-                                                <textarea onChange={handleRecipe} name={instructionId} type='text' placeholder='instruction' onBlur={signalListItemComplete} className='create-recipe-item' />
+                                            <li>
+                                                <CreateRecipeInstructions id={instructionId} />
                                             </li>
                                         )
                                     })}
                                 </ul>
                                 <Button xs={2} className='btn btn-primary' onClick={incrementRecipeInstructionsArr}>More Instructions</Button>
-                                {/* <CreateRecipeInstructions /> */}
                             </Row>
                         </Form.Group>
                     </Row>
