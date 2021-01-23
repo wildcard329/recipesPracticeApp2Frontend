@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FormGroup, Button } from 'react-bootstrap';
 
+import FormController from '../../controller/FormController.js';
 import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients';
 
 function CreateRecipeIngredients({id}) {
@@ -9,10 +9,12 @@ function CreateRecipeIngredients({id}) {
 
     const enterIngredient = () => {
         setIngredientIsEntered(true);
+        FormController.addRecipeIngredient(ingredient);
     };
 
     const editIngredient = () => {
         setIngredientIsEntered(false);
+        FormController.removeRecipeIngredient(ingredient);
     };
 
     const handleIngredient = e => {

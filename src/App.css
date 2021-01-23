@@ -115,6 +115,27 @@
   color:lightblue;
 }
 
+.single-recipe-card {
+  margin: 3% 5%;
+}
+
+.single-recipe-card img {
+  width: 75%;
+  margin-left: 10%;
+}
+
+.single-recipe-card .card-section {
+  margin: 2% 0%;
+}
+
+.single-recipe-card .image-footer {
+  margin-left: 8%;
+}
+
+.single-recipe-card .list-item {
+  margin: 1%;
+}
+
 .recipe-card {
   margin: 2%;
   border: 3px solid gray;

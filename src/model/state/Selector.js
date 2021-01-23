@@ -9,3 +9,8 @@ export const selectUserRecipeList = state => state.userRecipeList;
 export const selectRecipeData = state => state.recipeData;
 
 export const selectDestination = state => state.destination;
+
+export const selectRecipeIngredient = state => state.recipeIngredientAdd;
+export const selectRemovedRecipeIngredient = state => state.recipeIngredientRemove;
+export const selectRecipeInstruction = state => state.recipeInstructionAdd;
+export const selectRemoveRecipeInstruction = state => state.recipeInstructionRemove;

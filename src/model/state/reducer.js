@@ -7,6 +7,10 @@ const initialState = {
     userData: {},
     recipeList: [],
     recipeData: {},
+    recipeIngredientAdd: '',
+    recipeIngredientRemove: '',
+    recipeInstructionAdd: '',
+    recipeInstructionRemove: '',
     loggedIn: false,
     destination: null
 };
@@ -14,7 +18,6 @@ const initialState = {
 export const reducer = (state=initialState, action) => {
     switch (action.type) {
         case Actions.SET_USER:
-            console.log('state: ',state)
             return {
                 ...state,
                 user: {...action.user}
@@ -22,7 +25,7 @@ export const reducer = (state=initialState, action) => {
             case Actions.SET_TOKEN:
                 return {
                 ...state,
-                token: {...action.token}
+                token: action.token
             };
         case Actions.SET_LOGGED_IN:
             return {
@@ -56,7 +59,27 @@ export const reducer = (state=initialState, action) => {
         case Actions.GET_RECIPE_DATA:
             return {
                 ...state,
-                recipeData: {...action.recipeData}
+                recipeData: action.recipeData
+            };
+        case Actions.ADD_RECIPE_INGREDIENT_TO_FORM:
+            return {
+                ...state,
+                recipeIngredientAdd: action.recipeIngredientAdd
+            };
+        case Actions.REMOVE_RECIPE_INGREDIENT_FROM_FORM:
+            return {
+                ...state,
+                recipeIngredientRemove: action.recipeIngredientRemove
+            };
+        case Actions.ADD_RECIPE_INSTRUCTION_TO_FORM:
+            return {
+                ...state,
+                recipeInstructionAdd: action.recipeInstructionAdd
+            };
+        case Actions.REMOVE_RECIPE_INSTRUCTION_FROM_FORM:
+            return {
+                ...state,
+                recipeInstructionRemove: action.recipeIngredientRemove
             };
         case Actions.SET_DESTINATION:
             return {

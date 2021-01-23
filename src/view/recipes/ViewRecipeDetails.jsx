@@ -7,9 +7,9 @@ import RecipeController from '../../controller/RecipeController.js';
 function ViewRecipeDetails({recipe}) {
     const data = recipe.image
 
-    const getRecipeData = e => {
+    const getRecipeData = async e => {
         e.preventDefault();
-        RecipeController.getRecipeData(recipe.id);
+        await RecipeController.getRecipeData(recipe.id);
         UserController.routeToDestination('recipe info');
     };
 

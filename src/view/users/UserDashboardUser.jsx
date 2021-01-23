@@ -5,7 +5,6 @@ import { selectUser } from '../../model/state/Selector.js';
 
 function UserDashboardUser() {
     const user = useSelector(selectUser);
-    console.log(`dashboard user: ${user.username}`)
     return(
         <div className='user-dashboard-right'>
             <h2>{user && `Welcome, ${user.username}`}</h2>

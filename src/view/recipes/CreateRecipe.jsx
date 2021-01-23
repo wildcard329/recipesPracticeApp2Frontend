@@ -4,19 +4,22 @@ import { Form, Button, Card, CardImg, Row, Col } from 'react-bootstrap';
 
 import AddRecipeName from '../formComponents/addRecipe/AddRecipeName.jsx';
 import AddRecipeDescription from '../formComponents/addRecipe/AddRecipeDescription.jsx';
-import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients.jsx';
-import AddRecipeInstructions from '../formComponents/addRecipe/AddRecipeInstructions.jsx';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
-import { selectUser } from '../../model/state/Selector.js';
+import FormController from '../../controller/FormController.js';
+import { selectUser, selectRecipeIngredient, selectRemovedRecipeIngredient, selectRecipeInstruction, selectRemoveRecipeInstruction } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
-import ArrayHelper from '../../helpers/functions/intToArrayHandler.js';
+import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import CreateRecipeIngredients from './CreateRecipeIngredients.jsx';
 import CreateRecipeInstructions from './CreateRecipeInstructions.jsx';
 
 function CreateRecipe() {
     const user = useSelector(selectUser);
+    const ingredientAdd = useSelector(selectRecipeIngredient);
+    const ingredientRemove = useSelector(selectRemovedRecipeIngredient);
+    const instructionAdd = useSelector(selectRecipeInstruction);
+    const instructionRemove = useSelector(selectRemoveRecipeInstruction);
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [imgPreview, setImgPreview] = useState('');
@@ -24,13 +27,34 @@ function CreateRecipe() {
     const [descriptionIsEntered, setDescriptionIsEntered] = useState(false);
     const [numRecipeIngredients, setNumRecipeIngredients] = useState(5);
     const [numRecipeInstructions, setNumRecipeInstructions] = useState(3);
+    const [ingredients, setIngredients] = useState([]);
+    const [instructions, setInstructions] = useState([]);
     const [data, setData] = useState({
         name: null,
         description: null,
         author: user.id
     })
-    const recipeIngredientsArr = ArrayHelper.convertIntToArr('ingredient',numRecipeIngredients);
-    const recipeInstructionsArr = ArrayHelper.convertIntToArr('instruction',numRecipeInstructions);
+
+    const recipeIngredientsArr = FormHelper.convertIntToArr('ingredient',numRecipeIngredients);
+    const recipeInstructionsArr = FormHelper.convertIntToArr('instruction',numRecipeInstructions);
+
+    useEffect(() => {
+        if (ingredientAdd !== ''){
+            setIngredients([...ingredients, ingredientAdd])
+            FormController.addRecipeIngredient('');
+        } else if (ingredientRemove !== '') {
+            const filteredIngredients = FormHelper.filterListItem(ingredientRemove, ingredients)
+            setIngredients(filteredIngredients);
+            FormController.removeRecipeIngredient('');
+        } else if (instructionAdd !== '') {
+            setInstructions([...instructions, instructionAdd])
+            FormController.addRecipeInstruction('');
+        } else if (instructionRemove !== '') {
+            const filteredInstructions = FormHelper.filterListItem(instructionRemove, instructions)
+            setInstructions(filteredInstructions)
+            FormController.removeRecipeInstruction('');
+        }
+    }, [ingredientAdd, ingredientRemove, instructionAdd, instructionRemove])
 
     const incrementRecipeIngredientsArr = () => {
         setNumRecipeIngredients(numRecipeIngredients+1);
@@ -82,6 +106,8 @@ function CreateRecipe() {
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
+        recipe.append('ingredients', ingredients);
+        recipe.append('instructions', instructions);
         await RecipeController.addRecipeData(recipe);
         await RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);

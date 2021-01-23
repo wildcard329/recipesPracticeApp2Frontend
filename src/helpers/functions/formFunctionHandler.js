@@ -1,4 +1,4 @@
-class createArray {
+class formFunctions {
     static convertIntToArr(element, num) {
         let arr = []
         for (let i = 1; i <= num; i++) {
@@ -6,6 +6,9 @@ class createArray {
         }
         return arr;
     }
-}
+    static filterListItem(item, list) {
+        return list.filter(listItem => {return listItem !== item})
+    };
+};
 
-export default createArray;
+export default formFunctions;
