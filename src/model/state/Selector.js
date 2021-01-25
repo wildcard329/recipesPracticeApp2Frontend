@@ -7,6 +7,7 @@ export const selectLoggedStatus = state => state.loggedIn;
 export const selectRecipeList = state => state.recipeList;
 export const selectUserRecipeList = state => state.userRecipeList;
 export const selectRecipeData = state => state.recipeData;
+export const searchResults = state => state.searchResults;
 
 export const selectDestination = state => state.destination;
 

@@ -10,7 +10,7 @@ import SingleRecipeList from '../view/recipes/SingleRecipeList.jsx';
 import MultiRecipeList from '../view/recipes/MultiRecipeList.jsx';
 import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
 import EditRecipe from '../view/recipes/EditRecipe.jsx';
-import CreateRecipe from '../view/recipes/CreateRecipe.jsx';
+import RecipeForm from '../view/recipes/RecipeForm.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 
 import UserLogin from '../view/auth/UserLogin.jsx';
@@ -41,8 +41,8 @@ function AppRouter() {
                 <PrivateRoute path='/recipes/all' component={SingleRecipeList} />
                 <PrivateRoute path='/recipes/user' component={SingleRecipeList} />
                 <PrivateRoute path='/recipe/info' component={RecipeInfo} />
-                <PrivateRoute path='/recipes/add' component={CreateRecipe} />
-                <PrivateRoute path='/recipe/edit' component={EditRecipe} />
+                <PrivateRoute path='/recipes/add' component={RecipeForm} />
+                <PrivateRoute path='/recipes/edit' component={RecipeForm} />
             </Switch>
         </div>
     )

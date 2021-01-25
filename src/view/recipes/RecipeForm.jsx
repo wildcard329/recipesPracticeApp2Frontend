@@ -11,10 +11,10 @@ import FormController from '../../controller/FormController.js';
 import { selectUser, selectRecipeIngredient, selectRemovedRecipeIngredient, selectRecipeInstruction, selectRemoveRecipeInstruction } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
-import CreateRecipeIngredients from './CreateRecipeIngredients.jsx';
-import CreateRecipeInstructions from './CreateRecipeInstructions.jsx';
+import RecipeFormIngredients from './RecipeFormIngredients.jsx';
+import RecipeFormInstructions from './RecipeFormInstructions.jsx';
 
-function CreateRecipe() {
+function RecipeForm() {
     const user = useSelector(selectUser);
     const ingredientAdd = useSelector(selectRecipeIngredient);
     const ingredientRemove = useSelector(selectRemovedRecipeIngredient);
@@ -152,7 +152,7 @@ function CreateRecipe() {
                                 {recipeIngredientsArr && recipeIngredientsArr.map(ingredientId => {
                                     return (
                                         <li>
-                                            <CreateRecipeIngredients id={ingredientId} />
+                                            <RecipeFormIngredients id={ingredientId} />
                                         </li>)
                                 })}
                                 </ul>
@@ -163,7 +163,7 @@ function CreateRecipe() {
                                     {recipeInstructionsArr && recipeInstructionsArr.map(instructionId => {
                                         return(
                                             <li>
-                                                <CreateRecipeInstructions id={instructionId} />
+                                                <RecipeFormInstructions id={instructionId} />
                                             </li>
                                         )
                                     })}
@@ -182,4 +182,4 @@ function CreateRecipe() {
     )
 }
 
-export default CreateRecipe;
+export default RecipeForm;

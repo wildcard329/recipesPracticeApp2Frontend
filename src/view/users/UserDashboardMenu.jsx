@@ -8,43 +8,28 @@ import { selectUser } from '../../model/state/Selector.js';
 
 function UserDashboardMenu() {
     const user = useSelector(selectUser);
-    const [open, setOpen] = useState(false);
-
-    const openMenu = e => {
-        e.preventDefault();
-        setOpen(true);
-    };
-    
-    const closeMenu = () => {
-        setOpen(false)
-    }
 
     const viewProfile = () => {
         UserController.routeToDestination('profile');
-        closeMenu();
     }
 
     const browseRecipes = () => {
         UserController.routeToDestination('browse');
-        closeMenu();
     }
 
-    const browseUserRecipes = () => {
-        UserController.getUserData(user.id);
+    const browseUserRecipes = async () => {
+        await UserController.getUserData(user.id);
         UserController.routeToDestination('user recipes');
-        closeMenu();
     }
 
     const toAddRecipe = () => {
         UserController.routeToDestination('add recipe');
-        closeMenu();
     };
 
-    const logout = () => {
+    const logout = async () => {
         UserHelper.removeTokenSession();
         UserController.logoutUser(user);
         UserController.routeToDestination('login');
-        closeMenu();
     };
 
     return(

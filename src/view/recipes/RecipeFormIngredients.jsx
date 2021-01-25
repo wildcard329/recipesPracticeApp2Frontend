@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FormController from '../../controller/FormController.js';
 import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients';
 
-function CreateRecipeIngredients({id}) {
+function RecipeFormIngredients({id}) {
     const [ingredient, setIngredient] = useState('');
     const [ingredientIsEntered, setIngredientIsEntered] = useState(false);
 
@@ -29,4 +29,4 @@ function CreateRecipeIngredients({id}) {
     )
 }
 
-export default CreateRecipeIngredients;
+export default RecipeFormIngredients;

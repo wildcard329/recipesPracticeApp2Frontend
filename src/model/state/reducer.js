@@ -11,6 +11,7 @@ const initialState = {
     recipeIngredientRemove: '',
     recipeInstructionAdd: '',
     recipeInstructionRemove: '',
+    searchResults: [],
     loggedIn: false,
     destination: null
 };
@@ -80,6 +81,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 recipeInstructionRemove: action.recipeIngredientRemove
+            };
+        case Actions.SET_SEARCH_RESULTS:
+            return {
+                ...state,
+                searchResults: [action.searchResults]
             };
         case Actions.SET_DESTINATION:
             return {

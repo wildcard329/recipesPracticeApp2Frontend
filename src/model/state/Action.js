@@ -40,6 +40,7 @@ export const GET_RECIPE_LIST = 'GET_RECIPE_LIST';
 export const GET_USER_RECIPE_LIST = 'GET_USER_RECIPE_LIST';
 export const GET_RECIPE_DATA = 'GET_RECIPE_DATA';
 export const SET_NEW_RECIPE_STATUS = 'SET_NEW_RECIPE_STATUS';
+export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 
 export const getRecipeList = recipeList => {
     return { type: GET_RECIPE_LIST, recipeList };
@@ -55,6 +56,10 @@ export const getRecipeData = recipeData => {
 
 export const setNewRecipeStatus = newRecipeStatus => {
     return { type: SET_NEW_RECIPE_STATUS, newRecipeStatus };
+};
+
+export const setSearchResults = searchResults => {
+    return { type: SET_SEARCH_RESULTS, searchResults };
 };
 
 // Forms

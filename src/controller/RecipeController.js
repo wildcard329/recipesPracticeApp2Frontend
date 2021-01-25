@@ -19,6 +19,13 @@ class RecipeController {
         const newRecipeStatus = await RecipeServices.addRecipeData(recipe);
         store.dispatch(Action.setNewRecipeStatus(newRecipeStatus));
     };
+    async deleteRecipe(id) {
+        await RecipeServices.deleteRecipe(id);
+    };
+    async sendSearchQuery(search) {
+        const searchResults = await RecipeServices.sendSearchQuery(search);
+        store.dispatch(Action.setSearchResults(searchResults));
+    };
 };
 
 export default new RecipeController();

@@ -18,9 +18,13 @@ class RecipeServices {
     async addRecipeData(recipe) {
         await axiosWithAuth().post(`${RecipesURL}/create`, recipe);
     };
-
-    async sendTestData(data) {
-        await axiosWithAuth().post(`${RecipesURL}/images`, data);
+    async deleteRecipe(id) {
+        await axiosWithAuth().delete(`${RecipesURL}/${id}`);
+    };
+    async sendSearchQuery(search) {
+        const response = await axiosWithAuth().post(`${RecipesURL}/search`, search);
+        console.log("res: ",response)
+        return response.data;
     }
 };
 
