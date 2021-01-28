@@ -8,11 +8,17 @@ class FormController {
     async removeRecipeIngredient(ingredient) {
         store.dispatch(Action.removeIngredientFromForm(ingredient));
     };
+    async removeRecipeIngredientId(id) {
+        store.dispatch(Action.removeIngredientIdFromForm(id));
+    };
     async addRecipeInstruction(instruction) {
         store.dispatch(Action.addInstructionToForm(instruction));
     };
-    async removeRecipeInstruction(instructio) {
-        store.dispatch(Action.removeInstructionFromForm(instructio));
+    async removeRecipeInstruction(instruction) {
+        store.dispatch(Action.removeInstructionFromForm(instruction));
+    };
+    async removeRecipeInstructionId(id) {
+        store.dispatch(Action.removeInstructionIdFromForm(id));
     };
 };
 

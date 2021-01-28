@@ -11,6 +11,9 @@ const initialState = {
     recipeIngredientRemove: '',
     recipeInstructionAdd: '',
     recipeInstructionRemove: '',
+    ingredientId: null,
+    instructionId: null,
+    editRecipeData: null,
     searchResults: [],
     loggedIn: false,
     destination: null
@@ -62,6 +65,11 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 recipeData: action.recipeData
             };
+        case Actions.SET_EDIT_DATA:
+            return {
+                ...state,
+                editRecipeData: action.editRecipeData
+            };
         case Actions.ADD_RECIPE_INGREDIENT_TO_FORM:
             return {
                 ...state,
@@ -72,6 +80,11 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 recipeIngredientRemove: action.recipeIngredientRemove
             };
+        case Actions.REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM:
+            return {
+                ...state,
+                ingredientId: action.ingredientId
+            }
         case Actions.ADD_RECIPE_INSTRUCTION_TO_FORM:
             return {
                 ...state,
@@ -81,6 +94,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 recipeInstructionRemove: action.recipeIngredientRemove
+            };
+        case Actions.REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM:
+            return {
+                ...state,
+                instructionId: action.instructionId
             };
         case Actions.SET_SEARCH_RESULTS:
             return {

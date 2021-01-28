@@ -15,6 +15,10 @@ class RecipeController {
         const recipeData = await RecipeServices.getRecipeData(id);
         store.dispatch(Action.getRecipeData(recipeData));
     };
+    async getRecipeDataEdit(id) {
+        const editRecipeData = await RecipeServices.getRecipeData(id);
+        store.dispatch(Action.setEditData(editRecipeData));
+    }
     async addRecipeData(recipe) {
         const newRecipeStatus = await RecipeServices.addRecipeData(recipe);
         store.dispatch(Action.setNewRecipeStatus(newRecipeStatus));

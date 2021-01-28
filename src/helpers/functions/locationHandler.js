@@ -33,6 +33,8 @@ class UserNavigation {
                 return '/recipes/user'
             case 'add recipe':
                 return '/recipes/add';
+            case 'edit recipe':
+                return '/recipes/edit';
             case 'recipe info':
                 return '/recipe/info';
             default:

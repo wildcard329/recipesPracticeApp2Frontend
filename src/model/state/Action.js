@@ -40,6 +40,7 @@ export const GET_RECIPE_LIST = 'GET_RECIPE_LIST';
 export const GET_USER_RECIPE_LIST = 'GET_USER_RECIPE_LIST';
 export const GET_RECIPE_DATA = 'GET_RECIPE_DATA';
 export const SET_NEW_RECIPE_STATUS = 'SET_NEW_RECIPE_STATUS';
+export const SET_EDIT_DATA = 'SET_EDIT_DATA';
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 
 export const getRecipeList = recipeList => {
@@ -58,6 +59,10 @@ export const setNewRecipeStatus = newRecipeStatus => {
     return { type: SET_NEW_RECIPE_STATUS, newRecipeStatus };
 };
 
+export const setEditData = editRecipeData => {
+    return { type: SET_EDIT_DATA, editRecipeData };
+};
+
 export const setSearchResults = searchResults => {
     return { type: SET_SEARCH_RESULTS, searchResults };
 };
@@ -65,8 +70,10 @@ export const setSearchResults = searchResults => {
 // Forms
 export const ADD_RECIPE_INGREDIENT_TO_FORM = 'ADD_RECIPE_INGREDIENT_TO_FORM';
 export const REMOVE_RECIPE_INGREDIENT_FROM_FORM = 'REMOVE_RECIPE_INGREDIENT_FROM_FORM';
+export const REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM = 'REMOVE_INGREDIENT_ID_FROM_FORM';
 export const ADD_RECIPE_INSTRUCTION_TO_FORM = 'ADD_RECIPE_INSTRUCTION_TO_FORM';
 export const REMOVE_RECIPE_INSTRUCTION_FROM_FORM = 'REMOVE_RECIPE_INSTRUCTION_FROM_FORM';
+export const REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM = 'REMOVE_INSTRUCTION_ID_FROM_FORM';
 
 export const addIngredientToForm = recipeIngredientAdd => {
     return { type: ADD_RECIPE_INGREDIENT_TO_FORM, recipeIngredientAdd };
@@ -76,10 +83,18 @@ export const removeIngredientFromForm = recipeIngredientRemove => {
     return { type: REMOVE_RECIPE_INGREDIENT_FROM_FORM, recipeIngredientRemove };
 };
 
+export const removeIngredientIdFromForm = ingredientId => {
+    return { type: REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM, ingredientId }
+};
+
 export const addInstructionToForm = recipeInstructionAdd => {
     return { type: ADD_RECIPE_INSTRUCTION_TO_FORM, recipeInstructionAdd }
-}
+};
 
 export const removeInstructionFromForm = recipeInstructionRemove => {
     return { type: REMOVE_RECIPE_INSTRUCTION_FROM_FORM, recipeInstructionRemove }
-}
+};
+
+export const removeInstructionIdFromForm = instructionId => {
+    return { type: REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM, instructionId };
+};

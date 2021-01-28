@@ -9,7 +9,6 @@ import CreateUser from '../view/users/CreateUser.jsx';
 import SingleRecipeList from '../view/recipes/SingleRecipeList.jsx';
 import MultiRecipeList from '../view/recipes/MultiRecipeList.jsx';
 import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
-import EditRecipe from '../view/recipes/EditRecipe.jsx';
 import RecipeForm from '../view/recipes/RecipeForm.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 

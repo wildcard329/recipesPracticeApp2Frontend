@@ -160,3 +160,7 @@ img .recipe-card {
   margin: 0 auto;
 }
 
+.user-recipe-info {
+  text-align: right;
+}
+

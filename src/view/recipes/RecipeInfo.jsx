@@ -13,12 +13,15 @@ function RecipeInfo() {
     const ingredients = recipe.ingredients.split(',');
     const instructions = recipe.instructions.split('.,')
 
-    console.log('user is author: ',user.id === recipe.author)
-    console.log('user id: ',typeof(user.id),'\nrecipe author: ',typeof(recipe.author))
     const toRecipes = e => {
         e.preventDefault();
         UserController.routeToDestination('browse');
     };
+
+    const toEditRecipe = async () => {
+        await RecipeController.getRecipeDataEdit(recipe.id)
+        UserController.routeToDestination('edit recipe');
+    }
 
     const deleteRecipe = async () => {
         await RecipeController.deleteRecipe(recipe.id)
@@ -60,7 +63,12 @@ function RecipeInfo() {
                 </Col>
             </Row>
             <Button onClick={toRecipes}>Browse</Button>
-            {user.id === parseInt(recipe.author) ? <Button onClick={deleteRecipe}>Delete</Button> : null}
+            {user.id === parseInt(recipe.author) ? 
+                <div className='user-recipe-info'>
+                    <Button className='btn btn-success' onClick={toEditRecipe}>Edit</Button> 
+                    <Button className='btn btn-danger' onClick={deleteRecipe}>Delete</Button>
+                </div> 
+            : null}
         </div>
     )
 }

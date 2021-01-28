@@ -8,7 +8,14 @@ import AddRecipeDescription from '../formComponents/addRecipe/AddRecipeDescripti
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import FormController from '../../controller/FormController.js';
-import { selectUser, selectRecipeIngredient, selectRemovedRecipeIngredient, selectRecipeInstruction, selectRemoveRecipeInstruction } from '../../model/state/Selector.js';
+import { selectUser, 
+        selectEditRecipeData, 
+        selectRecipeIngredient, 
+        selectRemovedRecipeIngredient, 
+        selectRecipeInstruction, 
+        selectRemoveRecipeInstruction, 
+        selectRemoveRecipeIngredientId, 
+        selectRemoveRecipeInstructionId } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import RecipeFormIngredients from './RecipeFormIngredients.jsx';
@@ -16,8 +23,11 @@ import RecipeFormInstructions from './RecipeFormInstructions.jsx';
 
 function RecipeForm() {
     const user = useSelector(selectUser);
+    const recipeData = useSelector(selectEditRecipeData);
     const ingredientAdd = useSelector(selectRecipeIngredient);
     const ingredientRemove = useSelector(selectRemovedRecipeIngredient);
+    const ingredientIdRemove = useSelector(selectRemoveRecipeIngredientId);
+    const instructionIdRemove = useSelector(selectRemoveRecipeInstructionId);
     const instructionAdd = useSelector(selectRecipeInstruction);
     const instructionRemove = useSelector(selectRemoveRecipeInstruction);
     const [file, setFile] = useState('');
@@ -30,31 +40,40 @@ function RecipeForm() {
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
     const [data, setData] = useState({
-        name: null,
-        description: null,
+        name: recipeData ? recipeData.name : null,
+        description: recipeData ? recipeData.description : null,
         author: user.id
     })
 
-    const recipeIngredientsArr = FormHelper.convertIntToArr('ingredient',numRecipeIngredients);
-    const recipeInstructionsArr = FormHelper.convertIntToArr('instruction',numRecipeInstructions);
+    const [recipeIngredientsArr, setRecipeIngredientsArr] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.ingredients.split(',') : Array(numRecipeIngredients).fill(null), numRecipeIngredients));
+    const recipeInstructionsArr = FormHelper.convertIntToArr(recipeData ? recipeData.instructions.split('.,') : Array(numRecipeInstructions).fill(null), numRecipeInstructions);
 
-    useEffect(() => {
-        if (ingredientAdd !== ''){
-            setIngredients([...ingredients, ingredientAdd])
-            FormController.addRecipeIngredient('');
-        } else if (ingredientRemove !== '') {
-            const filteredIngredients = FormHelper.filterListItem(ingredientRemove, ingredients)
-            setIngredients(filteredIngredients);
-            FormController.removeRecipeIngredient('');
-        } else if (instructionAdd !== '') {
-            setInstructions([...instructions, instructionAdd])
-            FormController.addRecipeInstruction('');
-        } else if (instructionRemove !== '') {
-            const filteredInstructions = FormHelper.filterListItem(instructionRemove, instructions)
-            setInstructions(filteredInstructions)
-            FormController.removeRecipeInstruction('');
-        }
-    }, [ingredientAdd, ingredientRemove, instructionAdd, instructionRemove])
+    // useEffect(() => {
+    //     if (ingredientAdd !== ''){
+    //         setIngredients([...ingredients, ingredientAdd])
+    //         console.log('ingredients: ',ingredients)
+    //         FormController.addRecipeIngredient('');
+    //     } else if (ingredientRemove !== '') {
+    //         const filteredIngredients = FormHelper.filterListItem(ingredientRemove, recipeIngredientsArr)
+    //         setIngredients(filteredIngredients);
+    //         FormController.removeRecipeIngredient('');
+    //     } else if (ingredientIdRemove !== null) {
+    //         // const filteredIngredients = FormHelper.removeListItem(ingredientIdRemove, recipeIngredientsArr);
+    //         // setIngredients(filteredIngredients);
+    //         console.log('ingredients: ',recipeIngredientsArr,'id: ',ingredientIdRemove)
+    //         setNumRecipeIngredients(recipeIngredientsArr.length);
+    //         FormController.removeRecipeIngredientId(null);
+    //     } else if (instructionAdd !== '') {
+    //         setInstructions([...instructions, instructionAdd])
+    //         FormController.addRecipeInstruction('');
+    //     } else if (instructionRemove !== '') {
+    //         const filteredInstructions = FormHelper.filterListItem(instructionRemove, instructions)
+    //         setInstructions(filteredInstructions)
+    //         FormController.removeRecipeInstruction('');
+    //     } else if (instructionIdRemove !== null) {
+    //         FormController.removeRecipeInstructionId(null);
+    //     }
+    // }, [ingredientAdd, ingredientRemove, ingredientIdRemove, instructionAdd, instructionRemove, instructionIdRemove])
 
     const incrementRecipeIngredientsArr = () => {
         setNumRecipeIngredients(numRecipeIngredients+1);
@@ -131,8 +150,8 @@ function RecipeForm() {
                         : 
                         <Form.Group as={Col}>
                             <Row>
-                                <h4>Select Image to Upload</h4>
-                                <CardImg src={imageDefault} />
+                                {recipeData ? null : <h4>Select Image to Upload</h4>}
+                                <CardImg src={recipeData ? `data:image/jpeg;base64,${recipeData.image}` : imageDefault} />
                             </Row>
                             <Row>
                                 <input type='file' onChange={handleImage} className='image-input' />
@@ -140,34 +159,34 @@ function RecipeForm() {
                         </Form.Group>}
                         <Form.Group controlId='name' as={Col}>
                             <Row onClick={editNameField} className='input-field'>
-                                <input id='name' placeholder='recipe name' type='text' name='name' onChange={handleRecipe} onBlur={passNameProps} className={nameIsEntered ? 'none' : ''} />
+                                <input id='name' placeholder={recipeData ? recipeData.name : 'recipe name'} type='text' name='name' onChange={handleRecipe} onBlur={passNameProps} className={nameIsEntered ? 'none' : ''} />
                                 <AddRecipeName name={data.name} nameIsEntered={nameIsEntered} />
                             </Row>
                             <Row onClick={editDescriptionField} className='input-field'>
-                                <textarea id='description' placeholder='description' type='text' name='description' onChange={handleRecipe} onBlur={passDescriptionProps} className={descriptionIsEntered ? 'none' : ''} />    
+                                <textarea id='description' placeholder={recipeData ? recipeData.description : 'description'} type='text' name='description' onChange={handleRecipe} onBlur={passDescriptionProps} className={descriptionIsEntered ? 'none' : ''} />    
                                 <AddRecipeDescription description={data.description} descriptionIsEntered={descriptionIsEntered} />
                             </Row>
                             <Row className='input-field'>
                                 <ul>
-                                {recipeIngredientsArr && recipeIngredientsArr.map(ingredientId => {
+                                {recipeIngredientsArr.map(ingredient => {
                                     return (
                                         <li>
-                                            <RecipeFormIngredients id={ingredientId} />
+                                            <RecipeFormIngredients id={ingredient.htmlId} value={ingredient} ingredients={recipeIngredientsArr} ingredients={ingredients} setIngredients={setIngredients} recipeIngredientsArr={recipeIngredientsArr} setRecipeIngredientsArr={setRecipeIngredientsArr} numRecipeIngredients={numRecipeIngredients} setNumRecipeIngredients={setNumRecipeIngredients} />
                                         </li>)
                                 })}
                                 </ul>
                                 <Button xs={2} className='btn btn-primary' onClick={incrementRecipeIngredientsArr}>More Ingredients</Button>
                             </Row>
                             <Row className='input-field'>
-                                <ul>
+                                <ol>
                                     {recipeInstructionsArr && recipeInstructionsArr.map(instructionId => {
                                         return(
                                             <li>
-                                                <RecipeFormInstructions id={instructionId} />
+                                                <RecipeFormInstructions id={instructionId.htmlId} />
                                             </li>
                                         )
                                     })}
-                                </ul>
+                                </ol>
                                 <Button xs={2} className='btn btn-primary' onClick={incrementRecipeInstructionsArr}>More Instructions</Button>
                             </Row>
                         </Form.Group>
