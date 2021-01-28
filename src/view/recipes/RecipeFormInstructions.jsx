@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import FormController from '../../controller/FormController.js';
 import AddRecipeInstructions from '../formComponents/addRecipe/AddRecipeInstructions.jsx';
 
 function RecipeFormInstructions({id}) {
@@ -9,12 +8,10 @@ function RecipeFormInstructions({id}) {
 
     const enterInstruction = () => {
         setInstructionIsEntered(true);
-        FormController.addRecipeInstruction(instruction);
     };
 
     const editInstruction = () => {
         setInstructionIsEntered(false);
-        FormController.removeRecipeInstruction(instruction);
     };
 
     const handleInstruction = e => {

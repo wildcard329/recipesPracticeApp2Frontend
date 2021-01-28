@@ -7,15 +7,7 @@ import AddRecipeDescription from '../formComponents/addRecipe/AddRecipeDescripti
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
-import FormController from '../../controller/FormController.js';
-import { selectUser, 
-        selectEditRecipeData, 
-        selectRecipeIngredient, 
-        selectRemovedRecipeIngredient, 
-        selectRecipeInstruction, 
-        selectRemoveRecipeInstruction, 
-        selectRemoveRecipeIngredientId, 
-        selectRemoveRecipeInstructionId } from '../../model/state/Selector.js';
+import { selectUser, selectEditRecipeData } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import RecipeFormIngredients from './RecipeFormIngredients.jsx';
@@ -24,12 +16,6 @@ import RecipeFormInstructions from './RecipeFormInstructions.jsx';
 function RecipeForm() {
     const user = useSelector(selectUser);
     const recipeData = useSelector(selectEditRecipeData);
-    const ingredientAdd = useSelector(selectRecipeIngredient);
-    const ingredientRemove = useSelector(selectRemovedRecipeIngredient);
-    const ingredientIdRemove = useSelector(selectRemoveRecipeIngredientId);
-    const instructionIdRemove = useSelector(selectRemoveRecipeInstructionId);
-    const instructionAdd = useSelector(selectRecipeInstruction);
-    const instructionRemove = useSelector(selectRemoveRecipeInstruction);
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [imgPreview, setImgPreview] = useState('');
@@ -76,7 +62,8 @@ function RecipeForm() {
     // }, [ingredientAdd, ingredientRemove, ingredientIdRemove, instructionAdd, instructionRemove, instructionIdRemove])
 
     const incrementRecipeIngredientsArr = () => {
-        setNumRecipeIngredients(numRecipeIngredients+1);
+        // setNumRecipeIngredients(numRecipeIngredients+1);
+        setRecipeIngredientsArr(FormHelper.convertIntToArr(recipeIngredientsArr, recipeIngredientsArr.length+1))
     };
     const incrementRecipeInstructionsArr = () => {
         setNumRecipeInstructions(numRecipeInstructions+1);

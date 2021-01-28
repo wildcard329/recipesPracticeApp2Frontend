@@ -7,13 +7,6 @@ const initialState = {
     userData: {},
     recipeList: [],
     recipeData: {},
-    recipeIngredientAdd: '',
-    recipeIngredientRemove: '',
-    recipeInstructionAdd: '',
-    recipeInstructionRemove: '',
-    ingredientId: null,
-    instructionId: null,
-    editRecipeData: null,
     searchResults: [],
     loggedIn: false,
     destination: null
@@ -40,7 +33,7 @@ export const reducer = (state=initialState, action) => {
             return {
                 state: initialState
             }
-            case Actions.GET_USER_LIST:
+        case Actions.GET_USER_LIST:
             return {
                 ...state,
                 userList: [...action.userList]
@@ -69,36 +62,6 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 editRecipeData: action.editRecipeData
-            };
-        case Actions.ADD_RECIPE_INGREDIENT_TO_FORM:
-            return {
-                ...state,
-                recipeIngredientAdd: action.recipeIngredientAdd
-            };
-        case Actions.REMOVE_RECIPE_INGREDIENT_FROM_FORM:
-            return {
-                ...state,
-                recipeIngredientRemove: action.recipeIngredientRemove
-            };
-        case Actions.REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM:
-            return {
-                ...state,
-                ingredientId: action.ingredientId
-            }
-        case Actions.ADD_RECIPE_INSTRUCTION_TO_FORM:
-            return {
-                ...state,
-                recipeInstructionAdd: action.recipeInstructionAdd
-            };
-        case Actions.REMOVE_RECIPE_INSTRUCTION_FROM_FORM:
-            return {
-                ...state,
-                recipeInstructionRemove: action.recipeIngredientRemove
-            };
-        case Actions.REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM:
-            return {
-                ...state,
-                instructionId: action.instructionId
             };
         case Actions.SET_SEARCH_RESULTS:
             return {

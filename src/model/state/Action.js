@@ -66,35 +66,3 @@ export const setEditData = editRecipeData => {
 export const setSearchResults = searchResults => {
     return { type: SET_SEARCH_RESULTS, searchResults };
 };
-
-// Forms
-export const ADD_RECIPE_INGREDIENT_TO_FORM = 'ADD_RECIPE_INGREDIENT_TO_FORM';
-export const REMOVE_RECIPE_INGREDIENT_FROM_FORM = 'REMOVE_RECIPE_INGREDIENT_FROM_FORM';
-export const REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM = 'REMOVE_INGREDIENT_ID_FROM_FORM';
-export const ADD_RECIPE_INSTRUCTION_TO_FORM = 'ADD_RECIPE_INSTRUCTION_TO_FORM';
-export const REMOVE_RECIPE_INSTRUCTION_FROM_FORM = 'REMOVE_RECIPE_INSTRUCTION_FROM_FORM';
-export const REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM = 'REMOVE_INSTRUCTION_ID_FROM_FORM';
-
-export const addIngredientToForm = recipeIngredientAdd => {
-    return { type: ADD_RECIPE_INGREDIENT_TO_FORM, recipeIngredientAdd };
-}; 
-
-export const removeIngredientFromForm = recipeIngredientRemove => {
-    return { type: REMOVE_RECIPE_INGREDIENT_FROM_FORM, recipeIngredientRemove };
-};
-
-export const removeIngredientIdFromForm = ingredientId => {
-    return { type: REMOVE_RECIPE_INGREDIENT_ID_FROM_FORM, ingredientId }
-};
-
-export const addInstructionToForm = recipeInstructionAdd => {
-    return { type: ADD_RECIPE_INSTRUCTION_TO_FORM, recipeInstructionAdd }
-};
-
-export const removeInstructionFromForm = recipeInstructionRemove => {
-    return { type: REMOVE_RECIPE_INSTRUCTION_FROM_FORM, recipeInstructionRemove }
-};
-
-export const removeInstructionIdFromForm = instructionId => {
-    return { type: REMOVE_RECIPE_INSTRUCTION_ID_FROM_FORM, instructionId };
-};

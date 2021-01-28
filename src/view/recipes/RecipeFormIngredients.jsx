@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
-import FormController from '../../controller/FormController.js';
 import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 
@@ -12,10 +11,6 @@ function RecipeFormIngredients({id, value, setIngredients, ingredients, recipeIn
         name: value.value || ''
     });
 
-    // useEffect(() => {
-    //     setNumRecipeIngredients(recipeIngredientsArr.length);
-    // }, [recipeIngredientsArr])
-
     const enterIngredient = () => {
         setIngredientIsEntered(true);
         setIngredients([...ingredients, ingredient]);
@@ -25,14 +20,12 @@ function RecipeFormIngredients({id, value, setIngredients, ingredients, recipeIn
     const editIngredient = () => {
         setIngredientIsEntered(false);
         setIngredients(FormHelper.filterListItem(ingredient, ingredients))
-        // FormController.removeRecipeIngredient(ingredient);
     };
 
     const removeIngredient = () => {
         setIngredients(FormHelper.filterListItem(ingredient, ingredients));
         setRecipeIngredientsArr(FormHelper.removeListItem(ingredient, recipeIngredientsArr))
         console.log('array: ',recipeIngredientsArr)
-        // FormController.removeRecipeIngredientId(id);
     };
 
     const handleIngredient = e => {
