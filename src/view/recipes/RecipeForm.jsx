@@ -12,6 +12,7 @@ import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import RecipeFormIngredients from './RecipeFormIngredients.jsx';
 import RecipeFormInstructions from './RecipeFormInstructions.jsx';
+import { useLocation } from 'react-router-dom';
 
 function RecipeForm() {
     const user = useSelector(selectUser);
@@ -21,52 +22,22 @@ function RecipeForm() {
     const [imgPreview, setImgPreview] = useState('');
     const [nameIsEntered, setNameIsEntered] = useState(false);
     const [descriptionIsEntered, setDescriptionIsEntered] = useState(false);
-    const [numRecipeIngredients, setNumRecipeIngredients] = useState(5);
-    const [numRecipeInstructions, setNumRecipeInstructions] = useState(3);
-    const [ingredients, setIngredients] = useState([]);
-    const [instructions, setInstructions] = useState([]);
+    const [numRecipeIngredients] = useState(5);
+    const [numRecipeInstructions] = useState(3);
+    const [ingredients, setIngredients] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.ingredients.split(',') : Array(numRecipeIngredients).fill(undefined), numRecipeIngredients))
+    const [instructions, setInstructions] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.instructions.split('.,') : Array(numRecipeInstructions).fill(undefined), numRecipeInstructions));
+    const path = useLocation().pathname;
     const [data, setData] = useState({
         name: recipeData ? recipeData.name : null,
         description: recipeData ? recipeData.description : null,
         author: user.id
     })
 
-    const [recipeIngredientsArr, setRecipeIngredientsArr] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.ingredients.split(',') : Array(numRecipeIngredients).fill(null), numRecipeIngredients));
-    const recipeInstructionsArr = FormHelper.convertIntToArr(recipeData ? recipeData.instructions.split('.,') : Array(numRecipeInstructions).fill(null), numRecipeInstructions);
-
-    // useEffect(() => {
-    //     if (ingredientAdd !== ''){
-    //         setIngredients([...ingredients, ingredientAdd])
-    //         console.log('ingredients: ',ingredients)
-    //         FormController.addRecipeIngredient('');
-    //     } else if (ingredientRemove !== '') {
-    //         const filteredIngredients = FormHelper.filterListItem(ingredientRemove, recipeIngredientsArr)
-    //         setIngredients(filteredIngredients);
-    //         FormController.removeRecipeIngredient('');
-    //     } else if (ingredientIdRemove !== null) {
-    //         // const filteredIngredients = FormHelper.removeListItem(ingredientIdRemove, recipeIngredientsArr);
-    //         // setIngredients(filteredIngredients);
-    //         console.log('ingredients: ',recipeIngredientsArr,'id: ',ingredientIdRemove)
-    //         setNumRecipeIngredients(recipeIngredientsArr.length);
-    //         FormController.removeRecipeIngredientId(null);
-    //     } else if (instructionAdd !== '') {
-    //         setInstructions([...instructions, instructionAdd])
-    //         FormController.addRecipeInstruction('');
-    //     } else if (instructionRemove !== '') {
-    //         const filteredInstructions = FormHelper.filterListItem(instructionRemove, instructions)
-    //         setInstructions(filteredInstructions)
-    //         FormController.removeRecipeInstruction('');
-    //     } else if (instructionIdRemove !== null) {
-    //         FormController.removeRecipeInstructionId(null);
-    //     }
-    // }, [ingredientAdd, ingredientRemove, ingredientIdRemove, instructionAdd, instructionRemove, instructionIdRemove])
-
     const incrementRecipeIngredientsArr = () => {
-        // setNumRecipeIngredients(numRecipeIngredients+1);
-        setRecipeIngredientsArr(FormHelper.convertIntToArr(recipeIngredientsArr, recipeIngredientsArr.length+1))
+        setIngredients(FormHelper.convertIntToArr(ingredients, ingredients.length))
     };
     const incrementRecipeInstructionsArr = () => {
-        setNumRecipeInstructions(numRecipeInstructions+1);
+        setInstructions(FormHelper.convertIntToArr(instructions, instructions.length))
     };
 
     const handleImage = e => {
@@ -155,10 +126,10 @@ function RecipeForm() {
                             </Row>
                             <Row className='input-field'>
                                 <ul>
-                                {recipeIngredientsArr.map(ingredient => {
+                                {ingredients && ingredients.map(ingredient => {
                                     return (
                                         <li>
-                                            <RecipeFormIngredients id={ingredient.htmlId} value={ingredient} ingredients={recipeIngredientsArr} ingredients={ingredients} setIngredients={setIngredients} recipeIngredientsArr={recipeIngredientsArr} setRecipeIngredientsArr={setRecipeIngredientsArr} numRecipeIngredients={numRecipeIngredients} setNumRecipeIngredients={setNumRecipeIngredients} />
+                                            <RecipeFormIngredients id={ingredient.htmlId} name={ingredient.name} ingredients={ingredients} setIngredients={setIngredients} />
                                         </li>)
                                 })}
                                 </ul>
@@ -166,10 +137,10 @@ function RecipeForm() {
                             </Row>
                             <Row className='input-field'>
                                 <ol>
-                                    {recipeInstructionsArr && recipeInstructionsArr.map(instructionId => {
+                                    {instructions && instructions.map(instruction => {
                                         return(
                                             <li>
-                                                <RecipeFormInstructions id={instructionId.htmlId} />
+                                                <RecipeFormInstructions id={instruction.htmlId} name={instruction.name} instructions={instructions} setInstructions={setInstructions} />
                                             </li>
                                         )
                                     })}

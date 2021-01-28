@@ -1,22 +1,26 @@
 class formFunctions {
     static convertIntToArr(inputArr, num) {
         let arr = []
-        for (let i = 1; i <= num; i++) {
+        for (let i = 0; i <= num; i++) {
             arr.push({
-                htmlId: this.generateId(),
-                name: inputArr ? inputArr[i] : null
+                htmlId: inputArr.htmlId || this.generateId(),
+                name: inputArr.name || inputArr[i]
             })
         };
         return arr;
     };
-    static filterListItem(item, list) {
-        return list.filter(listItem => {
-            console.log('item: ',item,'\nlist item: ',listItem)
-            return listItem !== item});
+    static setListItem(arg, list) {
+        return list.map(listItem => 
+            listItem.htmlId !== arg.htmlId ? listItem : arg
+        );
     };
     static removeListItem(item, list) {
+        const filteredList = list.filter(lItem => {
+            return lItem.htmlId !== item.htmlId
+        })
+        console.log('list: ',list)
+        console.log('list: ',filteredList)
         return list.filter(listItem => {
-            console.log(`item: ${item}\nlist item: ${listItem.htmlId}\nitem value: ${listItem.value}\ntarget: ${item === listItem.htmlId}`)
             return listItem.htmlId !== item.htmlId
         });
     };
