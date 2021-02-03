@@ -1,37 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import AddRecipeInstructions from '../formComponents/addRecipe/AddRecipeInstructions.jsx';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import { Button } from 'react-bootstrap';
+import FormController from '../../controller/FormController.js';
 
-function RecipeFormInstructions({id, name, setInstructions, instructions}) {
-    const [instructionIsEntered, setInstructionIsEntered] = useState(false);
-    const [instruction, setInstruction] = useState({
-        htmlId: id,
-        name: name || ''
-    });
-
-    const enterInstruction = () => {
-        setInstructionIsEntered(true);
-        setInstructions(FormHelper.setListItem(instruction, instructions));
-    };
-
-    const editInstruction = () => {
-        setInstructionIsEntered(false);
-    };
-
-    const removeInstruction = () => {
-        setInstructions(FormHelper.removeListItem(instruction, instructions));
-    };
+function RecipeFormInstructions({recipeInstruction}) {
 
     const handleInstruction = e => {
-        setInstruction({...instruction, [e.target.name]: e.target.value});
+        const editedInstruction = FormHelper.editListItem(recipeInstruction, e.target.value)
+        FormController.relayInstruction(editedInstruction)
+    };
+    
+    const removeInstruction = () => {
+        FormController.deleteInstruction(recipeInstruction)
     };
 
     return(
-        <div onClick={editInstruction}>
-            <AddRecipeInstructions instruction={instruction.name} instructionIsEntered={instructionIsEntered} />
-            <textarea id={id} name='name' placeholder={instruction.name ? instruction.name : 'Enter instructions'} onChange={handleInstruction} onBlur={enterInstruction} className={instructionIsEntered ? 'none' : 'create-recipe-item'} />
+        <div>
+            <textarea id={recipeInstruction && recipeInstruction.htmlId} name='name' placeholder={recipeInstruction && recipeInstruction.name ? recipeInstruction && recipeInstruction.name : 'Enter instructions'} onChange={handleInstruction} className= 'create-recipe-item' />
             <Button className='btn btn-danger' onClick={removeInstruction}>x</Button>
         </div>
     )

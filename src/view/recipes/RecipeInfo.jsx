@@ -1,17 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 
-import { selectRecipeData, selectUser } from '../../model/state/Selector.js';
+import { selectRecipeData, selectIngredientsData, selectInstructionsData, selectUser } from '../../model/state/Selector.js';
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 
 function RecipeInfo() {
     const recipe = useSelector(selectRecipeData);
+    const ingredients = useSelector(selectIngredientsData);
+    const instructions = useSelector(selectInstructionsData);
     const user = useSelector(selectUser);
+    const history = useHistory();
     const data = recipe.image;
-    const ingredients = recipe.ingredients.split(',');
-    const instructions = recipe.instructions.split('.,')
+    const recipeId = recipe.id;
 
     const toRecipes = e => {
         e.preventDefault();
@@ -19,9 +22,8 @@ function RecipeInfo() {
     };
 
     const toEditRecipe = async () => {
-        await RecipeController.getRecipeDataEdit(recipe.id)
-        UserController.routeToDestination('edit recipe');
-    }
+        history.push(`/recipe/${recipeId}/edit`);
+    };
 
     const deleteRecipe = async () => {
         await RecipeController.deleteRecipe(recipe.id)
@@ -49,14 +51,14 @@ function RecipeInfo() {
                     <Row className='card-section'>
                         <ul>
                             {ingredients && ingredients.map(ingredient => {
-                                return <li className='list-item'>{ingredient}</li>
+                                return <li className='list-item'>{ingredient.name}</li>
                             })}    
                         </ul>    
                     </Row>
                     <Row className='card-section'>
                         <ul>
                             {instructions && instructions.map(instruction => {
-                                return <li className='list-item'>{instruction}</li>
+                                return <li className='list-item'>{instruction.name}</li>
                             })}  
                         </ul>    
                     </Row>           

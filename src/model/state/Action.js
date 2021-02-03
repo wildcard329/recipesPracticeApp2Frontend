@@ -39,7 +39,9 @@ export const setDestination = destination => {
 export const GET_RECIPE_LIST = 'GET_RECIPE_LIST';
 export const GET_USER_RECIPE_LIST = 'GET_USER_RECIPE_LIST';
 export const GET_RECIPE_DATA = 'GET_RECIPE_DATA';
-export const SET_NEW_RECIPE_STATUS = 'SET_NEW_RECIPE_STATUS';
+export const GET_INGREDIENT_DATA = 'GET_INGREDIENT_DATA';
+export const GET_INSTRUCTION_DATA = 'GET_INSTRUCTION_DATA';
+export const SET_NEW_RECIPE_ID = 'SET_NEW_RECIPE_ID';
 export const SET_EDIT_DATA = 'SET_EDIT_DATA';
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 
@@ -55,14 +57,41 @@ export const getRecipeData = recipeData => {
     return { type: GET_RECIPE_DATA, recipeData };
 };
 
-export const setNewRecipeStatus = newRecipeStatus => {
-    return { type: SET_NEW_RECIPE_STATUS, newRecipeStatus };
+export const getRecipeIngredients = ingredientsData => {
+    return { type: GET_INGREDIENT_DATA, ingredientsData };
 };
 
-export const setEditData = editRecipeData => {
-    return { type: SET_EDIT_DATA, editRecipeData };
+export const getRecipeInstructions = instructionsData => {
+    return { type: GET_INSTRUCTION_DATA, instructionsData };
+};
+
+export const setNewRecipeId = newRecipeId => {
+    return { type: SET_NEW_RECIPE_ID, newRecipeId};
 };
 
 export const setSearchResults = searchResults => {
     return { type: SET_SEARCH_RESULTS, searchResults };
+};
+
+// form
+
+export const RELAY_INGREDIENT = 'RELAY_INGREDIENT';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const RELAY_INSTRUCTION = 'RELAY_INSTRUCTION';
+export const DELETE_INSTRUCTION = 'DELETE_INSTRUCTION';
+
+export const relayIngredient = ingredient => {
+    return { type: RELAY_INGREDIENT, ingredient };
+};
+
+export const deleteIngredient = deleteIngredient => {
+    return { type: DELETE_INGREDIENT, deleteIngredient };
+};
+
+export const relayInstruction = instruction => {
+    return { type: RELAY_INSTRUCTION, instruction };
+};
+
+export const deleteInstruction = deleteInstruction => {
+    return { type: DELETE_INSTRUCTION, deleteInstruction }; 
 };

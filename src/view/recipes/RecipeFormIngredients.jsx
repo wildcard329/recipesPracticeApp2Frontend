@@ -1,37 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 
-import AddRecipeIngredients from '../formComponents/addRecipe/AddRecipeIngredients';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
+import FormController from '../../controller/FormController.js';
 
-function RecipeFormIngredients({id, name, setIngredients, ingredients}) {
-    const [ingredientIsEntered, setIngredientIsEntered] = useState(false);
-    const [ingredient, setIngredient] = useState({
-        htmlId: id,
-        name: name || ''
-    });
-
-    const enterIngredient = () => {
-        setIngredientIsEntered(true);
-        setIngredients(FormHelper.setListItem(ingredient, ingredients));
-    };
-
-    const editIngredient = () => {
-        setIngredientIsEntered(false);
+function RecipeFormIngredients({recipeIngredient}) {
+  
+    const handleIngredient = e => {
+        const editedIngredient = FormHelper.editListItem(recipeIngredient, e.target.value)
+        FormController.relayIngredient(editedIngredient);
     };
 
     const removeIngredient = () => {
-        setIngredients(FormHelper.removeListItem(ingredient, ingredients));
-    };
-
-    const handleIngredient = e => {
-        setIngredient({...ingredient, [e.target.name]: e.target.value});
+        FormController.deleteIngredient(recipeIngredient);
     };
 
     return(
-        <div onClick={editIngredient}>
-            <AddRecipeIngredients ingredient={ingredient.name} ingredientIsEntered={ingredientIsEntered} />
-            <input id={id} name='name' placeholder={ingredient.name ? ingredient.name : 'ingredient quantity and name'} onChange={handleIngredient} onBlur={enterIngredient} className={ingredientIsEntered ? 'none' : 'create-recipe-item'} />
+        <div>
+            <input id={recipeIngredient && recipeIngredient.htmlId} name='name' placeholder={recipeIngredient && recipeIngredient.name ? recipeIngredient && recipeIngredient.name : 'ingredient quantity and name'} onChange={handleIngredient} className= 'create-recipe-item' />
             <Button className='btn btn-danger' onClick={removeIngredient}>X</Button>
         </div>
     )

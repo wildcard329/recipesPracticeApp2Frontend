@@ -39,9 +39,9 @@ function AppRouter() {
                 <PrivateRoute path='/recipes/browse' component={MultiRecipeList} />
                 <PrivateRoute path='/recipes/all' component={SingleRecipeList} />
                 <PrivateRoute path='/recipes/user' component={SingleRecipeList} />
-                <PrivateRoute path='/recipe/info' component={RecipeInfo} />
                 <PrivateRoute path='/recipes/add' component={RecipeForm} />
-                <PrivateRoute path='/recipes/edit' component={RecipeForm} />
+                <PrivateRoute path='/recipe/:recipeId/info' component={RecipeInfo} />
+                <PrivateRoute path='/recipe/:recipeId/edit' component={RecipeForm} />
             </Switch>
         </div>
     )

@@ -1,28 +1,34 @@
 class formFunctions {
-    static convertIntToArr(inputArr, num) {
-        let arr = []
-        for (let i = 0; i <= num; i++) {
-            arr.push({
-                htmlId: inputArr.htmlId || this.generateId(),
-                name: inputArr.name || inputArr[i]
-            })
-        };
-        return arr;
+    static convertArrToHtml(inputArr) {
+        const outputArr = inputArr.map(item => {
+            return {
+                htmlId: inputArr?.htmlId || this.generateId(),
+                name: item?.name || '',
+                recipe: item?.recipe || null
+            };
+        });
+        return outputArr;
     };
-    static setListItem(arg, list) {
-        return list.map(listItem => 
-            listItem.htmlId !== arg.htmlId ? listItem : arg
+    static editListItem(item, value) {
+        // this sets an instruction or ingredient before it is passed to the reducer
+        return {
+            htmlId: item.htmlId,
+            name: value,
+            recipe: item.recipe
+        }
+    };
+    static setListItem(item, list) {
+        const newList = list.map(listItem => 
+            listItem.htmlId !== item.htmlId ? listItem : item
         );
+        console.log('edited list: ',newList)
+        return newList
     };
     static removeListItem(item, list) {
-        const filteredList = list.filter(lItem => {
-            return lItem.htmlId !== item.htmlId
-        })
-        console.log('list: ',list)
-        console.log('list: ',filteredList)
-        return list.filter(listItem => {
+        const filteredList = list.filter(listItem => {
             return listItem.htmlId !== item.htmlId
         });
+        return filteredList;
     };
     static generateId() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

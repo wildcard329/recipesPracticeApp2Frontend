@@ -1,43 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Button, Card, CardImg, Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 import AddRecipeName from '../formComponents/addRecipe/AddRecipeName.jsx';
 import AddRecipeDescription from '../formComponents/addRecipe/AddRecipeDescription.jsx';
+import RecipeFormIngredients from './RecipeFormIngredients.jsx';
+import RecipeFormInstructions from './RecipeFormInstructions.jsx';
 
 import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
-import { selectUser, selectEditRecipeData } from '../../model/state/Selector.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
-import RecipeFormIngredients from './RecipeFormIngredients.jsx';
-import RecipeFormInstructions from './RecipeFormInstructions.jsx';
-import { useLocation } from 'react-router-dom';
+import { 
+    selectUser, 
+    selectRecipeData, 
+    selectIngredientsData, 
+    selectInstructionsData,
+    selectIngredient,
+    selectDeleteIngredient,
+    selectInstruction,
+    selectDeleteInstruction 
+    } from '../../model/state/Selector.js';
 
 function RecipeForm() {
     const user = useSelector(selectUser);
-    const recipeData = useSelector(selectEditRecipeData);
+    const recipeData = useSelector(selectRecipeData);
+    const ingredientsData = useSelector(selectIngredientsData);
+    const instructionsData = useSelector(selectInstructionsData);
+    const { recipeId } = useParams();
+    const ingredient = useSelector(selectIngredient);
+    const deleteIngredient = useSelector(selectDeleteIngredient);
+    const instruction = useSelector(selectInstruction);
+    const deleteInstruction = useSelector(selectDeleteInstruction);
+
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [imgPreview, setImgPreview] = useState('');
-    const [nameIsEntered, setNameIsEntered] = useState(false);
-    const [descriptionIsEntered, setDescriptionIsEntered] = useState(false);
-    const [numRecipeIngredients] = useState(5);
-    const [numRecipeInstructions] = useState(3);
-    const [ingredients, setIngredients] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.ingredients.split(',') : Array(numRecipeIngredients).fill(undefined), numRecipeIngredients))
-    const [instructions, setInstructions] = useState(FormHelper.convertIntToArr(recipeData ? recipeData.instructions.split('.,') : Array(numRecipeInstructions).fill(undefined), numRecipeInstructions));
-    const path = useLocation().pathname;
+    const amountOfIngredients = ingredientsData.length || 5;
+    const amountOfInstructions = instructionsData.length || 3;
+    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? ingredientsData : Array(amountOfIngredients).fill({})))
+    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? instructionsData : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
-        name: recipeData ? recipeData.name : null,
-        description: recipeData ? recipeData.description : null,
+        name: recipeData.name || null,
+        description: recipeData.description || null,
         author: user.id
-    })
+    });
+
+    useEffect(() => {
+        setIngredients(FormHelper.setListItem(ingredient, ingredients))
+        setInstructions(FormHelper.setListItem(instruction, instructions))
+    }, [ingredient, instruction])
+    
+    useEffect(() => {
+        setIngredients(FormHelper.removeListItem(deleteIngredient, ingredients))
+        setInstructions(FormHelper.removeListItem(deleteInstruction, instructions))
+    }, [deleteIngredient, deleteInstruction])
 
     const incrementRecipeIngredientsArr = () => {
-        setIngredients(FormHelper.convertIntToArr(ingredients, ingredients.length))
+        ingredients.push({});
+        setIngredients(FormHelper.convertArrToHtml(ingredients))
     };
     const incrementRecipeInstructionsArr = () => {
-        setInstructions(FormHelper.convertIntToArr(instructions, instructions.length))
+        instructions.push({});
+        setInstructions(FormHelper.convertArrToHtml(instructions))
     };
 
     const handleImage = e => {
@@ -53,22 +79,6 @@ function RecipeForm() {
     const handleRecipe = e => {
         setData({...data, [e.target.name]: e.target.value});
     }
-
-    const passNameProps = () => {
-        setNameIsEntered(true);
-    };
-
-    const passDescriptionProps = () => {
-        setDescriptionIsEntered(true);
-    };
-
-    const editNameField = () => {
-        setNameIsEntered(false);
-    };
-
-    const editDescriptionField = () => {
-        setDescriptionIsEntered(false);
-    };
     
     const cancel = e => {
         e.preventDefault();
@@ -77,22 +87,25 @@ function RecipeForm() {
     
     const submitRecipe = async e => {
         e.preventDefault();
+        const id = recipeId;
         const recipe = new FormData();
         recipe.append('name', data.name);
         recipe.append('description', data.description);
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
-        recipe.append('ingredients', ingredients);
-        recipe.append('instructions', instructions);
-        await RecipeController.addRecipeData(recipe);
+        {recipeId ? 
+            await RecipeController.editRecipeData({recipe, ingredients, instructions}, id) 
+            : 
+            await RecipeController.addRecipeData({recipe, ingredients, instructions})
+        };
         await RecipeController.getRecipeList();
         await RecipeController.getUserRecipeList(user.id);
         UserController.routeToDestination('browse');
     };
     return(
         <div className='create-recipe'>
-            <h2>Add New Recipe</h2>
+            {recipeId ? <h2>Edit {data.name}</h2> : <h2>Add New Recipe</h2>}
             <form onSubmit={submitRecipe}>
                 <Form>
                     <Row className='form-row'>
@@ -108,28 +121,26 @@ function RecipeForm() {
                         : 
                         <Form.Group as={Col}>
                             <Row>
-                                {recipeData ? null : <h4>Select Image to Upload</h4>}
-                                <CardImg src={recipeData ? `data:image/jpeg;base64,${recipeData.image}` : imageDefault} />
+                                {recipeId ? null : <h4>Select Image to Upload</h4>}
+                                <CardImg src={recipeId ? `data:image/jpeg;base64,${recipeData.image}` : imageDefault} />
                             </Row>
                             <Row>
                                 <input type='file' onChange={handleImage} className='image-input' />
                             </Row>
                         </Form.Group>}
                         <Form.Group controlId='name' as={Col}>
-                            <Row onClick={editNameField} className='input-field'>
-                                <input id='name' placeholder={recipeData ? recipeData.name : 'recipe name'} type='text' name='name' onChange={handleRecipe} onBlur={passNameProps} className={nameIsEntered ? 'none' : ''} />
-                                <AddRecipeName name={data.name} nameIsEntered={nameIsEntered} />
+                            <Row className='input-field'>
+                                <input id='name' placeholder={recipeId ? recipeData.name : 'recipe name'} type='text' name='name' onChange={handleRecipe} />
                             </Row>
-                            <Row onClick={editDescriptionField} className='input-field'>
-                                <textarea id='description' placeholder={recipeData ? recipeData.description : 'description'} type='text' name='description' onChange={handleRecipe} onBlur={passDescriptionProps} className={descriptionIsEntered ? 'none' : ''} />    
-                                <AddRecipeDescription description={data.description} descriptionIsEntered={descriptionIsEntered} />
+                            <Row className='input-field'>
+                                <textarea id='description' placeholder={recipeId ? recipeData.description : 'description'} type='text' name='description' onChange={handleRecipe} />    
                             </Row>
                             <Row className='input-field'>
                                 <ul>
-                                {ingredients && ingredients.map(ingredient => {
+                                {ingredients && ingredients.map(recipeIngredient => {
                                     return (
-                                        <li>
-                                            <RecipeFormIngredients id={ingredient.htmlId} name={ingredient.name} ingredients={ingredients} setIngredients={setIngredients} />
+                                        <li key={recipeIngredient && recipeIngredient.htmlId}>
+                                            <RecipeFormIngredients recipeIngredient={recipeIngredient} />
                                         </li>)
                                 })}
                                 </ul>
@@ -137,10 +148,10 @@ function RecipeForm() {
                             </Row>
                             <Row className='input-field'>
                                 <ol>
-                                    {instructions && instructions.map(instruction => {
+                                    {instructions && instructions.map(recipeInstruction => {
                                         return(
-                                            <li>
-                                                <RecipeFormInstructions id={instruction.htmlId} name={instruction.name} instructions={instructions} setInstructions={setInstructions} />
+                                            <li key={recipeInstruction && recipeInstruction.htmlId}>
+                                                <RecipeFormInstructions recipeInstruction={recipeInstruction} />
                                             </li>
                                         )
                                     })}

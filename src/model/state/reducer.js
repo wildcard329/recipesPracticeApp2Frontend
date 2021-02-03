@@ -5,8 +5,15 @@ const initialState = {
     user: {},
     userList: [],
     userData: {},
+    ingredientsData: [],
+    instructionsData: [],
     recipeList: [],
     recipeData: {},
+    ingredient: {},
+    deleteIngredient: {},
+    instruction: {},
+    deleteInstruction: {},
+    newRecipeId: null,
     searchResults: [],
     loggedIn: false,
     destination: null
@@ -33,6 +40,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 state: initialState
             }
+        case Actions.SET_NEW_RECIPE_ID:
+            return {
+                ...state,
+                newRecipeId: action.newRecipeId
+            }
         case Actions.GET_USER_LIST:
             return {
                 ...state,
@@ -42,6 +54,26 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 userData: {...action.userData}
+            };
+        case Actions.RELAY_INGREDIENT:
+            return {
+                ...state,
+                ingredient: {...action.ingredient}
+            };
+        case Actions.DELETE_INGREDIENT:
+            return {
+                ...state,
+                deleteIngredient: {...action.deleteIngredient}
+            };
+        case Actions.RELAY_INSTRUCTION:
+            return {
+                ...state,
+                instruction: {...action.instruction}
+            };
+        case Actions.DELETE_INSTRUCTION:
+            return {
+                ...state,
+                deleteInstruction: {...action.deleteInstruction}
             };
         case Actions.GET_RECIPE_LIST:
             return {
@@ -58,10 +90,15 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 recipeData: action.recipeData
             };
-        case Actions.SET_EDIT_DATA:
+        case Actions.GET_INGREDIENT_DATA:
             return {
                 ...state,
-                editRecipeData: action.editRecipeData
+                ingredientsData: action.ingredientsData
+            };
+        case Actions.GET_INSTRUCTION_DATA:
+            return {
+                ...state,
+                instructionsData: action.instructionsData
             };
         case Actions.SET_SEARCH_RESULTS:
             return {

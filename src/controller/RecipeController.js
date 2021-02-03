@@ -15,13 +15,19 @@ class RecipeController {
         const recipeData = await RecipeServices.getRecipeData(id);
         store.dispatch(Action.getRecipeData(recipeData));
     };
-    async getRecipeDataEdit(id) {
-        const editRecipeData = await RecipeServices.getRecipeData(id);
-        store.dispatch(Action.setEditData(editRecipeData));
-    }
-    async addRecipeData(recipe) {
-        const newRecipeStatus = await RecipeServices.addRecipeData(recipe);
-        store.dispatch(Action.setNewRecipeStatus(newRecipeStatus));
+    async getRecipeIngredients(id) {
+        const ingredientsData = await RecipeServices.getRecipeIngredients(id);
+        store.dispatch(Action.getRecipeIngredients(ingredientsData));
+    };
+    async getRecipeInstructions(id) {
+        const instructionsData = await RecipeServices.getRecipeInstructions(id);
+        store.dispatch(Action.getRecipeInstructions(instructionsData));
+    };
+    async addRecipeData({recipe, ingredients, instructions}) {
+        await RecipeServices.addRecipeData({recipe, ingredients, instructions});
+    };
+    async editRecipeData({recipe, ingredients, instructions}, id) {
+        await RecipeServices.editRecipeData({recipe, ingredients, instructions}, id);
     };
     async deleteRecipe(id) {
         await RecipeServices.deleteRecipe(id);
