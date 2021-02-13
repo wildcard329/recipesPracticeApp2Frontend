@@ -94,6 +94,7 @@ function RecipeForm() {
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
+        recipe.imgHex = file.toString('hex');
         {recipeId ? 
             await RecipeController.editRecipeData({recipe, ingredients, instructions}, id) 
             : 

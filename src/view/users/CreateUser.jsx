@@ -8,7 +8,6 @@ function CreateUser() {
         password: '',
         email: ''
     });
-    const history = useHistory();
 
     const enterUser = e => {
         e.preventDefault();

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
-import { Button } from 'react-bootstrap';
 import FormController from '../../controller/FormController.js';
 
 function RecipeFormInstructions({recipeInstruction}) {
