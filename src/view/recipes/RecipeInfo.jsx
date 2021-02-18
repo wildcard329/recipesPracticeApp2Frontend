@@ -18,7 +18,7 @@ function RecipeInfo() {
 
     const toRecipes = e => {
         e.preventDefault();
-        UserController.routeToDestination('browse');
+        history.push('/recipes/browse');
     };
 
     const toEditRecipe = async () => {
@@ -27,7 +27,7 @@ function RecipeInfo() {
 
     const deleteRecipe = async () => {
         await RecipeController.deleteRecipe(recipe.id)
-        UserController.routeToDestination('browse');
+        history.push('/recipes/browse');
     }
 
     return(

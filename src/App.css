@@ -142,6 +142,7 @@
   border-radius: 5%;
   padding: 3%;
   background-color: white;
+  overflow: hidden;
 }
 
 .recipe-card:hover {
@@ -150,9 +151,20 @@
 }
 
 img .recipe-card {
-  width: 10%;
   position: absolute;
   z-index: -1;
+}
+
+.card-img {
+  width: 200px;
+  height: 100px;
+  object-fit: fill;
+}
+
+.card-img .single-recipe-card {
+  width: 100%;
+  object-fit: none;
+  height: auto;
 }
 
 .public-header {

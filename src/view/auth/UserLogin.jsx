@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import UserController from '../../controller/UserController.js';
 
 function UserLogin() {
+    const history = useHistory();
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -17,12 +19,12 @@ function UserLogin() {
     const submitLogin = async e => {
         e.preventDefault();
         await UserController.loginUser(user);
-        UserController.routeToDestination('browse');
+        history.push('/recipes/browse');
     };
 
     const goToRegister = e => {
         e.preventDefault();
-        UserController.routeToDestination('register');
+        history.push('/auth/register');
     };
     return(
         <form onSubmit={submitLogin} className='auth-form'>

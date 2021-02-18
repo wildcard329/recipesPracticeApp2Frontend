@@ -5,31 +5,33 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
 import { selectUser } from '../../model/state/Selector.js';
+import { useHistory } from 'react-router-dom';
 
 function UserDashboardMenu() {
+    const history = useHistory();
     const user = useSelector(selectUser);
 
     const viewProfile = () => {
-        UserController.routeToDestination('profile');
+        history.push('/user/profile');
     }
 
     const browseRecipes = () => {
-        UserController.routeToDestination('browse');
+        history.push('/recipes/browse');
     }
 
     const browseUserRecipes = async () => {
         await UserController.getUserData(user.id);
-        UserController.routeToDestination('user recipes');
+        history.push('/recipes/user');
     }
 
     const toAddRecipe = () => {
-        UserController.routeToDestination('add recipe');
+        history.push('/recipes/add');
     };
 
     const logout = async () => {
         UserHelper.removeTokenSession();
         UserController.logoutUser(user);
-        UserController.routeToDestination('login');
+        history.push('/auth/login');
     };
 
     return(

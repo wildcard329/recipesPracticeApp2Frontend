@@ -31,10 +31,7 @@ class RecipeServices {
         await axiosWithAuth().post(`${InstructionsURL}/recipe/${response.data.recipeId}/create`, instructions);
     };
     async editRecipeData({recipe, ingredients, instructions}, id) {
-        const requestPackage = {recipe, ingredients, instructions};
-        console.log('Sending recipe: ',recipe,'\nSending ingredients: ',ingredients,'\nSending instructions: ',instructions)
-        const response = await axiosWithAuth().put(`${RecipesURL}/${id}`, requestPackage);
-        console.log('res',response)
+        await axiosWithAuth().put(`${RecipesURL}/${id}`, recipe);
         await axiosWithAuth().put(`${IngredientsURL}/recipe/${id}`, ingredients);
         await axiosWithAuth().put(`${InstructionsURL}/recipe/${id}`,instructions);
     };

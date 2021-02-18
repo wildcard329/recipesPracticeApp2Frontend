@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 
 import UserController from '../../controller/UserController.js';
-import AuthError from './AuthError.jsx';
 
 function UserRegister() {
+    const history = useHistory();
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -19,11 +20,11 @@ function UserRegister() {
     const submitRegistration = e => {
         e.preventDefault();
         UserController.registerNewUser(user);
-        UserController.routeToDestination('login');
+        history.push('/auth/login');
     };
 
     const cancelRegistration = () => {
-        UserController.routeToDestination('login');
+        history.push('/auth/login');
     }
 
     return(

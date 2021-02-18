@@ -16,7 +16,6 @@ function ViewRecipeDetails({recipe}) {
         await RecipeController.getRecipeIngredients(recipe.id);
         await RecipeController.getRecipeInstructions(recipe.id);
         history.push(`/recipe/${recipeId}/info`);
-        // UserController.routeToDestination('recipe info', recipeId);
     };
 
     return(

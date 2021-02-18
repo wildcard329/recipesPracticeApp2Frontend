@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
 import { selectRecipeList, selectUser, selectUserRecipeList } from '../../model/state/Selector.js';
@@ -9,6 +9,7 @@ import RecipeCard from './RecipeCard.jsx';
 import UserController from "../../controller/UserController.js";
 
 function RecipeList() {
+    const history = useHistory();
     const recipes = useSelector(selectRecipeList);
     const userRecipes = useSelector(selectUserRecipeList);
     const user = UserHelper.validateId(useSelector(selectUser));
@@ -16,6 +17,14 @@ function RecipeList() {
     const setUserRecipes = () => {
         UserController.getUserData(user);
     };
+
+    const toAllRecipes = () => {
+        history.push('/recipes/all');
+    }
+
+    const toRecipeList = () => {
+        history.push('/recipes/user');
+    }
 
     useEffect(() => {
         RecipeController.getRecipeList();
@@ -25,15 +34,11 @@ function RecipeList() {
     return(
         <div>
             <div className='recipe-lists'>
-                <Link to='/recipes/all' className='list-header'>
-                    <h2 className='list-header'>Browse all recipes</h2>
-                </Link>
+                <h2 className='list-header' onClick={toAllRecipes}>Browse all recipes</h2>
                 <RecipeCard recipes={recipes} />
             </div>
             <div className='recipe-lists' onClick={setUserRecipes}>
-                <Link to='/recipes/user' className='list-header'>
-                    <h2 className='list-header'>Your Recipes</h2>
-                </Link>
+                <h2 className='list-header' onClick={toRecipeList}>Your Recipes</h2>
                 <RecipeCard recipes={userRecipes} />
             </div>
         </div>

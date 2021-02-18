@@ -6,7 +6,7 @@ function ViewUserDetails({user}) {
 
     const getUserData = async () => {
         await UserController.getUserData(user.id);
-        UserController.routeToDestination('user info');
+        history.push('/users/info');
     }
 
     return(

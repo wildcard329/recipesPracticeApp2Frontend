@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import UserController from '../../controller/UserController';
 
 function CreateUser() {
+    const history = useHistory();
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -15,12 +16,12 @@ function CreateUser() {
     };
 
     const cancel = () => {
-        UserController.routeToDestination('all users');
+        history.push('/users/all');
     };
 
     const addUser = async () => {
         await UserController.addNewUser(user);
-        UserController.routeToDestination('all users');
+        history.push('/users/all');
     };
 
     return(
