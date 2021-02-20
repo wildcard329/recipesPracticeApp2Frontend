@@ -1,5 +1,8 @@
 class CurrentUser {
     static validateId(userData) {
+        console.log('1')
+        // This function is for maintaining the user across refreshes
+        
         if (userData.id === undefined) {
             const { username, id, ...user } = { ...userData }
             return {
@@ -16,6 +19,10 @@ class CurrentUser {
         localStorage.setItem('username', user.username);
         localStorage.setItem('userid', user.id);
     };
+    static getUserId() {
+        const id = localStorage.getItem('userid');
+        return id;
+    }
     static removeTokenSession() {
         localStorage.removeItem('username');
         localStorage.removeItem('userid');
