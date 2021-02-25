@@ -1,13 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { selectUser } from '../../model/state/Selector.js';
+import UserHelper from '../../helpers/functions/storageHandler.js';
 
 function UserDashboardUser() {
-    const user = useSelector(selectUser);
+    const username = UserHelper.getUsername();
     return(
         <div className='user-dashboard-right'>
-            <h2>{user && `Welcome, ${user.username}`}</h2>
+            <h2>{username && `Welcome, ${username}`}</h2>
         </div>
     )
 }

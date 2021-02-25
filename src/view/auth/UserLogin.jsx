@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import UserController from '../../controller/UserController.js';
 import UserHelper from '../../helpers/functions/storageHandler.js';
+import { selectToken } from '../../model/state/Selector.js';
 
 function UserLogin() {
     const history = useHistory();
+    const token = useSelector(selectToken)
     const [user, setUser] = useState({
         username: '',
         password: '',
         last_login: new Date()
     })
+    useEffect(() => {
+        token ? 
+            UserHelper.setToken(token)
+        :
+            console.log('nope');
+    }, [token]);
 
     const onChangeCredentials = e => {
         setUser({...user, [e.target.name]: e.target.value});
