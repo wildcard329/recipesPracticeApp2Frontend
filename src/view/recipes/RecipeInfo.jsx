@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 
 import { selectRecipeData, selectIngredientsData, selectInstructionsData, selectUser } from '../../model/state/Selector.js';
-import UserController from '../../controller/UserController.js';
+import UserHelper from '../../helpers/functions/storageHandler.js';
 import RecipeController from '../../controller/RecipeController.js';
+import StorageHandler from '../../helpers/functions/storageHandler.js';
 
 function RecipeInfo() {
     const recipe = useSelector(selectRecipeData);
     const ingredients = useSelector(selectIngredientsData);
     const instructions = useSelector(selectInstructionsData);
-    const user = useSelector(selectUser);
+    const userId = UserHelper.getUserId();
     const history = useHistory();
     const data = recipe.image;
-    const recipeId = recipe.id;
+    const recipeId = recipe.id || StorageHandler.getRecipeId();
+
+    // whenever the component loads, it needs recipe info
+    useEffect(async () => {
+        if (!recipe.id) {
+            await RecipeController.getRecipeData(recipeId);
+            await RecipeController.getRecipeIngredients(recipeId);
+            await RecipeController.getRecipeInstructions(recipeId);
+        } else {
+            StorageHandler.setRecipeId(recipeId);
+        }
+    }, []);
 
     const toRecipes = e => {
         e.preventDefault();
+        StorageHandler.removeRecipeId();
         history.push('/recipes/browse');
     };
 
@@ -27,6 +40,7 @@ function RecipeInfo() {
 
     const deleteRecipe = async () => {
         await RecipeController.deleteRecipe(recipe.id)
+        StorageHandler.removeRecipeId();
         history.push('/recipes/browse');
     }
 
@@ -65,7 +79,7 @@ function RecipeInfo() {
                 </Col>
             </Row>
             <Button onClick={toRecipes}>Browse</Button>
-            {user.id === parseInt(recipe.author) ? 
+            {parseInt(userId) === parseInt(recipe.author) ? 
                 <div className='user-recipe-info'>
                     <Button className='btn btn-success' onClick={toEditRecipe}>Edit</Button> 
                     <Button className='btn btn-danger' onClick={deleteRecipe}>Delete</Button>

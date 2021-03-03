@@ -12,10 +12,10 @@ function RecipeList() {
     const history = useHistory();
     const recipes = useSelector(selectRecipeList);
     const userRecipes = useSelector(selectUserRecipeList);
-    const user = UserHelper.validateId(useSelector(selectUser));
+    const userId = UserHelper.getUserId();
     
     const setUserRecipes = () => {
-        UserController.getUserData(user);
+        UserController.getUserData(userId);
     };
 
     const toAllRecipes = () => {
@@ -28,8 +28,8 @@ function RecipeList() {
 
     useEffect(() => {
         RecipeController.getRecipeList();
-        RecipeController.getUserRecipeList(user.id);
-    }, [user.id]);
+        RecipeController.getUserRecipeList(userId);
+    }, [userId]);
 
     return(
         <div>

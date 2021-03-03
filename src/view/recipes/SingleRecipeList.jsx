@@ -12,19 +12,21 @@ function SingleRecipeList() {
     const userRecipes = useSelector(selectUserRecipeList);
     const path = useLocation().pathname;
     const [list, setList] = useState(null);
-
+    
     useEffect(() => {
         switch (path) {
             case '/recipes/all':
                 setList('all')
                 return RecipeController.getRecipeList();
-            case '/recipes/user':
-                setList('user');
-                return RecipeController.getUserRecipeList(id);
-            default:
-                return;
-            }
-    }, [id]);
+                case '/recipes/user':
+                    setList('user');
+                    return RecipeController.getUserRecipeList(id);
+                    default:
+                        return;
+                    }
+                }, [id]);
+        
+                RecipeController.getRecipeList(id);
     return(
         <div>
             {list === 'all' ? 

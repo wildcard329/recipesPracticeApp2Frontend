@@ -1,21 +1,6 @@
 import jwt_decode from 'jwt-decode';
 
 class CurrentUser {
-    static validateId(userData) {
-        // This function is for maintaining the user across refreshes
-        if (!userData) {
-            return
-        } else if (userData.id === undefined) {
-            const { username, id, ...user } = { ...userData }
-            return {
-                ...user,
-                username: localStorage.getItem('username'),
-                id: localStorage.getItem('userid')
-            }
-        } else {
-            return userData
-        };
-    };
     static setToken(token) {
         const user = jwt_decode(token);
         localStorage.setItem('token', token);
@@ -38,6 +23,16 @@ class CurrentUser {
         localStorage.removeItem('username');
         localStorage.removeItem('userid');
         localStorage.removeItem('token');
+    };
+    static setRecipeId(id) {
+        localStorage.setItem('recipeId', id);
+    };
+    static getRecipeId() {
+        const id = localStorage.getItem('recipeId');
+        return id;
+    };
+    static removeRecipeId() {
+        localStorage.removeItem('recipeId');
     };
 };
 

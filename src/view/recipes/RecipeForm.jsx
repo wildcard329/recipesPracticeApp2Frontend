@@ -45,15 +45,19 @@ function RecipeForm() {
         description: recipeData.description || null,
         author: user.id
     });
-    console.log(`Start with ${amountOfIngredients} ingredients`)
 
-    useEffect(() => {
-        if (recipeId) {
-            RecipeController.getRecipeData(recipeId)
-            RecipeController.getRecipeIngredients(recipeId)
-            RecipeController.getRecipeInstructions(recipeId)
+    
+    useEffect(async () => {
+        if (recipeId && !recipeData.id) {
+            await RecipeController.getRecipeData(recipeId)
+            await RecipeController.getRecipeIngredients(recipeId)
+            await RecipeController.getRecipeInstructions(recipeId)
         }
-    }, [recipeId])
+        if (recipeData.id && !ingredients && !instructions) {
+            setIngredients(FormHelper.convertArrToHtml(ingredientsData));
+            setInstructions(FormHelper.convertArrToHtml(instructionsData));
+        }
+    }, [])
 
     useEffect(() => {
         setIngredients(FormHelper.setListItem(ingredient, ingredients))

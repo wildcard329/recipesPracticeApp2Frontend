@@ -4,12 +4,13 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 import UserController from '../../controller/UserController';
 import UserHelper from '../../helpers/functions/storageHandler.js';
-import { selectUser } from '../../model/state/Selector.js';
+import { selectUser, selectUserData } from '../../model/state/Selector.js';
 import { useHistory } from 'react-router-dom';
 
 function UserDashboardMenu() {
     const history = useHistory();
-    const user = useSelector(selectUser);
+    const userId = UserHelper.getUserId();
+    const user = useSelector(selectUserData);
 
     const viewProfile = () => {
         history.push('/user/profile');
@@ -20,7 +21,7 @@ function UserDashboardMenu() {
     }
 
     const browseUserRecipes = async () => {
-        await UserController.getUserData(user.id);
+        await UserController.getUserData(userId);
         history.push('/recipes/user');
     }
 
