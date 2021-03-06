@@ -18,15 +18,14 @@ function SingleRecipeList() {
             case '/recipes/all':
                 setList('all')
                 return RecipeController.getRecipeList();
-                case '/recipes/user':
-                    setList('user');
-                    return RecipeController.getUserRecipeList(id);
-                    default:
-                        return;
-                    }
-                }, [id]);
+            case '/recipes/user':
+                setList('user');
+                return RecipeController.getUserRecipeList(id);
+                default:
+                    return;
+                }
+            }, [id]);
         
-                RecipeController.getRecipeList(id);
     return(
         <div>
             {list === 'all' ? 
