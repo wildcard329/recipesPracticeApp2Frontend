@@ -8,12 +8,6 @@
   margin-top: 1%;
 }
 
-.recipe-lists {
-  height: 60vh;
-  overflow: hidden;
-  margin-bottom: -11%;
-}
-
 .user-dashboard-right {
   text-align: right;
   margin-right: 5%;
@@ -94,13 +88,22 @@
   justify-content: space-around;
 }
 
+.recipe-lists {
+  width: 90%;
+  margin: 2% 5%;
+}
+
 .recipe-list {
   width: 90%;
-  /* margin: 0 auto; */
   margin: 2% 5%;
   display: flex;
   flex-wrap: wrap;
   background-color: #dcdcdc;
+}
+
+.recipe-lists .recipe-list .breadcrumb {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
 }
 
 .list-header {
@@ -109,6 +112,7 @@
   color: black;
   width:fit-content;
   cursor: pointer;
+  overflow-y: hidden;
 }
 
 .list-header:hover {
@@ -154,6 +158,12 @@
   width: 200px;
   height: 100px;
   object-fit: fill;
+}
+
+.recipe-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-img .single-recipe-card {

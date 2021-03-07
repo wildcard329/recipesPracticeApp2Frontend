@@ -21,23 +21,25 @@ function SingleRecipeList() {
             case '/recipes/user':
                 setList('user');
                 return RecipeController.getUserRecipeList(id);
-                default:
-                    return;
-                }
+            default:
+                return;
+            }
             }, [id]);
         
     return(
         <div>
             {list === 'all' ? 
-            <div>
-                <RecipeCard recipes={recipes} />
-            </div>
+                <div>
+                    <RecipeCard recipes={recipes} />
+                </div>
             : list === 'user' ?
-            <div>
-                <RecipeCard recipes={userRecipes} />
-            </div>
+                <div>
+                    <RecipeCard recipes={userRecipes} />
+                </div>
             :
-            null
+                <h2>
+                    Error loading content
+                </h2>
             }
         </div>
     )

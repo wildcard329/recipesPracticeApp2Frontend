@@ -16,6 +16,7 @@ function RecipeInfo() {
     const history = useHistory();
     const data = recipe.image;
     const recipeId = recipe.id || StorageHandler.getRecipeId();
+    console.log('instructions: ',instructions)
 
     // whenever the component loads, it needs recipe info
     useEffect(async () => {
@@ -70,11 +71,11 @@ function RecipeInfo() {
                         </ul>    
                     </Row>
                     <Row className='card-section'>
-                        <ul>
+                        <ol>
                             {instructions && instructions.map(instruction => {
                                 return <li className='list-item'>{instruction.name}</li>
                             })}  
-                        </ul>    
+                        </ol>    
                     </Row>           
                 </Col>
             </Row>

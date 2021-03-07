@@ -5,12 +5,12 @@ import ViewRecipeDetails from './ViewRecipeDetails.jsx';
 
 function RecipeCard({recipes}) {
     return(
-        <div className='recipe-list'>
-            <Breadcrumb>
+        <div>
+            <Breadcrumb className='recipe-list'>
             {recipes && recipes.map(recipe => {
                 return(
                     <Breadcrumb.Item>
-                        <ViewRecipeDetails recipe={recipe} />
+                        <ViewRecipeDetails key={recipe.id} recipe={recipe} />
                     </Breadcrumb.Item>
                 )
             })}            

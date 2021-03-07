@@ -2,7 +2,6 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 
 function ViewRecipeDetails({recipe}) {
@@ -21,7 +20,7 @@ function ViewRecipeDetails({recipe}) {
     return(
         <Card key={recipe.id} onClick={getRecipeData} className='recipe-card'>
             <Card.Img src={`data:image/jpeg;base64,${data}`} alt='recipe image' />
-            <Card.Title>{recipe.name}</Card.Title>
+            <Card.Title className='recipe-name'>{recipe.name}</Card.Title>
         </Card>
     )
 }
