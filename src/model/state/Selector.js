@@ -4,6 +4,7 @@ export const selectUser = state => state.user;
 export const selectToken = state => state.token;
 export const selectLoggedStatus = state => state.loggedIn;
 
+export const selectSampleRecipes = state => state.sampleRecipes;
 export const selectRecipeList = state => state.recipeList;
 export const selectUserRecipeList = state => state.userRecipeList;
 export const selectRecipeData = state => state.recipeData;
@@ -11,6 +12,8 @@ export const selectNewRecipeId = state => state.newRecipeId;
 export const selectIngredientsData = state => state.ingredientsData;
 export const selectInstructionsData = state => state.instructionsData;
 export const searchResults = state => state.searchResults;
+export const selectConveyorStatus = state => state.conveyorStatus;
+export const selectConveyorIncrementStatus = state => state.conveyorIncrementStatus;
 
 export const selectDestination = state => state.destination;
 

@@ -16,7 +16,6 @@ function RecipeInfo() {
     const history = useHistory();
     const data = recipe.image;
     const recipeId = recipe.id || StorageHandler.getRecipeId();
-    console.log('instructions: ',instructions)
 
     // whenever the component loads, it needs recipe info
     useEffect(async () => {

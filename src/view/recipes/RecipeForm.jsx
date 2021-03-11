@@ -6,10 +6,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import RecipeFormIngredients from './RecipeFormIngredients.jsx';
 import RecipeFormInstructions from './RecipeFormInstructions.jsx';
 
-import UserController from '../../controller/UserController.js';
 import RecipeController from '../../controller/RecipeController.js';
 import imageDefault from '../../images_static/plate-utensils.jpeg';
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
+import StorageHelper from '../../helpers/functions/storageHandler.js';
 import { 
     selectUser, 
     selectRecipeData, 
@@ -43,9 +43,9 @@ function RecipeForm() {
     const [data, setData] = useState({
         name: recipeData.name || null,
         description: recipeData.description || null,
-        author: user.id
+        type: recipeData.type || null,
+        author: user.id || StorageHelper.getUserId()
     });
-
     
     useEffect(async () => {
         if (recipeId && !recipeData.id) {
@@ -140,6 +140,9 @@ function RecipeForm() {
                     <Form.Group controlId='name' as={Col}>
                         <Row className='input-field'>
                             <input id='name' placeholder={recipeId ? recipeData.name : 'recipe name'} type='text' name='name' onChange={handleRecipe} />
+                        </Row>
+                        <Row className='input-field'>
+                            <input id='type' placeholder={recipeId ? recipeData.type : 'recipe type'} type='text' name='type' onChange={handleRecipe} />
                         </Row>
                         <Row className='input-field'>
                             <textarea id='description' placeholder={recipeId ? recipeData.description : 'description'} type='text' name='description' onChange={handleRecipe} />    

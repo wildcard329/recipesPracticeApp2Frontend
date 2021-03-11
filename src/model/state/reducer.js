@@ -7,12 +7,15 @@ const initialState = {
     userData: {},
     ingredientsData: [],
     instructionsData: [],
+    sampleRecipes: [],
     recipeList: [],
     recipeData: {},
     ingredient: {},
     deleteIngredient: {},
     instruction: {},
     deleteInstruction: {},
+    conveyorStatus: {},
+    conveyorIncrementStatus: {},
     newRecipeId: null,
     searchResults: [],
     loggedIn: false,
@@ -75,6 +78,11 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 deleteInstruction: {...action.deleteInstruction}
             };
+        case Actions.SET_SAMPLE_RESULTS:
+            return {
+                ...state,
+                sampleRecipes: {...action.sampleRecipes}
+            }
         case Actions.GET_RECIPE_LIST:
             return {
                 ...state,

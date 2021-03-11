@@ -5,6 +5,10 @@ const IngredientsURL = new URL('http://localhost:5000/api/ingredients');
 const InstructionsURL = new URL('http://localhost:5000/api/instructions');
 
 class RecipeServices {
+    async browseRecipes(id) {
+        const response = await axiosWithAuth().get(`${RecipesURL}/${id}/browse`)
+        return response.data;
+    }
     async getRecipeList() {
         const response = await axiosWithAuth().get(`${RecipesURL}/all`);
         return response.data;

@@ -22,7 +22,7 @@
   display: none;
 }
 
-.error-field {
+.error {
   color: red;
 }
 
@@ -96,14 +96,22 @@
 .recipe-list {
   width: 90%;
   margin: 2% 5%;
-  display: flex;
-  flex-wrap: wrap;
   background-color: #dcdcdc;
 }
 
-.recipe-lists .recipe-list .breadcrumb {
-  flex-wrap: nowrap;
+.reciepe-lists .recipe-list {
+  width: 90%;
+}
+
+/* .recipe-lists .recipe-list .row {
+  white-space: nowrap;
   overflow-x: scroll;
+} */
+
+.single-list .recipe-list .row {
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-gap: 1px;
 }
 
 .list-header {
@@ -140,17 +148,19 @@
   margin: 1%;
 }
 
-.recipe-card {
-  margin: 2%;
+.col .recipe-card {
+  margin: 1%;
   border: 3px solid gray;
   border-radius: 5%;
-  padding: 3%;
+  padding: 1%;
   background-color: white;
   overflow: hidden;
+  width: 215px;
+  height: 145px;
 }
 
 .recipe-card:hover {
-  border: 4px solid lightblue;
+  border: 3px solid lightblue;
   cursor: pointer;
 }
 
@@ -181,3 +191,38 @@
   text-align: right;
 }
 
+.conveyor-system {
+  width: min-content;
+}
+
+.conveyor {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.green-disabled {
+  background-color: darkgreen;
+}
+
+.green-selectable {
+  background-color: lime;
+}
+
+.blue-disabled {
+  background-color: darkblue;
+}
+
+.blue-selectable {
+  background-color: lightblue;
+}
+
+.red-disabled {
+  background-color: darkred;
+}
+
+.red-selectable {
+  background-color: red;
+}

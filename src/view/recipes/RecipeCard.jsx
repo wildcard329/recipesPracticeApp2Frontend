@@ -1,20 +1,20 @@
 import React from 'react';
-import { Breadcrumb } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import ViewRecipeDetails from './ViewRecipeDetails.jsx';
 
 function RecipeCard({recipes}) {
     return(
         <div>
-            <Breadcrumb className='recipe-list'>
+            <Row className='recipe-list'>
             {recipes && recipes.map(recipe => {
                 return(
-                    <Breadcrumb.Item>
+                    <Col>
                         <ViewRecipeDetails key={recipe.id} recipe={recipe} />
-                    </Breadcrumb.Item>
+                    </Col>
                 )
             })}            
-            </Breadcrumb>
+            </Row>
         </div>
     )
 }

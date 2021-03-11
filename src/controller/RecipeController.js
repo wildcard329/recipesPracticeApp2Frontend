@@ -3,6 +3,10 @@ import * as Action from '../model/state/Action.js';
 import RecipeServices from '../model/services/RecipeServices.js';
 
 class RecipeController {
+    async browseRecipes(id) {
+        const sampleRecipes = await RecipeServices.browseRecipes(id);
+        store.dispatch(Action.setSampleResults(sampleRecipes));
+    }
     async getRecipeList() {
         const recipeList = await RecipeServices.getRecipeList();
         store.dispatch(Action.getRecipeList(recipeList));
@@ -36,6 +40,15 @@ class RecipeController {
         const searchResults = await RecipeServices.sendSearchQuery(search);
         store.dispatch(Action.setSearchResults(searchResults));
     };
+    async relayStart({start, list}) {
+        store.dispatch(Action.setConveyor({start, list}));
+    };
+    async relayStop({start, list}) {
+        store.dispatch(Action.setConveyor({start, list}));
+    };
+    async relayIncrement({incrementing, list}) {
+        store.dispatch(Action.setConveyorIncrement({incrementing, list}));
+    }
 };
 
 export default new RecipeController();

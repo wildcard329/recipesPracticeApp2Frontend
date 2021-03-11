@@ -24,20 +24,20 @@ function SingleRecipeList() {
             default:
                 return;
             }
-            }, [id]);
+        }, [id, list]);
         
     return(
         <div>
             {list === 'all' ? 
-                <div>
+                <div className='single-list'>
                     <RecipeCard recipes={recipes} />
                 </div>
             : list === 'user' ?
-                <div>
+                <div className='single-list'>
                     <RecipeCard recipes={userRecipes} />
                 </div>
             :
-                <h2>
+                <h2 className='error'>
                     Error loading content
                 </h2>
             }
