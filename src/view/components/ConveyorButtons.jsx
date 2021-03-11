@@ -5,7 +5,6 @@ function ConveyorButtons({list}) {
     const [start, setStart] = useState(false);
     const [visibleArr, setVisibleArr] = useState(5);
     const [incrementing, setIncrementing] = useState(false);
-    console.log('Why is this not getting rendered?')
 
     const startConveyor = () => {
         RecipeController.relayStart({start, list})

@@ -1,21 +1,27 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
-import ViewRecipeDetails from './ViewRecipeDetails.jsx';
+import RecipeController from '../../controller/RecipeController.js';
 
-function RecipeCard({recipes}) {
+function RecipeCard({recipe}) {
+    const data = recipe.image
+    const recipeId = recipe.id
+    const history = useHistory();
+
+    const getRecipeData = async e => {
+        e.preventDefault();
+        await RecipeController.getRecipeData(recipe.id);
+        await RecipeController.getRecipeIngredients(recipe.id);
+        await RecipeController.getRecipeInstructions(recipe.id);
+        history.push(`/recipe/${recipeId}/info`);
+    };
+
     return(
-        <div>
-            <Row className='recipe-list'>
-            {recipes && recipes.map(recipe => {
-                return(
-                    <Col>
-                        <ViewRecipeDetails key={recipe.id} recipe={recipe} />
-                    </Col>
-                )
-            })}            
-            </Row>
-        </div>
+        <Card key={recipe.id} onClick={getRecipeData} className='recipe-card'>
+            <Card.Img src={`data:image/jpeg;base64,${data}`} alt='recipe image' />
+            <Card.Title className='recipe-name'>{recipe.name}</Card.Title>
+        </Card>
     )
 }
 

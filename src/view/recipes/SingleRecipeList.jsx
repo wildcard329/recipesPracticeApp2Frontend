@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
 import { selectRecipeList, selectUserData, selectUserRecipeList } from '../../model/state/Selector.js';
-import RecipeCard from './RecipeCard.jsx';
+import RecipeCard from './RecipeMapper.jsx';
 
 function SingleRecipeList() {
     const id = useSelector(selectUserData).id;
@@ -13,14 +13,16 @@ function SingleRecipeList() {
     const path = useLocation().pathname;
     const [list, setList] = useState(null);
     
-    useEffect(() => {
+    useEffect(async () => {
         switch (path) {
             case '/recipes/all':
-                setList('all')
-                return RecipeController.getRecipeList();
+                await RecipeController.getRecipeList();
+                setList(recipes)
+                break;
             case '/recipes/user':
-                setList('user');
-                return RecipeController.getUserRecipeList(id);
+                await RecipeController.getUserRecipeList(id);
+                setList(userRecipes);
+                break;    
             default:
                 return;
             }
@@ -28,19 +30,9 @@ function SingleRecipeList() {
         
     return(
         <div>
-            {list === 'all' ? 
-                <div className='single-list'>
-                    <RecipeCard recipes={recipes} />
-                </div>
-            : list === 'user' ?
-                <div className='single-list'>
-                    <RecipeCard recipes={userRecipes} />
-                </div>
-            :
-                <h2 className='error'>
-                    Error loading content
-                </h2>
-            }
+            <div className='single-list'>
+                <RecipeCard recipes={list} />
+            </div>
         </div>
     )
 }
