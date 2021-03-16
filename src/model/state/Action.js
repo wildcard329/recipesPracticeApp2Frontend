@@ -46,7 +46,6 @@ export const SET_NEW_RECIPE_ID = 'SET_NEW_RECIPE_ID';
 export const SET_EDIT_DATA = 'SET_EDIT_DATA';
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 export const SET_CONVEYOR = 'SET_CONVEYOR';
-export const SET_CONVEYOR_INCREMENT = 'SET_CONVEYOR_INCREMENT';
 
 export const setSampleResults = sampleRecipes => {
     return { type: SET_SAMPLE_RESULTS, sampleRecipes }
@@ -82,10 +81,6 @@ export const setSearchResults = searchResults => {
 
 export const setConveyor = conveyorStatus => {
     return { type: SET_CONVEYOR, conveyorStatus };
-};
-
-export const setConveyorIncrement = conveyorIncrementStatus => {
-    return { type: SET_CONVEYOR_INCREMENT, conveyorIncrementStatus };
 };
 
 // form

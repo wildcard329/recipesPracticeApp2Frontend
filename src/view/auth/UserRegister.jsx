@@ -19,6 +19,7 @@ function UserRegister() {
 
     const submitRegistration = e => {
         e.preventDefault();
+        console.log('user: ',user)
         UserController.registerNewUser(user);
         history.push('/auth/login');
     };
@@ -31,13 +32,13 @@ function UserRegister() {
         <div className='auth-form'>
             <Form>
                 <Form.Group controlId='username'>
-                    <input id='username' type='text' placeholder='username' onChange={enterUser} />
+                    <input id='username' name='username' type='text' placeholder='username' onChange={enterUser} />
                 </Form.Group>
                 <Form.Group controlId='password'>
-                    <input id='password' type='password' placeholder='password' onChange={enterUser} />
+                    <input id='password' name='password' type='password' placeholder='password' onChange={enterUser} />
                 </Form.Group>
                 <Form.Group controlId='email'>
-                    <input id='email' type='email' placeholder='email' onChange={enterUser} />
+                    <input id='email' name='email' type='email' placeholder='email' onChange={enterUser} />
                 </Form.Group>
                 <Form.Group className='auth-btn-group'>
                     <Button className='btn btn-primary' onClick={submitRegistration}>Submit</Button>

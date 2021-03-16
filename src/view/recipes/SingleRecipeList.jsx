@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
 import { selectRecipeList, selectUserData, selectUserRecipeList } from '../../model/state/Selector.js';
-import RecipeCard from './RecipeMapper.jsx';
+import RecipeMapper from './RecipeMapper.jsx';
 
 function SingleRecipeList() {
     const id = useSelector(selectUserData).id;
@@ -29,10 +29,8 @@ function SingleRecipeList() {
         }, [id, list]);
         
     return(
-        <div>
-            <div className='single-list'>
-                <RecipeCard recipes={list} />
-            </div>
+        <div className='single-list'>
+            <RecipeMapper recipes={list} />
         </div>
     )
 }

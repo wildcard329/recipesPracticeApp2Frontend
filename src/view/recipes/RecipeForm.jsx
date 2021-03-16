@@ -102,6 +102,7 @@ function RecipeForm() {
         const id = recipeId;
         const recipe = new FormData();
         recipe.append('name', data.name);
+        recipe.append('type', data.type);
         recipe.append('description', data.description);
         recipe.append('author',data.author);
         recipe.append('file', file);

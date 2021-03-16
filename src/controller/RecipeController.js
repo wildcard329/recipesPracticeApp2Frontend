@@ -40,15 +40,10 @@ class RecipeController {
         const searchResults = await RecipeServices.sendSearchQuery(search);
         store.dispatch(Action.setSearchResults(searchResults));
     };
-    async relayStart({start, list}) {
-        store.dispatch(Action.setConveyor({start, list}));
+    async relayStatus(activeStatus) {
+        console.log('active: ',activeStatus)
+        store.dispatch(Action.setConveyor(activeStatus));
     };
-    async relayStop({start, list}) {
-        store.dispatch(Action.setConveyor({start, list}));
-    };
-    async relayIncrement({incrementing, list}) {
-        store.dispatch(Action.setConveyorIncrement({incrementing, list}));
-    }
 };
 
 export default new RecipeController();

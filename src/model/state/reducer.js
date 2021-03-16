@@ -14,8 +14,7 @@ const initialState = {
     deleteIngredient: {},
     instruction: {},
     deleteInstruction: {},
-    conveyorStatus: {},
-    conveyorIncrementStatus: {},
+    conveyorStatus: false,
     newRecipeId: null,
     searchResults: [],
     loggedIn: false,
@@ -82,6 +81,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 sampleRecipes: {...action.sampleRecipes}
+            }
+        case Actions.SET_CONVEYOR:
+            return {
+                ...state,
+                conveyorStatus: action.conveyorStatus
             }
         case Actions.GET_RECIPE_LIST:
             return {

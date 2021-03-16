@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
+import UserController from "../../controller/UserController.js";
 import { selectSampleRecipes } from '../../model/state/Selector.js';
 import UserHelper from '../../helpers/functions/storageHandler.js';
-import UserController from "../../controller/UserController.js";
 
 import RecipeMapper from "./RecipeMapper.jsx";
 
@@ -13,12 +13,12 @@ function RecipeList() {
     const history = useHistory();
     const userId = UserHelper.getUserId();
     const samples = useSelector(selectSampleRecipes);
-    const filters = samples[0];
-    const recipes = samples[1];
-    const userRecipes = samples[2];
-    const filter1 = samples[3];
-    const filter2 = samples[4];
-    const filter3 = samples[5];
+    const filters = samples && samples[0];
+    const recipes = samples && samples[1];
+    const userRecipes = samples && samples[2];
+    const filter1 = samples && samples[3];
+    const filter2 = samples && samples[4];
+    const filter3 = samples && samples[5];
    
     const setUserRecipes = () => {
         UserController.getUserData(userId);
