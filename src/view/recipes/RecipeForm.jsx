@@ -25,8 +25,6 @@ function RecipeForm() {
     const history = useHistory();
     const user = useSelector(selectUser);
     const recipeData = useSelector(selectRecipeData);
-    const ingredientsData = useSelector(selectIngredientsData);
-    const instructionsData = useSelector(selectInstructionsData);
     const { recipeId } = useParams();
     const ingredient = useSelector(selectIngredient);
     const deleteIngredient = useSelector(selectDeleteIngredient);
@@ -36,10 +34,10 @@ function RecipeForm() {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [imgPreview, setImgPreview] = useState('');
-    const amountOfIngredients = ingredientsData.length || 5;
-    const amountOfInstructions = instructionsData.length || 3;
-    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? ingredientsData : Array(amountOfIngredients).fill({})))
-    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? instructionsData : Array(amountOfInstructions).fill({})));
+    const amountOfIngredients = recipeData.ingredients.length || 5;
+    const amountOfInstructions = recipeData.instructions.length || 3;
+    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})))
+    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
         name: recipeData.name || null,
         description: recipeData.description || null,
@@ -50,12 +48,6 @@ function RecipeForm() {
     useEffect(async () => {
         if (recipeId && !recipeData.id) {
             await RecipeController.getRecipeData(recipeId)
-            await RecipeController.getRecipeIngredients(recipeId)
-            await RecipeController.getRecipeInstructions(recipeId)
-        }
-        if (recipeData.id && !ingredients && !instructions) {
-            setIngredients(FormHelper.convertArrToHtml(ingredientsData));
-            setInstructions(FormHelper.convertArrToHtml(instructionsData));
         }
     }, [])
 
@@ -107,6 +99,8 @@ function RecipeForm() {
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
+        recipe.append('ingredients', ingredients);
+        recipe.append('instructions', instructions);
         {recipeId ? 
             await RecipeController.editRecipeData({recipe, ingredients, instructions}, id) 
             : 

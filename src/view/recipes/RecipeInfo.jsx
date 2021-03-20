@@ -10,19 +10,20 @@ import StorageHandler from '../../helpers/functions/storageHandler.js';
 
 function RecipeInfo() {
     const recipe = useSelector(selectRecipeData);
-    const ingredients = useSelector(selectIngredientsData);
-    const instructions = useSelector(selectInstructionsData);
+    // const ingredients = useSelector(selectIngredientsData);
+    // const instructions = useSelector(selectInstructionsData);
     const userId = UserHelper.getUserId();
     const history = useHistory();
     const data = recipe.image;
     const recipeId = recipe.id || StorageHandler.getRecipeId();
+    console.log('recipe: ',recipe);
 
     // whenever the component loads, it needs recipe info
     useEffect(async () => {
         if (!recipe.id) {
             await RecipeController.getRecipeData(recipeId);
-            await RecipeController.getRecipeIngredients(recipeId);
-            await RecipeController.getRecipeInstructions(recipeId);
+            // await RecipeController.getRecipeIngredients(recipeId);
+            // await RecipeController.getRecipeInstructions(recipeId);
         } else {
             StorageHandler.setRecipeId(recipeId);
         }
@@ -64,14 +65,14 @@ function RecipeInfo() {
                     </Row>
                     <Row className='card-section'>
                         <ul>
-                            {ingredients && ingredients.map(ingredient => {
+                            {recipe.ingredients && recipe.ingredients.map(ingredient => {
                                 return <li className='list-item'>{ingredient.name}</li>
                             })}    
                         </ul>    
                     </Row>
                     <Row className='card-section'>
                         <ol>
-                            {instructions && instructions.map(instruction => {
+                            {recipe.instructions && recipe.instructions.map(instruction => {
                                 return <li className='list-item'>{instruction.name}</li>
                             })}  
                         </ol>    

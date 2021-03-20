@@ -4,45 +4,81 @@ import RecipeServices from '../model/services/RecipeServices.js';
 
 class RecipeController {
     async browseRecipes(id) {
-        const sampleRecipes = await RecipeServices.browseRecipes(id);
-        store.dispatch(Action.setSampleResults(sampleRecipes));
+        try {
+            const sampleRecipes = await RecipeServices.browseRecipes(id);
+            store.dispatch(Action.setSampleResults(sampleRecipes));
+        } catch (err) {
+            console.log(err);
+        }
     }
     async getRecipeList() {
-        const recipeList = await RecipeServices.getRecipeList();
-        store.dispatch(Action.getRecipeList(recipeList));
+        try {
+            const recipeList = await RecipeServices.getRecipeList();
+            store.dispatch(Action.getRecipeList(recipeList));
+        } catch (err) {
+            console.log(err);
+        };
     };
     async getUserRecipeList(id) {
-        const userRecipeList = await RecipeServices.getUserRecipeList(id);
-        store.dispatch(Action.getUserRecipeList(userRecipeList));
+        try {
+            const userRecipeList = await RecipeServices.getUserRecipeList(id);
+            store.dispatch(Action.getUserRecipeList(userRecipeList));
+        } catch (err) {
+            console.log(err);
+        };
     };
     async getRecipeData(id) {
-        const recipeData = await RecipeServices.getRecipeData(id);
-        store.dispatch(Action.getRecipeData(recipeData));
+        try {
+            const recipeData = await RecipeServices.getRecipeData(id);
+            store.dispatch(Action.getRecipeData(recipeData));
+        } catch (err) {
+            console.log(err);
+        };
     };
     async getRecipeIngredients(id) {
-        const ingredientsData = await RecipeServices.getRecipeIngredients(id);
-        store.dispatch(Action.getRecipeIngredients(ingredientsData));
+        try {
+            const ingredientsData = await RecipeServices.getRecipeIngredients(id);
+            store.dispatch(Action.getRecipeIngredients(ingredientsData));
+        } catch (err) {
+            console.log(err);
+        };
     };
     async getRecipeInstructions(id) {
-        const instructionsData = await RecipeServices.getRecipeInstructions(id);
-        store.dispatch(Action.getRecipeInstructions(instructionsData));
+        try {
+            const instructionsData = await RecipeServices.getRecipeInstructions(id);
+            store.dispatch(Action.getRecipeInstructions(instructionsData));
+        } catch (err) {
+            console.log(err);
+        }
     };
     async addRecipeData({recipe, ingredients, instructions}) {
-        await RecipeServices.addRecipeData({recipe, ingredients, instructions});
+        try {
+            await RecipeServices.addRecipeData({recipe, ingredients, instructions});
+        } catch (err) {
+            console.log(err);
+        };
     };
     async editRecipeData({recipe, ingredients, instructions}, id) {
-        await RecipeServices.editRecipeData({recipe, ingredients, instructions}, id);
+        try {
+            await RecipeServices.editRecipeData({recipe, ingredients, instructions}, id);
+        } catch (err) {
+            console.log(err);
+        };
     };
     async deleteRecipe(id) {
-        await RecipeServices.deleteRecipe(id);
+        try {
+            await RecipeServices.deleteRecipe(id);
+        } catch (err) {
+            console.log(err);
+        };
     };
     async sendSearchQuery(search) {
-        const searchResults = await RecipeServices.sendSearchQuery(search);
-        store.dispatch(Action.setSearchResults(searchResults));
-    };
-    async relayStatus(activeStatus) {
-        console.log('active: ',activeStatus)
-        store.dispatch(Action.setConveyor(activeStatus));
+        try {
+            const searchResults = await RecipeServices.sendSearchQuery(search);
+            store.dispatch(Action.setSearchResults(searchResults));
+        } catch (err) {
+            console.log(err);
+        };
     };
 };
 

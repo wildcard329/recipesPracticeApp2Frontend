@@ -8,7 +8,7 @@ class RecipeServices {
     async browseRecipes(id) {
         const response = await axiosWithAuth().get(`${RecipesURL}/${id}/browse`)
         return response.data;
-    }
+    };
     async getRecipeList() {
         const response = await axiosWithAuth().get(`${RecipesURL}/all`);
         return response.data;
