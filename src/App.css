@@ -169,10 +169,11 @@
 .recipe-card .card-img {
   width: 200px;
   height: 100px;
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .recipe-card .recipe-name {
+  /* margin-top: -10%; */
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -5,7 +5,8 @@ class formFunctions {
             return {
                 htmlId: inputArr?.htmlId || this.generateId(),
                 name: item?.name || '',
-                recipe: item?.recipe || null
+                recipe: item?.recipe || null,
+                serverId: item?.id || null
             };
         });
         return outputArr;

@@ -21,7 +21,6 @@ class UserService {
     };
     async loginUser(user) {
         const response = await axios.post(`${AuthURL}/login`, user);
-        console.log('response: ',response.data)
         return response.data;
     };
     async getLoggedInUser(id) {

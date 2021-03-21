@@ -18,7 +18,8 @@ const initialState = {
     newRecipeId: null,
     searchResults: [],
     loggedIn: false,
-    destination: null
+    destination: null,
+    errorMessage: null
 };
 
 export const reducer = (state=initialState, action) => {
@@ -121,6 +122,11 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 destination: action.destination
+            };
+        case Actions.SET_ERROR_MESSAGE:
+            return {
+                ...state,
+                errorMessage: action.errorMessage
             };
         default:
             return state;

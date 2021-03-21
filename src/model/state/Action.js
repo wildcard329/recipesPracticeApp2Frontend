@@ -83,7 +83,9 @@ export const setConveyor = conveyorStatus => {
     return { type: SET_CONVEYOR, conveyorStatus };
 };
 
-// form
+// recipe form ingredients and instructions
+// data spread through multiple components
+// reducer is needed to centralize the data
 
 export const RELAY_INGREDIENT = 'RELAY_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
@@ -104,4 +106,12 @@ export const relayInstruction = instruction => {
 
 export const deleteInstruction = deleteInstruction => {
     return { type: DELETE_INSTRUCTION, deleteInstruction }; 
+};
+
+// error
+
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+
+export const setErrorMessage = errorMessage => {
+    return { type: SET_ERROR_MESSAGE, errorMessage };
 };

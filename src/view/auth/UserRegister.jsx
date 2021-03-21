@@ -19,7 +19,6 @@ function UserRegister() {
 
     const submitRegistration = e => {
         e.preventDefault();
-        console.log('user: ',user)
         UserController.registerNewUser(user);
         history.push('/auth/login');
     };

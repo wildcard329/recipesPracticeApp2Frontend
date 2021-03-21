@@ -8,7 +8,7 @@ class RecipeController {
             const sampleRecipes = await RecipeServices.browseRecipes(id);
             store.dispatch(Action.setSampleResults(sampleRecipes));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         }
     }
     async getRecipeList() {
@@ -16,7 +16,7 @@ class RecipeController {
             const recipeList = await RecipeServices.getRecipeList();
             store.dispatch(Action.getRecipeList(recipeList));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async getUserRecipeList(id) {
@@ -24,7 +24,7 @@ class RecipeController {
             const userRecipeList = await RecipeServices.getUserRecipeList(id);
             store.dispatch(Action.getUserRecipeList(userRecipeList));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async getRecipeData(id) {
@@ -32,7 +32,7 @@ class RecipeController {
             const recipeData = await RecipeServices.getRecipeData(id);
             store.dispatch(Action.getRecipeData(recipeData));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async getRecipeIngredients(id) {
@@ -40,7 +40,7 @@ class RecipeController {
             const ingredientsData = await RecipeServices.getRecipeIngredients(id);
             store.dispatch(Action.getRecipeIngredients(ingredientsData));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async getRecipeInstructions(id) {
@@ -48,28 +48,28 @@ class RecipeController {
             const instructionsData = await RecipeServices.getRecipeInstructions(id);
             store.dispatch(Action.getRecipeInstructions(instructionsData));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         }
     };
     async addRecipeData({recipe, ingredients, instructions}) {
         try {
             await RecipeServices.addRecipeData({recipe, ingredients, instructions});
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async editRecipeData({recipe, ingredients, instructions}, id) {
         try {
             await RecipeServices.editRecipeData({recipe, ingredients, instructions}, id);
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async deleteRecipe(id) {
         try {
             await RecipeServices.deleteRecipe(id);
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
     async sendSearchQuery(search) {
@@ -77,7 +77,7 @@ class RecipeController {
             const searchResults = await RecipeServices.sendSearchQuery(search);
             store.dispatch(Action.setSearchResults(searchResults));
         } catch (err) {
-            console.log(err);
+            store.dispatch(Action.setErrorMessage(err));
         };
     };
 };

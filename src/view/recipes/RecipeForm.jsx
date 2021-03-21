@@ -13,8 +13,6 @@ import StorageHelper from '../../helpers/functions/storageHandler.js';
 import { 
     selectUser, 
     selectRecipeData, 
-    selectIngredientsData, 
-    selectInstructionsData,
     selectIngredient,
     selectDeleteIngredient,
     selectInstruction,
@@ -34,8 +32,8 @@ function RecipeForm() {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
     const [imgPreview, setImgPreview] = useState('');
-    const amountOfIngredients = recipeData.ingredients.length || 5;
-    const amountOfInstructions = recipeData.instructions.length || 3;
+    const amountOfIngredients = recipeData.ingredients?.length || 5;
+    const amountOfInstructions = recipeData.instructions?.length || 3;
     const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})))
     const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
@@ -99,8 +97,17 @@ function RecipeForm() {
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
-        recipe.append('ingredients', ingredients);
-        recipe.append('instructions', instructions);
+        // recipe.append('ingredients', ingredients);
+        // recipe.append('instructions', instructions);
+        ingredients.forEach(ingredient => {
+            console.log('name: ',ingredient.name);
+            const ingredientName = ingredient.name
+            recipe.append('ingredients', ingredientName);
+        });
+        instructions.forEach(instruction => {
+            const instructionName = instruction.name;
+            recipe.append('instruction', instructionName);
+        });
         {recipeId ? 
             await RecipeController.editRecipeData({recipe, ingredients, instructions}, id) 
             : 
