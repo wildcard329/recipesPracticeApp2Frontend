@@ -34,37 +34,40 @@ function RecipeForm() {
     const [imgPreview, setImgPreview] = useState('');
     const amountOfIngredients = recipeData.ingredients?.length || 5;
     const amountOfInstructions = recipeData.instructions?.length || 3;
-    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})))
-    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
+    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients || StorageHelper.retrieveIngredients() : Array(amountOfIngredients).fill({})));
+    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions || StorageHelper.retrieveInstructions() : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
-        name: recipeData.name || null,
-        description: recipeData.description || null,
-        type: recipeData.type || null,
+        name: recipeData.name || StorageHelper.retrieveName() || null,
+        description: recipeData.description || StorageHelper.retrieveDescription() || null,
+        type: recipeData.type || StorageHelper.retrieveType() || null,
         author: user.id || StorageHelper.getUserId()
     });
-    
-    useEffect(async () => {
-        if (recipeId && !recipeData.id) {
-            await RecipeController.getRecipeData(recipeId)
-        }
-    }, [])
+    // console.log(StorageHelper.packStorageList(recipeData.ingredients))
+    console.log(StorageHelper.retrieveIngredients())
 
+    useEffect(async () => {
+        if (recipeId) {
+            StorageHelper.storeRecipe(recipeData);
+        };
+        if (recipeId && !recipeData.id) {
+            await RecipeController.getRecipeData(recipeId);
+        };
+    }, []);
     useEffect(() => {
         setIngredients(FormHelper.setListItem(ingredient, ingredients))
         setInstructions(FormHelper.setListItem(instruction, instructions))
-    }, [ingredient, instruction])
-    
+    }, [ingredient, instruction])    
     useEffect(() => {
         setIngredients(FormHelper.removeListItem(deleteIngredient, ingredients))
         setInstructions(FormHelper.removeListItem(deleteInstruction, instructions))
     }, [deleteIngredient, deleteInstruction])
 
     const incrementRecipeIngredientsArr = () => {
-        ingredients.push({});
+        ingredients?.push({});
         setIngredients(FormHelper.convertArrToHtml(ingredients))
     };
     const incrementRecipeInstructionsArr = () => {
-        instructions.push({});
+        instructions?.push({});
         setInstructions(FormHelper.convertArrToHtml(instructions))
     };
 
@@ -97,16 +100,13 @@ function RecipeForm() {
         recipe.append('author',data.author);
         recipe.append('file', file);
         recipe.append('filename', filename);
-        // recipe.append('ingredients', ingredients);
-        // recipe.append('instructions', instructions);
         ingredients.forEach(ingredient => {
-            console.log('name: ',ingredient.name);
             const ingredientName = ingredient.name
             recipe.append('ingredients', ingredientName);
         });
         instructions.forEach(instruction => {
             const instructionName = instruction.name;
-            recipe.append('instruction', instructionName);
+            recipe.append('instructions', instructionName);
         });
         {recipeId ? 
             await RecipeController.editRecipeData({recipe, ingredients, instructions}, id) 
@@ -117,7 +117,7 @@ function RecipeForm() {
     };
     return(
         <div className='create-recipe'>
-            {recipeId ? <h2>Edit {data.name}</h2> : <h2>Add New Recipe</h2>}
+            {recipeId ? <h2>Edit {recipeData.name}</h2> : <h2>Add New Recipe</h2>}
             <Form>
                 <Row className='form-row'>
                     {imgPreview ? 

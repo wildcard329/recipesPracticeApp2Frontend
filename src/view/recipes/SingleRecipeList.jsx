@@ -4,10 +4,12 @@ import { useLocation } from 'react-router-dom';
 
 import RecipeController from '../../controller/RecipeController.js';
 import { selectRecipeList, selectUserData, selectUserRecipeList } from '../../model/state/Selector.js';
+import StorageHandler from '../../helpers/functions/storageHandler.js';
+
 import RecipeMapper from './RecipeMapper.jsx';
 
 function SingleRecipeList() {
-    const id = useSelector(selectUserData).id;
+    const id = useSelector(selectUserData).id || StorageHandler.getUserId();
     const recipes = useSelector(selectRecipeList);
     const userRecipes = useSelector(selectUserRecipeList);
     const path = useLocation().pathname;

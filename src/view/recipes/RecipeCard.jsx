@@ -12,8 +12,6 @@ function RecipeCard({recipe}) {
     const getRecipeData = async e => {
         e.preventDefault();
         await RecipeController.getRecipeData(recipe.id);
-        await RecipeController.getRecipeIngredients(recipe.id);
-        await RecipeController.getRecipeInstructions(recipe.id);
         history.push(`/recipe/${recipeId}/info`);
     };
 

@@ -29,10 +29,8 @@ class RecipeServices {
         const response = await axiosWithAuth().get(`${InstructionsURL}/recipe/${id}`);
         return response.data;
     }
-    async addRecipeData({recipe, ingredients, instructions}) {
-        const response = await axiosWithAuth().post(`${RecipesURL}/create`, recipe);
-        await axiosWithAuth().post(`${IngredientsURL}/recipe/${response.data.recipeId}/create`, ingredients);
-        await axiosWithAuth().post(`${InstructionsURL}/recipe/${response.data.recipeId}/create`, instructions);
+    async addRecipeData(recipe) {
+        await axiosWithAuth().post(`${RecipesURL}/create`, recipe)
     };
     async editRecipeData({recipe, ingredients, instructions}, id) {
         await axiosWithAuth().put(`${RecipesURL}/${id}`, recipe);

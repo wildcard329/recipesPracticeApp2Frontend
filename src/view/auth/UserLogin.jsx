@@ -9,12 +9,12 @@ import { selectToken } from '../../model/state/Selector.js';
 
 function UserLogin() {
     const history = useHistory();
-    const token = useSelector(selectToken)
+    const token = useSelector(selectToken);
     const [user, setUser] = useState({
         username: '',
         password: '',
         last_login: new Date()
-    })
+    });
     useEffect(() => {
         token ? 
             UserHelper.setToken(token)
@@ -24,7 +24,7 @@ function UserLogin() {
 
     const onChangeCredentials = e => {
         setUser({...user, [e.target.name]: e.target.value});
-    }
+    };
 
     const submitLogin = async e => {
         e.preventDefault();
