@@ -47,7 +47,6 @@ class CurrentUser {
             storageArr.push(item.name.concat('***'));
         });
         const storageString = storageArr.toString();
-        console.log('arr: ',storageArr,'\nstring: ',storageString)
         return storageString;
     }
     static retrieveName() {
@@ -76,7 +75,7 @@ class CurrentUser {
         instructions.map(instruction => {
             instructionsArr.push({name: instruction})
         })
-        return instructions;
+        return instructionsArr;
     };
 };
 

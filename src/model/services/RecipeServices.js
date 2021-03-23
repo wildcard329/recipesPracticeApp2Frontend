@@ -29,7 +29,7 @@ class RecipeServices {
         const response = await axiosWithAuth().get(`${InstructionsURL}/recipe/${id}`);
         return response.data;
     }
-    async addRecipeData(recipe) {
+    async addRecipeData({recipe}) {
         await axiosWithAuth().post(`${RecipesURL}/create`, recipe)
     };
     async editRecipeData({recipe, ingredients, instructions}, id) {

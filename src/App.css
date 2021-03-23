@@ -34,10 +34,9 @@
   margin: 0 auto;
   padding: 10%;
   background-color: #dcdcdc;
-  background-image: url('./images_static/recipe.jpeg');
+  background-image: url('./images_static/mycookbook.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: .8;
 }
 
 .auth-btn-group {

@@ -34,6 +34,7 @@ function RecipeForm() {
     const [imgPreview, setImgPreview] = useState('');
     const amountOfIngredients = recipeData.ingredients?.length || 5;
     const amountOfInstructions = recipeData.instructions?.length || 3;
+    // the instructions and ingredients are created from the server data, if the page is reloaded, they are grabbed from local storage instead; React failed to set and render state after page reload
     const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients || StorageHelper.retrieveIngredients() : Array(amountOfIngredients).fill({})));
     const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions || StorageHelper.retrieveInstructions() : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
@@ -42,11 +43,12 @@ function RecipeForm() {
         type: recipeData.type || StorageHelper.retrieveType() || null,
         author: user.id || StorageHelper.getUserId()
     });
-    // console.log(StorageHelper.packStorageList(recipeData.ingredients))
-    console.log(StorageHelper.retrieveIngredients())
 
     useEffect(async () => {
-        if (recipeId) {
+        if (recipeId && recipeData.id) {
+            // had a bug where the ingredients and instructions were not rendering,
+            // this function saves them to local storage so the app still has the data 
+            // on page reload
             StorageHelper.storeRecipe(recipeData);
         };
         if (recipeId && !recipeData.id) {

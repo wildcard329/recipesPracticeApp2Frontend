@@ -16,14 +16,13 @@ import UserLogin from '../view/auth/UserLogin.jsx';
 import UserRegister from '../view/auth/UserRegister.jsx';
 import UserDashboard from '../view/users/UserDashboard.jsx';
 import UserProfile from '../view/users/UserProfile.jsx';
-
-import { AppNavigator } from './AppNavigator.jsx';
+import AppNavBar from './AppNavBar.jsx';
 
 function AppRouter() {
     return(
         <div>
             <UserDashboard />
-            <AppNavigator />
+            {/* <AppNavBar /> */}
             <Switch>
                 <Route exact path='/' component={UserLogin} />
                 <Route path='/auth/login' component={UserLogin} />
