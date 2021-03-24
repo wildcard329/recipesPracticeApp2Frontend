@@ -1,7 +1,7 @@
 class formFunctions {
     static convertArrToHtml(inputArr) {
         // this maps an array to html objects
-        console.log('input: ',inputArr)
+        // console.log('input: ',inputArr)
         const outputArr = inputArr?.map(item => {
             return {
                 htmlId: inputArr?.htmlId || this.generateId(),
@@ -10,6 +10,7 @@ class formFunctions {
                 serverId: item?.id || null
             };
         });
+        // console.log('output: ',outputArr);
         return outputArr;
     };
     static editListItem(item, value) {

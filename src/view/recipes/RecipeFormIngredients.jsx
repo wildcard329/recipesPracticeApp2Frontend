@@ -5,6 +5,7 @@ import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import FormController from '../../controller/FormController.js';
 
 function RecipeFormIngredients({recipeIngredient}) {
+    console.log('ingredient: ',recipeIngredient);
   
     const handleIngredient = e => {
         const editedIngredient = FormHelper.editListItem(recipeIngredient, e.target.value)

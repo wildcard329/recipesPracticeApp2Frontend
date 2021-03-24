@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Button, Card, CardImg, Row, Col } from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 import RecipeFormIngredients from './RecipeFormIngredients.jsx';
 import RecipeFormInstructions from './RecipeFormInstructions.jsx';
@@ -24,10 +24,12 @@ function RecipeForm() {
     const user = useSelector(selectUser);
     const recipeData = useSelector(selectRecipeData);
     const { recipeId } = useParams();
+    const path = useLocation().pathname;
     const ingredient = useSelector(selectIngredient);
     const deleteIngredient = useSelector(selectDeleteIngredient);
     const instruction = useSelector(selectInstruction);
     const deleteInstruction = useSelector(selectDeleteInstruction);
+    // console.log('data: \n', recipeData);
 
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('');
@@ -35,26 +37,29 @@ function RecipeForm() {
     const amountOfIngredients = recipeData.ingredients?.length || 5;
     const amountOfInstructions = recipeData.instructions?.length || 3;
     // the instructions and ingredients are created from the server data, if the page is reloaded, they are grabbed from local storage instead; React failed to set and render state after page reload
-    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients || StorageHelper.retrieveIngredients() : Array(amountOfIngredients).fill({})));
-    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions || StorageHelper.retrieveInstructions() : Array(amountOfInstructions).fill({})));
+    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})));
+    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
     const [data, setData] = useState({
-        name: recipeData.name || StorageHelper.retrieveName() || null,
-        description: recipeData.description || StorageHelper.retrieveDescription() || null,
-        type: recipeData.type || StorageHelper.retrieveType() || null,
+        name: recipeData.name || null,
+        description: recipeData.description || null,
+        type: recipeData.type || null,
         author: user.id || StorageHelper.getUserId()
     });
 
-    useEffect(async () => {
-        if (recipeId && recipeData.id) {
-            // had a bug where the ingredients and instructions were not rendering,
-            // this function saves them to local storage so the app still has the data 
-            // on page reload
-            StorageHelper.storeRecipe(recipeData);
-        };
+    useEffect(async () => {    
         if (recipeId && !recipeData.id) {
             await RecipeController.getRecipeData(recipeId);
         };
     }, []);
+    useEffect(async () => {
+        if (recipeData.id) {
+            await setIngredients(FormHelper.convertArrToHtml(recipeData.ingredients));
+            await setInstructions(FormHelper.convertArrToHtml(recipeData.instructions));
+        } else {
+            await setIngredients(FormHelper.convertArrToHtml(Array(amountOfIngredients).fill({})));
+            await setInstructions(FormHelper.convertArrToHtml(Array(amountOfInstructions).fill({})));
+        }
+    }, [recipeData, path])
     useEffect(() => {
         setIngredients(FormHelper.setListItem(ingredient, ingredients))
         setInstructions(FormHelper.setListItem(instruction, instructions))
