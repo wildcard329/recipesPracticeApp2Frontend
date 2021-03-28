@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormControl } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -51,6 +51,12 @@ function UserLogin() {
                 </Form.Group>
             </Form>
         </form>
+        // <Form inline onClick={submitLogin}>
+        //     <FormControl onChange={onChangeCredentials} type='text' placholder='Username' name='username' className='mr-sm-2' />
+        //     <FormControl onChange={onChangeCredentials} type='text' placholder='Password' name='password' className='mr-sm-2' />
+        //     <Button type='submit' variant='outline-success'>Login</Button>
+        //     <Button variant='outline-success'>Register</Button>
+        // </Form>
     )
 }
 

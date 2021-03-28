@@ -1,8 +1,8 @@
 class formFunctions {
-    static convertArrToHtml(inputArr) {
+    static async convertArrToHtml(inputArr) {
         // this maps an array to html objects
         // console.log('input: ',inputArr)
-        const outputArr = inputArr?.map(item => {
+        const outputArr = await inputArr?.map(item => {
             return {
                 htmlId: inputArr?.htmlId || this.generateId(),
                 name: item?.name || '',

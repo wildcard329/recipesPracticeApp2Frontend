@@ -34,49 +34,6 @@ class CurrentUser {
     static removeRecipeId() {
         localStorage.removeItem('recipeId');
     };
-    static storeRecipe(recipe) {
-        localStorage.setItem('recipeName', recipe.name);
-        localStorage.setItem('recipeDescription', recipe.description);
-        localStorage.setItem('recipeType', recipe.type);
-        localStorage.setItem('recipeIngredients', this.packStorageList(recipe.ingredients));
-        localStorage.setItem('recipeInstructions', this.packStorageList(recipe.instructions));
-    };
-    static packStorageList(inputArr) {
-        let storageArr = [];
-        inputArr && inputArr.map(item => {
-            storageArr.push(item.name.concat('***'));
-        });
-        const storageString = storageArr.toString();
-        return storageString;
-    }
-    static retrieveName() {
-        const name = localStorage.getItem('recipeName');
-        return name;
-    };
-    static retrieveDescription() {
-        const description = localStorage.getItem('recipeDescription');
-        return description;
-    };
-    static retrieveType() {
-        const type = localStorage.getItem('recipeType');
-        return type;
-    };
-    static retrieveIngredients() {
-        const ingredients = localStorage.getItem('recipeIngredients').split('***');
-        let ingredientsArr = [];
-        ingredients.map(ingredient => {
-            ingredientsArr.push({name: ingredient})
-        })
-        return ingredientsArr;
-    };
-    static retrieveInstructions() {
-        const instructions = localStorage.getItem('recipeInstructions').split('***');
-        let instructionsArr = [];
-        instructions.map(instruction => {
-            instructionsArr.push({name: instruction})
-        })
-        return instructionsArr;
-    };
 };
 
 export default CurrentUser;

@@ -30,6 +30,11 @@ function RecipeInfo() {
         history.push('/recipes/browse');
     };
 
+    const clone = e => {
+        e.preventDefault();
+        console.log('cloned');
+    }
+
     const toEditRecipe = async () => {
         history.push(`/recipe/${recipeId}/edit`);
     };
@@ -80,7 +85,10 @@ function RecipeInfo() {
                     <Button className='btn btn-success' onClick={toEditRecipe}>Edit</Button> 
                     <Button className='btn btn-danger' onClick={deleteRecipe}>Delete</Button>
                 </div> 
-            : null}
+            : 
+            <div className='user-recipe-info'>
+                <Button onClick={clone}>Add to Cookbook</Button>
+            </div>}
         </div>
     )
 }

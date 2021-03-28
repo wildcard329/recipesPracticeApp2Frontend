@@ -24,7 +24,6 @@ function RecipeForm() {
     const user = useSelector(selectUser);
     const recipeData = useSelector(selectRecipeData);
     const { recipeId } = useParams();
-    const path = useLocation().pathname;
     const ingredient = useSelector(selectIngredient);
     const deleteIngredient = useSelector(selectDeleteIngredient);
     const instruction = useSelector(selectInstruction);
@@ -36,9 +35,15 @@ function RecipeForm() {
     const [imgPreview, setImgPreview] = useState('');
     const amountOfIngredients = recipeData.ingredients?.length || 5;
     const amountOfInstructions = recipeData.instructions?.length || 3;
-    // the instructions and ingredients are created from the server data, if the page is reloaded, they are grabbed from local storage instead; React failed to set and render state after page reload
-    const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})));
-    const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
+    // const [ingredients, setIngredients] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({})));
+    // const [instructions, setInstructions] = useState(FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({})));
+    const ingredientsArr = FormHelper.convertArrToHtml(recipeId ? recipeData.ingredients : Array(amountOfIngredients).fill({}));
+    const instructionsArr = FormHelper.convertArrToHtml(recipeId ? recipeData.instructions : Array(amountOfInstructions).fill({}));
+    
+    // console.log('ingredients: ',ingredientsArr,'\ninstructions: ',instructionsArr);
+
+    const [ingredients, setIngredients] = useState([]);
+    const [instructions, setInstructions] = useState([]);
     const [data, setData] = useState({
         name: recipeData.name || null,
         description: recipeData.description || null,
@@ -48,18 +53,22 @@ function RecipeForm() {
 
     useEffect(async () => {    
         if (recipeId && !recipeData.id) {
-            await RecipeController.getRecipeData(recipeId);
+            const data = await RecipeController.getRecipeData(recipeId);
         };
     }, []);
     useEffect(async () => {
         if (recipeData.id) {
-            await setIngredients(FormHelper.convertArrToHtml(recipeData.ingredients));
-            await setInstructions(FormHelper.convertArrToHtml(recipeData.instructions));
+            const refreshedIngredients = await FormHelper.convertArrToHtml(recipeData.ingredients);
+            const refreshedInstructions = await FormHelper.convertArrToHtml(recipeData.instructions);
+            await setIngredients(refreshedIngredients);
+            await setInstructions(refreshedInstructions);
         } else {
-            await setIngredients(FormHelper.convertArrToHtml(Array(amountOfIngredients).fill({})));
-            await setInstructions(FormHelper.convertArrToHtml(Array(amountOfInstructions).fill({})));
+            const refreshedIngredients = await FormHelper.convertArrToHtml(Array(amountOfIngredients).fill({}));
+            const refreshedInstructions = await FormHelper.convertArrToHtml(Array(amountOfInstructions).fill({}));
+            await setIngredients(refreshedIngredients);
+            await setInstructions(refreshedInstructions);
         }
-    }, [recipeData, path])
+    }, [recipeData])
     useEffect(() => {
         setIngredients(FormHelper.setListItem(ingredient, ingredients))
         setInstructions(FormHelper.setListItem(instruction, instructions))
@@ -69,13 +78,15 @@ function RecipeForm() {
         setInstructions(FormHelper.removeListItem(deleteInstruction, instructions))
     }, [deleteIngredient, deleteInstruction])
 
-    const incrementRecipeIngredientsArr = () => {
+    const incrementRecipeIngredientsArr = async () => {
         ingredients?.push({});
-        setIngredients(FormHelper.convertArrToHtml(ingredients))
+        const updatedIngredients = await FormHelper.convertArrToHtml(ingredients);
+        setIngredients(updatedIngredients);
     };
-    const incrementRecipeInstructionsArr = () => {
+    const incrementRecipeInstructionsArr = async () => {
         instructions?.push({});
-        setInstructions(FormHelper.convertArrToHtml(instructions))
+        const updatedInstructions = await FormHelper.convertArrToHtml(instructions);
+        setInstructions(updatedInstructions);
     };
 
     const handleImage = e => {
