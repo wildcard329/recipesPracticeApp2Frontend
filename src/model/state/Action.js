@@ -91,6 +91,9 @@ export const RELAY_INGREDIENT = 'RELAY_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const RELAY_INSTRUCTION = 'RELAY_INSTRUCTION';
 export const DELETE_INSTRUCTION = 'DELETE_INSTRUCTION';
+export const RELAY_USER_REGISTER = 'RELAY_USER_REGISTER';
+export const RELAY_CREATE_RECIPE = 'RELAY_CREATE_RECIPE';
+export const REQUEST_DELETE_RECIPE = 'REQUEST_DELETE_RECIPE';
 
 export const relayIngredient = ingredient => {
     return { type: RELAY_INGREDIENT, ingredient };
@@ -106,6 +109,18 @@ export const relayInstruction = instruction => {
 
 export const deleteInstruction = deleteInstruction => {
     return { type: DELETE_INSTRUCTION, deleteInstruction }; 
+};
+
+export const relayUserRegister = registerUser => {
+    return { type: RELAY_USER_REGISTER, registerUser };
+};
+
+export const relayCreateRecipe = createRecipe => {
+    return { type: RELAY_CREATE_RECIPE, createRecipe };
+};
+
+export const requestDeleteRecipe = requestDelete => {
+    return { type: REQUEST_DELETE_RECIPE, requestDelete };
 };
 
 // error

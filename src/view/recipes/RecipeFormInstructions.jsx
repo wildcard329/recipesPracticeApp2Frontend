@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { BsX } from 'react-icons/bs';
+import { FormControl } from 'react-bootstrap';
 
 import FormHelper from '../../helpers/functions/formFunctionHandler.js';
 import FormController from '../../controller/FormController.js';
@@ -16,9 +17,16 @@ function RecipeFormInstructions({recipeInstruction}) {
     };
 
     return(
-        <div>
-            <textarea id={recipeInstruction && recipeInstruction.htmlId} name='name' placeholder={recipeInstruction && recipeInstruction.name ? recipeInstruction && recipeInstruction.name : 'Enter instructions'} onChange={handleInstruction} className= 'create-recipe-item' />
-            <Button className='btn btn-danger' onClick={removeInstruction}>x</Button>
+        <div className='form-list-item-wrapper'>
+            <FormControl
+                as='textarea' 
+                id={recipeInstruction && recipeInstruction.htmlId} 
+                name='name' 
+                placeholder={recipeInstruction && recipeInstruction.name ? recipeInstruction && recipeInstruction.name : 'Enter instructions'} 
+                onChange={handleInstruction} 
+                className= 'create-recipe-item' 
+            />
+            <BsX className='delete-recipe-list-item create-recipe-list-item-button' onClick={removeInstruction} />
         </div>
     )
 }

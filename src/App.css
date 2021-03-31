@@ -3,6 +3,14 @@
   background: grey;
 }
 
+.app-navbar {
+  margin: 1% 2.5%;
+}
+
+.app-navbar-item {
+  font-size: small;
+}
+
 .dashboard-container {
   display: flex;
   justify-content: space-between;
@@ -40,10 +48,18 @@
 }
 
 .auth-btn-group {
-  display: flex;
   justify-content: space-between;
   margin: 0 auto;
   width: 25%;
+}
+
+.create-recipe-form {
+  width: 80vw;
+  max-width: 80vw;
+}
+
+.create-recipe-list {
+  list-style: none;
 }
 
 .create-recipe {
@@ -53,6 +69,10 @@
 
 .image-input {
   margin-top: 10%;
+}
+
+.form-list-item-wrapper {
+  display: flex;
 }
 
 .create-recipe .form-row h4 {
@@ -77,6 +97,14 @@
 
 .create-recipe-item {
   margin: 1%;
+}
+
+.delete-recipe-list-item {
+  color: red;
+}
+
+.create-recipe-list-item-button:hover {
+  cursor: pointer;
 }
 
 .card-wrapper {
@@ -188,6 +216,15 @@
 .public-header {
   text-align: center;
   margin: 0 auto;
+}
+
+.recipe-data-image {
+  height: 60vh;
+  max-height: 60vh;
+  object-fit: cover;
+  border: 3px solid darkslategray;
+  background-color: darkslategray;
+  float: left;
 }
 
 .user-recipe-info {

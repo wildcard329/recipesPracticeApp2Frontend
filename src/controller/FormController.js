@@ -14,6 +14,15 @@ class FormController {
     async deleteInstruction(instruction) {
         store.dispatch(Action.deleteInstruction(instruction));
     };
+    async relayUserRegister(signal) {
+        store.dispatch(Action.relayUserRegister(signal));
+    };
+    async relayCreateRecipe(signal) {
+        store.dispatch(Action.relayCreateRecipe(signal));
+    };
+    async requestDeleteRecipe(signal) {
+        store.dispatch(Action.requestDeleteRecipe(signal));
+    };
 };
 
 export default new FormController();

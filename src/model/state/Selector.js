@@ -12,11 +12,12 @@ export const selectNewRecipeId = state => state.newRecipeId;
 export const selectIngredientsData = state => state.ingredientsData;
 export const selectInstructionsData = state => state.instructionsData;
 export const searchResults = state => state.searchResults;
-export const selectConveyorStatus = state => state.conveyorStatus;
-export const selectConveyorIncrementStatus = state => state.conveyorIncrementStatus;
 
 export const selectDestination = state => state.destination;
 
+export const selectRegisterUser = state => state.registerUser;
+export const selectCreateRecipe = state => state.createRecipe;
+export const selectRequestDelete = state => state.requestDelete;
 export const selectIngredient = state => state.ingredient;
 export const selectDeleteIngredient = state => state.deleteIngredient;
 export const selectInstruction = state => state.instruction;

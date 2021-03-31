@@ -11,6 +11,7 @@ import MultiRecipeList from '../view/recipes/MultiRecipeList.jsx';
 import RecipeInfo from '../view/recipes/RecipeInfo.jsx';
 import RecipeForm from '../view/recipes/RecipeForm.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
+import FormModal from '../view/recipes/FormModal.jsx';
 
 import UserLogin from '../view/auth/UserLogin.jsx';
 import UserRegister from '../view/auth/UserRegister.jsx';
@@ -21,12 +22,12 @@ import AppNavBar from './AppNavBar.jsx';
 function AppRouter() {
     return(
         <div>
-            <UserDashboard />
-            {/* <AppNavBar /> */}
+            <AppNavBar />
+            {/* <UserRegister /> */}
+            <FormModal />
             <Switch>
-                <Route exact path='/' component={UserLogin} />
-                <Route path='/auth/login' component={UserLogin} />
-                <Route path='/auth/register' component={UserRegister} />
+                <Route exact path='/' component={null} />
+                <Route path='/auth/login' component={null} />
                 
                 <PrivateRoute path='/user/profile' component={UserProfile} />
                 

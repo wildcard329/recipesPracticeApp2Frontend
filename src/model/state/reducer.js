@@ -3,6 +3,7 @@ import * as Actions from './Action.js';
 const initialState = {
     token: null,
     user: {},
+    registerUser: false,
     userList: [],
     userData: {},
     ingredientsData: [],
@@ -10,15 +11,15 @@ const initialState = {
     sampleRecipes: [],
     recipeList: [],
     recipeData: {},
+    createRecipe: false,
+    requestDelete: false,
     ingredient: {},
     deleteIngredient: {},
     instruction: {},
     deleteInstruction: {},
-    conveyorStatus: false,
     newRecipeId: null,
     searchResults: [],
     loggedIn: false,
-    destination: null,
     errorMessage: null
 };
 
@@ -33,6 +34,11 @@ export const reducer = (state=initialState, action) => {
                 return {
                 ...state,
                 token: action.token
+            };
+        case Actions.RELAY_USER_REGISTER:
+            return {
+                ...state,
+                registerUser: action.registerUser
             };
         case Actions.SET_LOGGED_IN:
             return {
@@ -83,11 +89,6 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 sampleRecipes: {...action.sampleRecipes}
             }
-        case Actions.SET_CONVEYOR:
-            return {
-                ...state,
-                conveyorStatus: action.conveyorStatus
-            }
         case Actions.GET_RECIPE_LIST:
             return {
                 ...state,
@@ -103,6 +104,16 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 recipeData: action.recipeData
             };
+        case Actions.RELAY_CREATE_RECIPE:
+            return {
+                ...state,
+                createRecipe: action.createRecipe
+            };
+        case Actions.REQUEST_DELETE_RECIPE:
+            return {
+                ...state,
+                requestDelete: action.requestDelete
+            };
         case Actions.GET_INGREDIENT_DATA:
             return {
                 ...state,
@@ -117,11 +128,6 @@ export const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 searchResults: [action.searchResults]
-            };
-        case Actions.SET_DESTINATION:
-            return {
-                ...state,
-                destination: action.destination
             };
         case Actions.SET_ERROR_MESSAGE:
             return {
